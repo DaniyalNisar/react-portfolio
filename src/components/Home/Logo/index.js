@@ -9,10 +9,14 @@ const Logo = () => {
   const solidLogoRef = useRef()
 
   useEffect(() => {
-    gsap.timeline().to(bgRef.current, {
-      duration: 1,
-      opacity: 1,
-    })
+
+    gsap
+      .timeline()
+      .to(bgRef.current, {
+        duration: 1,
+        opacity: 1,
+      })
+   
 
     gsap.fromTo(
       solidLogoRef.current,
@@ -29,20 +33,21 @@ const Logo = () => {
 
   return (
     <>
-      {/* <div className="gold" >
+    <div className="gold" >
         <img
         src={Gold}
         alt="JavaScript,  Developer" />
     
-    </div> */}
-      <div className="logo-container" ref={bgRef}>
-        <img
-          className="solid-logo"
-          ref={solidLogoRef}
-          src={LogoS}
-          alt="JavaScript,  Developer"
-        />
-      </div>
+    </div>
+    <div className="logo-container" ref={bgRef}>
+     <img
+        className="solid-logo"
+        ref={solidLogoRef}
+        src={LogoS}
+        alt="JavaScript,  Developer"
+      />
+
+    </div>
     </>
   )
 }

@@ -6,9 +6,8 @@
     z-index: 3;
     min-height: 500px;
     
-    background-color: rgba(10, 10, 10, 0.6); /* Or tweak opacity */
-backdrop-filter: blur(10px);
-
+    background: linear-gradient(to bottom, #0E1A2B, #13294B, #1EB980);
+    
       
 
 
@@ -92,11 +91,6 @@ nav {
         content: 'CONTACT';
         }
     }
-    a.blog-link {
-        &:after {
-        content: 'BLOG';
-        }
-    }
 
     a.active {
         svg{
@@ -123,7 +117,7 @@ nav {
             line-height: 16px;
 
             &:hover svg{
-                color: #1EB980;
+                color: #00301f;
             }
         }
     }

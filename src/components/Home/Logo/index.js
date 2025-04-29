@@ -25,7 +25,7 @@ const Logo = () => {
       },
       {
         opacity: 1,
-        delay: 4,
+        delay: 1,
         duration: 4,
       }
     )
@@ -33,12 +33,7 @@ const Logo = () => {
 
   return (
     <>
-    <div className="gold" >
-        <img
-        src={Gold}
-        alt="JavaScript,  Developer" />
     
-    </div>
     <div className="logo-container" ref={bgRef}>
      <img
         className="solid-logo"

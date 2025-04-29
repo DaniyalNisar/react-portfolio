@@ -10,7 +10,7 @@
 }
 
 .tags {
-    color: #ffd700;
+    color: #1EB980;
     opacity: 0.6;
     position: absolute;
     bottom: 0;
@@ -38,7 +38,8 @@
 }
 
 .about-page,
-.contact-page {
+.contact-page,
+.blog-page {
     .text-zone {
         position: absolute;
         left: 10%;
@@ -52,7 +53,7 @@
         h1{
             font-size: 53px;
             font-family: 'Coolvetica';
-            color: #ffd700;
+            color: #1EB980;
             font-weight: 400;
             margin-top: 0;
             position: relative;
@@ -62,7 +63,7 @@
             &::before{
                 content: '<h1>';
                 font-family: 'La Belle Aurore';
-                color: #ffd700;
+                color: #1EB980;
                 font-size: 18px;
                 position: absolute;
                 margin-top:-10px;
@@ -74,7 +75,7 @@
             &::after{
                 content: '</h1>';
                 font-family: 'La Belle Aurore';
-                color: #ffd700;
+                color: #1EB980;
                 font-size: 18px;
                 line-height: 18px;
                 position: absolute;

@@ -1,70 +1,55 @@
-import Loader from 'react-loaders';
-import './index.scss';
-import AnimatedLetters from '../AnimatedLetters';
-import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './index.scss'; // optional styling
+import { useEffect } from 'react';
 
-const BlogPage = () => {
-  const [letterClass, setLetterClass] = useState('text-animate');
+const blogPosts = [
+  {
+    id: 1,
+    title: 'Why I Built This Portfolio',
+    date: 'April 28, 2025',
+    content: 'This is the full content of the blog post explaining why I built the portfolio...'
+  },
+  {
+    id: 2,
+    title: 'Working with React and SCSS',
+    date: 'April 25, 2025',
+    content: 'Here is a deeper look at SCSS + React synergy...'
+  },
+  {
+    id: 3,
+    title: 'Tips for Clean JavaScript Code',
+    date: 'April 20, 2025',
+    content: 'Some practical JavaScript tips that will improve code readability...'
+  },
+  {
+    id: 4,
+    title: 'Designing for Developers',
+    date: 'April 18, 2025',
+    content: 'Discussion about design thinking for developer-focused products...'
+  }
+];
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Why I Built This Portfolio',
-      date: 'April 28, 2025',
-      excerpt: 'Sharing the story and motivation behind building my own portfolio site using modern web technologies...'
-    },
-    {
-      id: 2,
-      title: 'Working with React and SCSS',
-      date: 'April 25, 2025',
-      excerpt: 'A deep dive into how SCSS enhances styling flexibility and keeps your React project scalable...'
-    },
-    {
-      id: 3,
-      title: 'Tips for Clean JavaScript Code',
-      date: 'April 20, 2025',
-      excerpt: 'These practices help you write cleaner, more maintainable JavaScript in any project...'
-    }
-  ];
+const BlogDetail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const blog = blogPosts.find((b) => b.id === parseInt(id));
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLetterClass('text-animate-hover');
-    }, 3000);
-    return () => clearTimeout(timer);
+    window.scrollTo(0, 0);
   }, []);
 
+  if (!blog) {
+    return <div style={{ padding: '2rem', color: 'red' }}>Blog not found</div>;
+  }
+
   return (
-    <>
-      <div className="container blog-page">
-        <div className="text-zone">
-          <h1>
-            <AnimatedLetters
-              letterClass={letterClass}
-              strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g','s']}
-              idx={15}
-            />
-          </h1>
-          <p className="blog-intro">
-            Welcome to my blog where I share insights, tutorials, and thoughts on development, design, and tech!
-          </p>
-
-        <div className="blog-list">
-          {blogPosts.map(post => (
-            <div className="blog-card" key={post.id}>
-              <h2>{post.title}</h2>
-              <p className="blog-date">{post.date}</p>
-              <p className="blog-excerpt">{post.excerpt}</p>
-              <button className="read-more">Read More</button>
-            </div>
-          ))}
-        </div>
-      </div>
-      </div>
-
-      <Loader type="pacman" />
-    </>
+    <div className="container blog-detail-page">
+      <h1>{blog.title}</h1>
+      <p className="blog-date">{blog.date}</p>
+      <p className="blog-content">{blog.content}</p>
+      <button onClick={() => navigate(-1)} className="go-back">← Go Back</button>
+    </div>
   );
 };
 
-export default BlogPage;
+export default BlogDetail;

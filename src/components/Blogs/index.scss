@@ -70,20 +70,26 @@
   }
 
   .read-more {
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
+    display: inline-block; // Ensures padding and size works like a button
+    margin-top: 1.5rem;
+    padding: 1rem 1rem;
     background: transparent;
     border: 1px solid #1EB980;
     border-radius: 8px;
     color: #1EB980;
     cursor: pointer;
     font-weight: 600;
-
+    font-size: 1.3rem;
+    text-decoration: none; // Remove underline on link
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  
     &:hover {
       background-color: #1EB980;
       color: #000000;
     }
   }
+  
 }
 
 

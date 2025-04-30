@@ -2,6 +2,8 @@ import Loader from 'react-loaders';
 import './index.scss';
 import AnimatedLetters from '../AnimatedLetters';
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const BlogPage = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
@@ -88,7 +90,7 @@ const BlogPage = () => {
                   <h2>{post.title}</h2>
                   <p className="blog-date">{post.date}</p>
                   <p className="blog-excerpt">{post.excerpt}</p>
-                  <button className="read-more">Read More</button>
+                  <Link to={`/blog/${post.id}`} className="read-more">Read More</Link>
                 </div>
               ))}
             </div>

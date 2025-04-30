@@ -5,6 +5,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import BlogPage from './components/Blogs';
+import BlogDetail from './components/BlogDetail';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="/blogs" element={<BlogPage />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
+
 
       </Route>
     </Routes>

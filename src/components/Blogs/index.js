@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const BlogPage = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
+  const [showCards, setShowCards] = useState(false);
   const blogContainerRef = useRef(null); // ref for blog container
 
   const blogPosts = [
@@ -35,10 +36,18 @@ const BlogPage = () => {
   ];
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer1 = setTimeout(() => {
       setLetterClass('text-animate-hover');
     }, 3000);
-    return () => clearTimeout(timer);
+
+    const timer2 = setTimeout(() => {
+      setShowCards(true);
+    }, 1000); // show cards after 1 sec
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   const scrollLeft = () => {
@@ -56,7 +65,7 @@ const BlogPage = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g','s']}
+              strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']}
               idx={15}
             />
           </h1>
@@ -66,12 +75,16 @@ const BlogPage = () => {
 
           <div className="blog-scroll-wrapper">
             <div className='button-wrapper'>
-                <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
-            </div>    
+              <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
+            </div>
 
             <div className="blog-container" ref={blogContainerRef}>
-              {blogPosts.map(post => (
-                <div className="blog-card" key={post.id}>
+              {blogPosts.map((post, index) => (
+                <div
+                  className={`blog-card ${showCards ? 'visible' : ''}`}
+                  key={post.id}
+                  style={{ transitionDelay: `${index * 0.2}s` }}
+                >
                   <h2>{post.title}</h2>
                   <p className="blog-date">{post.date}</p>
                   <p className="blog-excerpt">{post.excerpt}</p>
@@ -81,9 +94,8 @@ const BlogPage = () => {
             </div>
 
             <div className='button-wrapper'>
-                <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
+              <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
             </div>
-
           </div>
         </div>
       </div>

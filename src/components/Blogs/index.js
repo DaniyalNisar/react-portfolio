@@ -1,10 +1,11 @@
 import Loader from 'react-loaders';
 import './index.scss';
 import AnimatedLetters from '../AnimatedLetters';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const BlogPage = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
+  const blogContainerRef = useRef(null); // ref for blog container
 
   const blogPosts = [
     {
@@ -24,6 +25,12 @@ const BlogPage = () => {
       title: 'Tips for Clean JavaScript Code',
       date: 'April 20, 2025',
       excerpt: 'These practices help you write cleaner, more maintainable JavaScript in any project...'
+    },
+    {
+      id: 4,
+      title: 'Designing for Developers',
+      date: 'April 18, 2025',
+      excerpt: 'Bridging the gap between design and code can unlock new levels of creativity and productivity...'
     }
   ];
 
@@ -33,6 +40,14 @@ const BlogPage = () => {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  const scrollLeft = () => {
+    blogContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    blogContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -49,17 +64,28 @@ const BlogPage = () => {
             Welcome to my blog where I share insights, tutorials, and thoughts on development, design, and tech!
           </p>
 
-        <div className="blog-list">
-          {blogPosts.map(post => (
-            <div className="blog-card" key={post.id}>
-              <h2>{post.title}</h2>
-              <p className="blog-date">{post.date}</p>
-              <p className="blog-excerpt">{post.excerpt}</p>
-              <button className="read-more">Read More</button>
+          <div className="blog-scroll-wrapper">
+            <div className='button-wrapper'>
+                <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
+            </div>    
+
+            <div className="blog-container" ref={blogContainerRef}>
+              {blogPosts.map(post => (
+                <div className="blog-card" key={post.id}>
+                  <h2>{post.title}</h2>
+                  <p className="blog-date">{post.date}</p>
+                  <p className="blog-excerpt">{post.excerpt}</p>
+                  <button className="read-more">Read More</button>
+                </div>
+              ))}
             </div>
-          ))}
+
+            <div className='button-wrapper'>
+                <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
+            </div>
+
+          </div>
         </div>
-      </div>
       </div>
 
       <Loader type="pacman" />

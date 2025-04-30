@@ -151,7 +151,7 @@
     width:90%; /* 100% width for mobile, one card at a time */
     margin: 0; /* Remove any margin */
     padding: 1.7rem;
-    margin-bottom: 2rem;;
+    margin-bottom: 2rem;
   }
 
   .scroll-button {
@@ -172,7 +172,7 @@
 
 .blog-card {
   opacity: 0 ;
-  transform: translateY(20px) !important;
+  transform: translateY(1px) ;
   transition: opacity 3s ease, transform 3s ease !important;
 
   &.visible {

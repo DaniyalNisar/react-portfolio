@@ -67,7 +67,7 @@ const MyWork = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']}
+              strArray={['D','a','n','i','y','a','l','\'','s',' ','W','o','r','k']}
               idx={15}
             />
           </h1>

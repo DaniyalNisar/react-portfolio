@@ -6,6 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import BlogPage from './components/Blogs';
 import BlogDetail from './components/BlogDetail';
+import MyWork from './components/Mywork';
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="/blogs" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/mywork" element={<MyWork />} />
+
 
 
       </Route>

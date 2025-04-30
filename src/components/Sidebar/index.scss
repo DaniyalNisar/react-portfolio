@@ -97,6 +97,11 @@ nav {
         content: 'BLOG';
         }
     }
+    a.project-link {
+        &:after {
+        content: 'MY WORK';
+        }
+    }
 
     a.active {
         svg{

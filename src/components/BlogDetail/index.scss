@@ -74,6 +74,97 @@
   }
 }
 
+.go-back {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  background: transparent;
+  border: 1px solid #FF6B6B;
+  border-radius: 8px;
+  color: #FF6B6B;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    background-color: #FF6B6B;
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+  }
+
+  &:focus {
+    outline: 2px dashed #FF6B6B;
+    outline-offset: 4px;
+  }
+}
+
+.blog-title-image {
+  width: 80vh;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .blog-title-image {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+  }
+}
+
+.blog-detail-page {
+  display: flex;
+  overflow-y:scroll;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  gap: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: #1EB980 transparent;
+
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #1EB980;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+.top-tags {
+  bottom: auto;
+  top: 35px;
+}
+
+.tags {
+  color: #1EB980;
+  opacity: 0.6;
+  position: absolute;
+  bottom: 0;
+  left: 120px;
+  font-size: 18px;
+  font-family: 'La Belle Aurore';
+  display: none;
+}
+
+
+
+
+
+
+
+
+
 
 // .flat-button1{
 //   color: #1EB980;

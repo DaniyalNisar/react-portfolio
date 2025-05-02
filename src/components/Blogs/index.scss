@@ -50,11 +50,16 @@
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    cursor:pointer;
   }
 
   h2 {
     color: #1bc1c7;
     margin-bottom: 0.5rem;
+
+    &:hover{
+      color: #00f7ff;
+    }
   }
 
   .blog-date {

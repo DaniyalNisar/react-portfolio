@@ -3,17 +3,29 @@ import {Link, NavLink} from 'react-router-dom'
 import LogoS from '../../assets/images/logo-s.png'
 import LogoSubtitle from '../../assets/images/logo_sub.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHome,faUser, faEnvelope,faBlog, faBriefcase} from '@fortawesome/free-solid-svg-icons'
+import {faHome,faUser, faEnvelope,faBlog, faBriefcase, faBars} from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faGithub, faFacebook, faInstagram,
 }  from '@fortawesome/free-brands-svg-icons'
-const Sidebar = () => (
+import { useState} from 'react';
+
+const Sidebar = () => {
     
-    <div className='nav-bar'>
+  const [showNav, setShowNav] = useState(false);
+
+  return (<div className='nav-bar'>
         <Link className='logo' to='/'>
             <img src={LogoS}  alt="logo" />
             <img className="sub-logo" src={LogoSubtitle}  alt="slobodan" />
         </Link>  
-    <nav>
+      {/* <div className='hamburger-icon'> */}
+        <FontAwesomeIcon icon={faBars}
+          onClick={() =>showNav ? setShowNav(false) : setShowNav(true)} 
+          color="#1EB980"
+          size="3x"
+          className='hamburger-icon'
+        />
+      {/* </div> */}
+    <nav className={showNav ? 'mobile-show' : ''}>
         <NavLink exact="true" activeclassname="active" to="/">
             <FontAwesomeIcon icon={faHome} color="#E9F4F8		" />
         </NavLink>
@@ -71,7 +83,9 @@ const Sidebar = () => (
         </li>
         
     </ul>
-    </div>
-)
+  
+  </div>
 
+  )
+}
 export default Sidebar;

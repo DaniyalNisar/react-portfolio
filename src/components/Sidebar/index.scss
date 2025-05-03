@@ -7,10 +7,12 @@
     min-height: 500px;
     
     background-color: rgba(10, 10, 10, 0.6); /* Or tweak opacity */
-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 
       
-
+.hamburger-icon{
+   display: none;
+}
 
 
 .logo {
@@ -136,3 +138,76 @@ nav {
  }
 
 }
+
+@media screen and (max-width: 1200px) {
+    .nav-bar{
+        background: none;
+        position: absolute;
+        height: auto;
+        min-height: auto;
+        width: 100%;
+        // background-color: rgba(10, 10, 10, 0.6); /* Or tweak opacity */
+        // margin-left: -90vw;
+
+    
+    ul, nav{
+        display: none;
+
+    }
+    nav{
+        margin-top: 7vh !important;
+        width: 100vw;
+        height: 100vh;
+        // margin-right: 50vw !important;
+        background-color: rgba(10, 10, 10, 1); /* Or tweak opacity */
+        backdrop-filter: blur(10px);
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 2;
+        margin:auto;
+        padding-left: 1.5vh;
+       
+        a{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+       
+        a:after{
+            opacity: 1;
+            position: initial;
+            width: auto;
+            margin-left: 10px;
+        }
+
+        a svg{
+            opacity: 1 !important;
+        }
+
+        &.mobile-show{
+            display: block;
+        }
+
+
+    
+    }
+
+    .hamburger-icon{
+        // margin-top: -4.9vh !important;
+        // margin-left: 93.8vw;
+        display: block;
+        // padding-top: 5px;
+        // padding-right: 10px !important;
+        position: absolute;
+        top:15px;
+        right: 15px;
+        
+    }
+
+
+    
+    
+        
+    }
+  }

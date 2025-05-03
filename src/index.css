@@ -5,6 +5,7 @@ html {
 
 body {
   margin: 0;
+  /* margin-top: 10 vh !important; */
   font: 300 11px/1.4 'Helvetica Neue', sans-serif;
   /* color: #444; */
   /* background-color: #0B1120; */
@@ -30,13 +31,17 @@ body::before {
   inset: 0;
   background: rgba(0, 0, 0, 0.3); /* Adjust for darkening */
   z-index: -1;
+
+  /* margin-top: 10vh !important; */
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
 
   body{
     overflow: visible;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
+    margin-top: 7vh !important;
+  
   }
 }
 

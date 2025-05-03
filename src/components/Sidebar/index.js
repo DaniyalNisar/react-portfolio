@@ -21,25 +21,25 @@ const Sidebar = () => {
         <FontAwesomeIcon icon={faBars}
           onClick={() =>showNav ? setShowNav(false) : setShowNav(true)} 
           color="#1EB980"
-          size="3x"
+          size="2x"
           className='hamburger-icon'
         />
       {/* </div> */}
     <nav className={showNav ? 'mobile-show' : ''}>
-        <NavLink exact="true" activeclassname="active" to="/">
-            <FontAwesomeIcon icon={faHome} color="#E9F4F8		" />
+        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" to="/">
+            <FontAwesomeIcon  onClick={() =>setShowNav(false)} icon={faHome} color="#E9F4F8		" />
         </NavLink>
-         <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
-            <FontAwesomeIcon icon={faUser} color="#E9F4F8		" />
+         <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="about-link" to="/about">
+            <FontAwesomeIcon onClick={() =>setShowNav(false)}  icon={faUser} color="#E9F4F8		" />
         </NavLink>
-         <NavLink exact="true" activeclassname="active" className="contact-link" to="/contact">
-            <FontAwesomeIcon icon={faEnvelope} color="#E9F4F8		" />
+         <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="contact-link" to="/contact">
+            <FontAwesomeIcon onClick={() =>setShowNav(false)} icon={faEnvelope} color="#E9F4F8		" />
         </NavLink>
-        <NavLink exact="true" activeclassname="active" className="blog-link" to="/blogs">
-            <FontAwesomeIcon icon={faBlog} color="#E9F4F8		" />
+        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="blog-link" to="/blogs">
+            <FontAwesomeIcon  icon={faBlog} color="#E9F4F8		" />
         </NavLink>
-        <NavLink exact="true" activeclassname="active" className="project-link" to="/mywork">
-            <FontAwesomeIcon icon={faBriefcase} color="#E9F4F8		" />
+        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="project-link" to="/mywork">
+            <FontAwesomeIcon onClick={() =>setShowNav(false)} icon={faBriefcase} color="#E9F4F8		" />
         </NavLink>
         
     </nav>

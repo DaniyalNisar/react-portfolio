@@ -139,14 +139,14 @@ nav {
 
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .nav-bar{
         background: none;
         position: absolute;
         height: auto;
         min-height: auto;
         width: 100%;
-        // background-color: rgba(10, 10, 10, 0.6); /* Or tweak opacity */
+        background-color: rgba(10, 10, 10, 1); /* Or tweak opacity */
         // margin-left: -90vw;
 
     
@@ -167,6 +167,7 @@ nav {
         z-index: 2;
         margin:auto;
         padding-left: 1.5vh;
+        padding-bottom: 1vh;;
        
         a{
             display: flex;
@@ -204,6 +205,24 @@ nav {
         right: 15px;
         
     }
+
+    
+.logo {
+    display: block;
+    padding: 5.5px 0;
+
+    img {
+        display: block;
+        margin: 4.7px auto;
+        width: 33px;
+        height: auto;
+
+        &.sub-logo{
+            width: 50px;
+            display: none;
+        }
+    }
+}
 
 
     

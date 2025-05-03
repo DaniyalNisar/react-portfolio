@@ -283,31 +283,31 @@
 
 
 
-// @media (max-width: 768px) {
-//     .blog-page,
-//     .blog-detail-page,
-//     .work-page {
-//       .text-zone {
-//         left: 5%;
-//         width: 90%;
+@media (max-width: 768px) {
+    .blog-page,
+    .blog-detail-page,
+    .work-page {
+      .text-zone {
+        left: 5%;
+        width: 90%;
   
-//         h1 {
-//            font-size: 20px;
+        h1 {
+           font-size: 40px;
   
-//           &::before {
-//             font-size: 14px;
-//           }
+          &::before {
+            font-size: 14px;
+          }
   
-//           &::after {
-//             font-size: 14px;
-//           }
-//         }
+          &::after {
+            font-size: 14px;
+          }
+        }
   
-//         p {
-//           font-size: 12px;
-//         }
-//       }
-//     }
-//   }
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
   
 

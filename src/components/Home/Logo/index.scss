@@ -50,3 +50,40 @@
   stroke-width: 10px;
 }
 
+
+@media (max-width: 800px) {
+  .logo-container {
+    // width: 100% !important;
+    // height: auto !important;
+
+    // position: absolute !important;
+    // opacity: 0.1 !important; // Faint background look
+    // z-index: -1 !important; // Push behind text
+    // margin: 0 auto !important;
+    // transform: none !important;
+    // display: flex !important;
+    // justify-content: center !important;
+    // align-items: center !important;
+    // top:5vh;
+    opacity: 0.1 !important;
+    z-index: -1 !important;
+    margin-right: 15vw !important;
+    // margin-top: 10%;
+
+    svg {
+      // transform: none !important;
+      // width: 80% !important;
+      // height: auto !important;
+    }
+
+    .solid-logo {
+      width: 95% !important;
+      // display: none !important; // Hide extra clutter if not needed
+    }
+
+    &::after {
+        display: none !important; // Hide gradient underline on mobile
+    }
+  }
+}
+

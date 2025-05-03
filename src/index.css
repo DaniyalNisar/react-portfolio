@@ -39,7 +39,7 @@ body::before {
 
   body{
     overflow: visible;
-    /* overflow-x: hidden; */
+    /* overflow-x: hidden !important; */
     margin-top: 7vh !important;
   
   }

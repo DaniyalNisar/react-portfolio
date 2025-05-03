@@ -128,13 +128,14 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .work-scroll-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:1rem;
-    
+ // padding:0rem;
+    margin-left: -1vw;
+        
     @media (max-width: 768px) {
       height: auto; /* Adjust height to auto for better fit on small screens */
       padding-top: 1rem; /* Reduce padding on top for mobile */

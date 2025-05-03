@@ -283,10 +283,11 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .blog-page,
     .blog-detail-page,
-    .work-page {
+    .work-page,.about-page,
+    .contact-page {
       .text-zone {
         left: 5%;
         width: 90%;
@@ -308,6 +309,25 @@
         }
       }
     }
-  }
-  
 
+    .top-tags {
+        bottom: auto;
+        top: 20px;
+        margin-left: -100px;
+    }
+   .bottom-tag-html{
+     margin-left: -25px;
+   }
+   .bottom-tags{
+    margin-left: -82px;
+
+   }
+
+   .blog-detail-page{
+    // margin-bottom: 10px !important;
+    height: 60% !important;
+    min-height: 73% !important;
+    
+   }
+    
+  }

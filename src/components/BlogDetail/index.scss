@@ -111,12 +111,7 @@
   object-fit: cover;
 }
 
-@media (max-width: 768px) {
-  .blog-title-image {
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-  }
-}
+
 
 .blog-detail-page {
   display: flex;
@@ -139,6 +134,18 @@
 
   &::-webkit-scrollbar-track {
     background-color: transparent;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .blog-title-image {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+  }
+  .blog-detail-page {
+   margin-top: 6vh;
+  padding-bottom: 5vh !important;
   }
   
 }

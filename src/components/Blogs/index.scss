@@ -133,7 +133,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:1rem;
+    // padding:0rem;
+    margin-left: -1vw;
     
     @media (max-width: 768px) {
       height: auto; /* Adjust height to auto for better fit on small screens */

@@ -80,3 +80,53 @@
     transform: rotateX(90deg);
   }
 }
+
+@media (max-width: 900px) {
+  .stage-cube-cont {
+    position: absolute !important;
+    top: 20px !important;                // space from top
+    left: 50% !important;               // center horizontally
+    transform: translateX(-50%) !important;
+    width: 150px !important;            // container = cube size
+    height: 150px !important;
+    padding-top: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;       // allow faces to show
+    z-index: 1 !important;
+    perspective: 600px !important;      // give depth to the 3D scene
+  }
+
+  .cubespinner {
+    width: 150px !important;
+    height: 150px !important;
+    margin: 0 !important;
+    transform-origin: 75px 75px 0 !important;   // pivot at cube center
+    transform-style: preserve-3d !important;    // keep faces in 3D
+    animation-name: spincube !important;
+    animation-duration: 12s !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  .cubespinner div {
+    position: absolute !important;
+    width: 150px !important;            // face size
+    height: 150px !important;
+    border: 1px solid #ccc !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    text-align: center !important;
+    font-size: 60px !important;         // scale down text/icons
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 0 10px 0px lightyellow !important;
+  }
+
+  // Each face sits exactly half its size out on the Z axis
+  .face1 { transform: translateZ(75px) !important; }
+  .face2 { transform: rotateY(90deg) translateZ(75px) !important; }
+  .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(75px) !important; }
+  .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(75px) !important; }
+  .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(75px) !important; }
+  .face6 { transform: rotateX(-90deg) translateZ(75px) !important; }
+}

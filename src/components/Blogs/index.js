@@ -13,9 +13,9 @@ const BlogPage = () => {
   const blogPosts = [
     {
       id: 1,
-      title: 'Why I Built This Portfolio',
-      date: 'April 28, 2025',
-      excerpt: 'Sharing the story and motivation behind building my own portfolio site using modern web technologies...'
+      title: 'Understanding Caching: A Simple Guide for Developers',
+      date: 'May 04, 2025',
+      excerpt: 'Speed up your app with smart caching techniques!'
     },
     {
       id: 2,

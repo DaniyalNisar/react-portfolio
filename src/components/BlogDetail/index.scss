@@ -121,7 +121,7 @@
   gap: 2rem;
   scrollbar-width: thin;
   scrollbar-color: #1EB980 transparent;
-
+  // margin-bottom: 1vh !important;
 
   &::-webkit-scrollbar {
     height: 6px;
@@ -148,6 +148,83 @@
   padding-bottom: 5vh !important;
   }
   
+}
+
+
+.blog-content {
+  font-family: 'Open Sans', sans-serif; /* Clean, modern font */
+  // color: #333; /* Darker text for better visibility */
+  line-height: 1.8;
+  font-size: 1.15rem;
+  margin-top: 2rem;
+}
+
+.blog-content h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: 700; /* Bold for sub-headings */
+  color: #08ffd2; /* Red color for headings */
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
+}
+.blog-content h3 {
+  font-family: 'Arial', sans-serif;
+  font-weight: 700; /* Bold for sub-headings */
+  color: #52daff; /* Red color for headings */
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
+}
+.blog-content h4 {
+  font-family: 'Arial', sans-serif;
+  font-weight: 700; /* Bold for sub-headings */
+  color: #8dd2ff; /* Red color for headings */
+  opacity: 1;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.blog-content p {
+  font-size: 1.27rem;
+  color: #333; /* Dark text for contrast */
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+
+.blog-content code {
+  // background-color: #f5f5f5; /* Slightly lighter background for code */
+  
+  padding: 0.4rem 0.6rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: #D32F2F; /* Red color for code text */
+}
+
+.blog-content ul {
+  padding-left: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.blog-content ul li {
+  font-size: 1.18rem;
+  color: #ffffff;
+  margin-bottom: 0.7rem;
+}
+
+.blog-content .blog-date {
+  font-size: 1rem;
+  color: #ffffff; /* Subtle color for the date */
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.blog-content .blog-title-image {
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 

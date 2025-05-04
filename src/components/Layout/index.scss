@@ -88,6 +88,7 @@
         }
 
         p{
+            font-size: 1.2rem;
             font-style: 13px;
             color: #fff;
             font-family: sans-serif;
@@ -106,6 +107,12 @@
             &:nth-of-type(3) {
                animation-delay: 1.3s; 
             }
+            &:nth-of-type(4) {
+                animation-delay: 1.4s; 
+             }
+            &:nth-of-type(5) {
+                animation-delay: 1.5s; 
+             }
         }
     }
 

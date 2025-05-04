@@ -13,32 +13,75 @@ const MyWork = () => {
   const myWorks = [
     {
       id: 1,
-      title: 'Why I Built This Portfolio',
-      date: 'April 28, 2025',
-      excerpt: 'Sharing the story and motivation behind building my own portfolio site using modern web technologies...',
-      image: '/images/blogs/react.png'
+      title: '🔄 Cache Enhancement',
+      // date: 'April 28, 2025',
+      excerpt: 'Optimized the caching layer of a high-throughput fintech app to handle 80+ transactions per second, significantly improving performance and reducing latency.',
+      image: '/images/works/cache.jpg'
     },
     {
       id: 2,
-      title: 'Working with React and SCSS',
+      title: '💳 ISO 8583 Payments',
       date: 'April 25, 2025',
-      excerpt: 'A deep dive into how SCSS enhances styling flexibility and keeps your React project scalable...',
-      image: '/images/blogs/react.png'
+      excerpt: 'Built and integrated ISO 8583-based payment solutions for institutions such as Smart Visa and Belize Bank, enabling secure, real-time financial transactions.',
+      image: '/images/works/ISO8583.jpg'
     },
     {
       id: 3,
-      title: 'Tips for Clean JavaScript Code',
+      title: '💳 AMEX Installment Plan',
       date: 'April 20, 2025',
-      excerpt: 'These practices help you write cleaner, more maintainable JavaScript in any project...',
-      image: '/images/blogs/react.png'
+      excerpt: 'Integrated an installment plan system for American Express, allowing customers to split payments seamlessly while maintaining backend integrity.',
+      image: '/images/works/amex.jpg'
     },
     {
       id: 4,
-      title: 'Designing for Developers',
+      title: '🚨 Alerts Enhancement',
       date: 'April 18, 2025',
-      excerpt: 'Bridging the gap between design and code can unlock new levels of creativity and productivity...',
-      image: '/images/blogs/react.png'
+      excerpt: 'Improved the alerting system to ensure faster, more reliable notifications for key transaction events and potential system failures.',
+      image: '/images/works/alert.jpg'
+    },
+    {
+      id: 5,
+      title: '📚 Teachify',
+      date: 'April 18, 2025',
+      excerpt: 'An online tutoring marketplace where educators offer courses and live sessions',
+      image: '/images/works/teachify.jpg'
+    },
+    {
+      id: 6,
+      title: '🏥 Hospital Management System',
+      date: 'April 18, 2025',
+      excerpt: 'Built a full-stack system to manage patient records, appointments, and doctor schedules — with an online booking feature for patients.',
+      image: '/images/works/hospital.jpg'
+    },
+    {
+      id: 7,
+      title: '🎮 Game Store Management System',
+      date: 'April 18, 2025',
+      excerpt: 'Created a platform for browsing, purchasing, and managing games with support for order, game libraries, and admin features.',
+      image: '/images/works/game.jpg'
+    },
+    {
+      id: 8,
+      title: '🎨 Canvas Maker',
+      date: 'April 18, 2025',
+      excerpt: 'A simple tool that lets you upload images and add customizable text on the top, bottom, or center — with control over text size and color.',
+      image: '/images/works/canvas.jpg'
+    },
+    {
+      id: 9,
+      title: '👥 LinkedIn Clone',
+      date: 'April 18, 2025',
+      excerpt: 'Developed a professional networking platform with profile creation, connections, and posts — inspired by LinkedIn, built using modern web technologies.',
+      image: '/images/works/linkedin.jpg'
+    },
+    {
+      id: 10,
+      title: '📧 Gmail Clone',
+      date: 'April 18, 2025',
+      excerpt: 'Recreated Gmail’s core features including inbox, thread-based messages, and search, with responsive UI and real-time updates.',
+      image: '/images/works/gmail.jpg'
     }
+    
   ];
 
   useEffect(() => {
@@ -76,7 +119,7 @@ const MyWork = () => {
             />
           </h1>
           <p className="work-intro">
-            Welcome to my work where I share insights, tutorials, and thoughts on development, design, and tech!
+          Here’s a glimpse into some of the things I’ve built — from fintech systems handling high-speed transactions to full-stack web apps and creative tools. And there’s still so much more to come." ✨
           </p>
 
           <div className="work-scroll-wrapper">
@@ -93,7 +136,7 @@ const MyWork = () => {
                 >
                   <img src={post.image} alt={post.title} className="work-image" />
                   <h2>{post.title}</h2>
-                  <p className="work-date">{post.date}</p>
+                  {/* <p className="work-date">{post.date}</p> */}
                   <p className="work-excerpt">{post.excerpt}</p>
                   {/* <Link to={`/mywork/${post.id}`} className="read-more">Read More</Link> */}
                 </div>

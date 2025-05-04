@@ -35,6 +35,7 @@ const About = () => {
                 <p>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid aspernatur ipsa eius aperiam sed amet aliquam nisi consequatur sapiente, incidunt hic debitis ea veniam mollitia magni atque corrupti quas tenetur soluta asperiores unde sint? Fugit?
                 </p>
+                
             </div>
 
             <div className="stage-cube-cont">

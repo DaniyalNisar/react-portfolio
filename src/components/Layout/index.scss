@@ -332,8 +332,11 @@
    
    
    .about-page{
+
+    height: 60% !important;
+    min-height: 75% !important;
     .text-zone{
-        margin-top: 19vh !important;
+        margin-top: 23vh !important;
     }
    }
   }

@@ -81,6 +81,9 @@
   }
 }
 
+
+
+
 @media (max-width: 900px) {
   .stage-cube-cont {
     position: absolute !important;
@@ -129,4 +132,35 @@
   .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(75px) !important; }
   .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(75px) !important; }
   .face6 { transform: rotateX(-90deg) translateZ(75px) !important; }
+
+
+
+  
+.about-page{
+
+ 
+  display: flex;
+  overflow-y:scroll;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  gap: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: #1EB980 transparent;
+
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #1EB980;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+
+}
 }

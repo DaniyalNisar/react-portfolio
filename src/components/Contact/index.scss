@@ -115,4 +115,117 @@
   }
 }
 
+/* Contact page overrides & Toastify customizations */
+
+.container.contact-page {
+  .contact-form {
+    form {
+      ul {
+        li.half {
+          width: 48%;
+        }
+        li {
+          margin-bottom: 15px;
+        }
+        li input,
+        li textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #444;
+          border-radius: 4px;
+          font-size: 14px;
+          background: #8aeaff;
+          opacity: 0.8;
+          color: #000000;
+          // text-color:white;
+          &:focus {
+            outline: none;
+            border-color: #1EB980;
+          }
+        }
+        li textarea {
+          min-height: 120px;
+          resize: vertical;
+        }
+        li button.flat-button {
+          background: transparent;
+          border: 1px solid #1EB980;
+          color: #1EB980;
+          padding: 10px 20px;
+          // font-size: 14px;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+          &:hover:enabled {
+            background: #1EB980;
+            color: #000;
+          }
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* React-Toastify overrides (optional tweaks) */
+.Toastify__toast-container {
+  width: 360px; /* consistent toast width */
+}
+.Toastify__toast {
+  border-radius: 8px;
+  font-size: 14px;
+  background: #333333;
+  color: #fff;
+}
+.Toastify__toast--success {
+  border-left: 5px solid #1EB980;
+}
+.Toastify__toast--error {
+  border-left: 5px solid #dd0031;
+}
+.Toastify__progress-bar {
+  background: #1EB980;
+}
+
+
+/* Standard, modern browsers */
+input::placeholder,
+textarea::placeholder {
+  color: #888888;          /* Suva Grey */
+  opacity: 1;              /* Override Firefox default opacity */
+}
+
+/* WebKit (Chrome, Safari) */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #888888;
+}
+
+/* Mozilla Firefox 19+ */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #888888;
+  opacity: 1;
+}
+
+/* Mozilla Firefox 4–18 */
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #888888;
+  opacity: 1;
+}
+
+/* Internet Explorer 10–11 */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #888888;
+}
+
+/* Microsoft Edge Legacy */
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #888888;
+}
 

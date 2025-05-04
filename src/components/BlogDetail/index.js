@@ -9,7 +9,7 @@ const blogPosts = [
     id: 1,
     title: 'Understanding Caching: A Simple Guide for Developers',
     date: 'May 04, 2025',
-    image: '/images/blogs/react.png',
+    image: '/images/blogs/cache.jpg',
     content: `<p>Imagine you go to your favorite coffee shop every morning. The first day, you give your name and your order, and they make your drink. But what if, on day two, they already remember your order and start making it as you walk in? That’s caching — remembering things to save time next time.</p>
   <p>In software, caching works the same way: we store data that's expensive to compute or fetch so we can access it faster later. Caching improves performance by saving time and reducing the load on your data sources, such as databases or external APIs.</p>
 

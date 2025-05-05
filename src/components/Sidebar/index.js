@@ -56,7 +56,7 @@ const Sidebar = () => {
         </li>
         <li>
          <a 
-            href="https://www.linkedin.com/in/daniyal-nisar-rana-7b6041209/"
+            href="https://github.com/DaniyalNisar"
             target="_blank"
             rel="noreferrer"
           >
@@ -65,7 +65,7 @@ const Sidebar = () => {
         </li>
           <li>
          <a 
-            href="https://www.linkedin.com/in/daniyal-nisar-rana-7b6041209/"
+            href="https://www.facebook.com/share/18dovEmFev/"
             target="_blank"
             rel="noreferrer"
           >
@@ -74,7 +74,7 @@ const Sidebar = () => {
         </li>
           <li>
          <a 
-            href="https://www.linkedin.com/in/daniyal-nisar-rana-7b6041209/"
+            href="https://www.instagram.com/daniyal.nisar99/"
             target="_blank"
             rel="noreferrer"
           >

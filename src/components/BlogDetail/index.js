@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import './index.scss'; // optional styling
-import { useEffect,useState } from 'react';
-import AnimatedLetters from '../AnimatedLetters';
+import { useEffect } from 'react';
+// import AnimatedLetters from '../AnimatedLetters';
 
 
 const blogPosts = [
@@ -200,7 +200,7 @@ const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const blog = blogPosts.find((b) => b.id === parseInt(id));
-  const [letterClass, setLetterClass] = useState('text-animate');
+  // const [letterClass, setLetterClass] = useState('text-animate');
 
   
 
@@ -208,16 +208,16 @@ const BlogDetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setLetterClass('text-animate-hover');
-    }, 3000);
+  // useEffect(() => {
+  //   const timer1 = setTimeout(() => {
+  //     setLetterClass('text-animate-hover');
+  //   }, 3000);
 
   
-    return () => {
-      clearTimeout(timer1);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(timer1);
+  //   };
+  // }, []);
 
   
 
@@ -228,12 +228,13 @@ const BlogDetail = () => {
   return (
     <div className="container blog-detail-page">
       <div className='text-zone'>
-      <h1>
-            <AnimatedLetters
+      <h1 className='blog-detail-heading'>
+        {blog.title}
+            {/* <AnimatedLetters
               letterClass={letterClass}
               strArray={blog.title.split('')}
               idx={50}
-            />
+            /> */}
           </h1>
       <p className="blog-date">{blog.date}</p>
       <img src={blog.image} alt={blog.title} className="blog-title-image" />

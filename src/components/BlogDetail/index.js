@@ -167,11 +167,98 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: 'Working with React and SCSS',
-    date: 'April 25, 2025',
-    image: '/images/blogs/react.png',
-    content: `...`
+    title: '01 Matrix – BFS-Based Distance Calculation',
+    date: 'June 23, 2025',
+    content: `
+      <p>The 01 Matrix problem is a common interview question where you need to update each cell in a matrix based on the shortest distance to a nearby zero. While brute force works, there's a clean and optimal BFS approach that gets the job done efficiently. Let's explore it.</p>
+  
+      <h3>🧩 Problem Statement</h3>
+      <p>You're given an <code>m x n</code> binary matrix <code>mat</code> filled with 0s and 1s. Your task is to return a matrix where each cell containing a 1 is replaced by the shortest distance to the nearest 0. Distance is measured in number of adjacent moves (up/down/left/right).</p>
+      
+      <pre><code>Input:
+  mat = [[0,0,0],
+         [0,1,0],
+         [1,1,1]]
+  
+  Output:
+  [[0,0,0],
+   [0,1,0],
+   [1,2,1]]
+      </code></pre>
+  
+      <h3>🧠 Intuition</h3>
+      <p>Instead of calculating distance for each 1, we reverse the approach. We start from all 0s and do a multi-source BFS, updating distance level by level. This guarantees the shortest path since BFS spreads outward uniformly.</p>
+  
+      <h3>⚙️ Approach</h3>
+      <ul>
+        <li>Initialize a queue with all 0s and mark them visited.</li>
+        <li>Use BFS to explore neighbors of each 0.</li>
+        <li>For every unvisited neighbor (i.e., a 1), set its distance to current + 1 and add to queue.</li>
+        <li>Repeat until all cells are processed.</li>
+      </ul>
+  
+      <h3>💻 Java Code</h3>
+      <pre><code>class Node {
+      int first, second, third;
+      Node(int first, int second, int third) {
+          this.first = first;
+          this.second = second;
+          this.third = third;
+      }
+  }
+  
+  class Solution {
+      public int[][] updateMatrix(int[][] mat) {
+          int n = mat.length;
+          int m = mat[0].length;
+          int[][] vis = new int[n][m];
+          int[][] dist = new int[n][m];
+          Queue&lt;Node&gt; q = new LinkedList&lt;&gt;();
+  
+          for (int i = 0; i &lt; n; i++) {
+              for (int j = 0; j &lt; m; j++) {
+                  if (mat[i][j] == 0) {
+                      q.add(new Node(i, j, 0));
+                      vis[i][j] = 1;
+                  }
+              }
+          }
+  
+          int[] drow = {-1, 0, 1, 0};
+          int[] dcol = {0, 1, 0, -1};
+  
+          while (!q.isEmpty()) {
+              Node node = q.poll();
+              int row = node.first, col = node.second, dis = node.third;
+              dist[row][col] = dis;
+  
+              for (int i = 0; i &lt; 4; i++) {
+                  int nrow = row + drow[i];
+                  int ncol = col + dcol[i];
+  
+                  if (nrow &gt;= 0 &amp;&amp; ncol &gt;= 0 &amp;&amp; nrow &lt; n &amp;&amp; ncol &lt; m &amp;&amp; vis[nrow][ncol] == 0) {
+                      q.add(new Node(nrow, ncol, dis + 1));
+                      vis[nrow][ncol] = 1;
+                  }
+              }
+          }
+  
+          return dist;
+      }
+  }
+      </code></pre>
+  
+      <h3>⏱️ Time & Space Complexity</h3>
+      <ul>
+        <li><strong>Time:</strong> O(n * m), since each cell is visited at most once.</li>
+        <li><strong>Space:</strong> O(n * m) for the queue, visited, and distance matrices.</li>
+      </ul>
+  
+      <h3>🚀 Final Thoughts</h3>
+      <p>This problem is a textbook case for BFS on a grid. Starting from all 0s and spreading out is both intuitive and efficient. Mastering patterns like this makes you faster and more confident during interviews and real-world development.</p>
+    `
   },
+  
   
   {
       id: 2,
@@ -237,7 +324,13 @@ const BlogDetail = () => {
             /> */}
           </h1>
       <p className="blog-date">{blog.date}</p>
-      <img src={blog.image} alt={blog.title} className="blog-title-image" />
+      {blog.image?.trim() && (
+      <img
+        src={blog.image}
+        alt={blog.title}
+        className="blog-title-image"
+      />
+    )}
       <div
          className="blog-content"
           dangerouslySetInnerHTML={{ __html: blog.content }}

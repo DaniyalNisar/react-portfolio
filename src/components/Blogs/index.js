@@ -19,9 +19,9 @@ const BlogPage = () => {
     },
     {
       id: 2,
-      title: 'Working with React and SCSS',
-      date: 'April 25, 2025',
-      excerpt: 'A deep dive into how SCSS enhances styling flexibility and keeps your React project scalable...'
+      title: '01 Matrix',
+      date: 'June 23, 2025',
+      excerpt: 'Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell'
     },
     {
       id: 3,

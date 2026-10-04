@@ -29,6 +29,15 @@ const About = () => {
           <p>
             My core toolkit includes Java, Spring Boot, SQL, Linux and Git. Alongside my backend work, I’m building deeper knowledge in Python, machine learning and AI, with an interest in applying those skills to practical engineering problems rather than treating them as separate disciplines.
           </p>
+          <div className="exploring-block" aria-label="Currently exploring">
+            <span className="exploring-label">Currently exploring</span>
+            <div className="exploring-items">
+              <span>Applied AI</span>
+              <span>LLM systems</span>
+              <span>MLOps</span>
+              <span>Optimization</span>
+            </div>
+          </div>
           <p>
             I value clear communication, thoughtful engineering and steady improvement. Outside work, I spend time on side projects, technical reading and gaming.
           </p>

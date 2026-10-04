@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { articles } from '../../articles'
 import './index.scss'
 
 const blogPosts = [
@@ -171,6 +172,7 @@ const BlogDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const blog = blogPosts.find((post) => post.id === Number(id))
+  const relatedPosts = articles.filter((post) => post.id !== Number(id)).slice(0, 3)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -198,12 +200,27 @@ const BlogDetail = () => {
             src={blog.image}
             alt={`${blog.title} article`}
             className="blog-title-image"
-            loading="lazy"
+            loading="eager"
           />
         )}
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
         <button onClick={() => navigate('/blogs')} className="go-back">Back to blog</button>
       </article>
+
+      <aside className="related-posts" aria-label="Related articles">
+        <span className="related-kicker">Keep reading</span>
+        <h2>More from the blog</h2>
+        <div className="related-list">
+          {relatedPosts.map((post) => (
+            <Link key={post.id} to={`/blog/${post.id}`} className="related-card">
+              <span className="related-date">{post.date}</span>
+              <strong>{post.title}</strong>
+              <span className="related-excerpt">{post.excerpt}</span>
+              <span className="related-link">Read article</span>
+            </Link>
+          ))}
+        </div>
+      </aside>
     </div>
   )
 }

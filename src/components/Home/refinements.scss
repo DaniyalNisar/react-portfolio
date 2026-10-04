@@ -1,12 +1,14 @@
+.specialties-mobile { display: none; }
+
 @media (max-width: 900px) {
   .home-page {
     min-height: calc(100dvh - 64px);
-    display: flex;
-    align-items: center;
+    display: block;
 
     .text-zone {
       width: min(90%, 720px);
-      padding: 78px 0 46px;
+      margin: 0 auto;
+      padding: 104px 0 42px;
     }
 
     h1 {
@@ -18,83 +20,154 @@
       .hero-name-line img {
         width: .76em;
         height: .76em;
-        margin: 0 -.14em .02em .03em;
-        transform: translateY(.02em);
+        margin: 0 -.16em .015em .015em;
+        transform: translateY(.01em);
       }
 
       .hero-name { margin-left: 0; }
-      .hero-role-line { margin-top: .06em; }
+      .hero-role-line { margin-top: .08em; }
+
+      &::before {
+        top: -22px;
+        left: 0;
+      }
+
+      &::after {
+        right: .1em;
+        bottom: -.15em;
+      }
     }
 
     .hero-specialties {
       margin-top: 18px;
-      letter-spacing: .09em;
-      line-height: 1.55;
+      letter-spacing: .08em;
+      line-height: 1.5;
     }
 
     .hero-intro {
       margin-top: 12px;
-      line-height: 1.58;
+      line-height: 1.56;
+      max-width: 590px;
     }
 
-    .hero-actions { margin-top: 20px; }
+    .hero-actions {
+      margin-top: 20px;
+      justify-content: flex-start;
+    }
   }
 
   .logo-container {
-    top: 64% !important;
-    right: -14vw !important;
-    width: min(76vw, 350px) !important;
-    height: 42vh !important;
-    opacity: .045 !important;
+    top: 62% !important;
+    right: -12vw !important;
+    width: min(66vw, 320px) !important;
+    height: 38vh !important;
+    opacity: .035 !important;
   }
 }
 
 @media (max-width: 620px) {
+  .specialties-desktop { display: none; }
+  .specialties-mobile { display: inline; }
+
   .home-page {
     .text-zone {
-      width: calc(100% - 34px);
-      padding-top: 72px;
-      padding-bottom: 36px;
+      width: calc(100% - 36px);
+      margin: 0 auto;
+      padding-top: 92px;
+      padding-bottom: 32px;
     }
 
     h1 {
-      font-size: clamp(3rem, 9.2vw, 4.1rem);
+      font-size: clamp(2.95rem, 8.6vw, 3.85rem);
+      line-height: 1.04;
+
+      .hero-greeting { margin-bottom: .08em; }
+      .hero-name-line { margin-bottom: .08em; }
 
       .hero-name-line img {
-        width: .72em;
-        height: .72em;
-        margin-right: -.16em;
+        width: .73em;
+        height: .73em;
+        margin-left: .01em;
+        margin-right: -.19em;
+        margin-bottom: .015em;
+      }
+
+      .hero-role-line {
+        white-space: normal;
+        max-width: 100%;
+      }
+
+      &::before {
+        top: -18px;
+        font-size: 12px;
+      }
+
+      &::after {
+        right: .15em;
+        bottom: -.12em;
+        font-size: 12px;
       }
     }
 
     .hero-specialties {
-      font-size: .96rem;
-      letter-spacing: .075em;
+      margin-top: 17px;
+      font-size: .95rem;
+      letter-spacing: .07em;
+      line-height: 1.45;
     }
 
-    .hero-intro { font-size: 1.26rem; }
+    .hero-intro {
+      margin-top: 12px;
+      max-width: 36rem;
+      font-size: 1.22rem;
+      line-height: 1.55;
+    }
 
     .hero-actions {
-      gap: 8px;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-      .flat-button,
-      .flat-button1 {
-        min-width: 0;
-        flex: 1 1 calc(50% - 4px);
-      }
+    .hero-actions .flat-button,
+    .hero-actions .flat-button1 {
+      flex: 0 1 auto;
+      min-height: 42px;
+      padding: 0 16px;
+      font-size: 9.5px;
+      letter-spacing: .12em;
     }
   }
 
   .logo-container {
-    top: 66% !important;
-    right: -22vw !important;
-    width: 86vw !important;
-    height: 39vh !important;
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-page {
+    .text-zone {
+      width: calc(100% - 28px);
+      padding-top: 86px;
+    }
+
+    h1 { font-size: clamp(2.75rem, 8.9vw, 3.35rem); }
+
+    .hero-specialties { font-size: .9rem; }
+    .hero-intro { font-size: 1.16rem; }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-actions .flat-button,
+    .hero-actions .flat-button1 {
+      width: auto;
+      min-width: 156px;
+    }
   }
 }
 
 @media (max-width: 380px) {
-  .home-page h1 { font-size: 2.85rem; }
-  .home-page .hero-specialties { font-size: .9rem; }
-  .home-page .hero-intro { font-size: 1.2rem; }
+  .home-page h1 { font-size: 2.7rem; }
 }

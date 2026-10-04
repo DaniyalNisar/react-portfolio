@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://daniyalnisar.netlify.app/</loc>
-    <lastmod>2025-05-08</lastmod> <!-- Add current date -->
-  </url>
-  <url>
-    <loc>https://daniyalnisar.netlify.app/about</loc>
-    <lastmod>2025-05-08</lastmod>
-  </url>
-  <url>
-    <loc>https://daniyalnisar.netlify.app/contact</loc>
-    <lastmod>2025-05-08</lastmod>
-  </url>
-  <url>
-    <loc>https://daniyalnisar.netlify.app/blogs</loc>
-    <lastmod>2025-05-08</lastmod>
-  </url>
-  <url>
-    <loc>https://daniyalnisar.netlify.app/mywork</loc>
-    <lastmod>2025-05-08</lastmod>
-  </url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/</loc></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/about</loc></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/contact</loc></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/blogs</loc></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/mywork</loc></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/blog/1</loc><lastmod>2025-05-04</lastmod></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/blog/2</loc><lastmod>2025-06-23</lastmod></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/blog/3</loc><lastmod>2025-04-20</lastmod></url>
+  <url><loc>https://daniyalnisar.github.io/react-portfolio/blog/4</loc><lastmod>2025-04-18</lastmod></url>
 </urlset>

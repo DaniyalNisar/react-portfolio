@@ -1,91 +1,68 @@
-import './index.scss';
-import {Link, NavLink} from 'react-router-dom'
-import LogoS from '../../assets/images/logo-s.png'
-import LogoSubtitle from '../../assets/images/logo_sub.png'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHome,faUser, faEnvelope,faBlog, faBriefcase, faBars} from '@fortawesome/free-solid-svg-icons'
-import { faLinkedin, faGithub, faFacebook, faInstagram,
-}  from '@fortawesome/free-brands-svg-icons'
-import { useState} from 'react';
+import './index.scss'
+import { Link, NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { useState } from 'react'
+
+const navItems = [
+  ['/', 'Home'],
+  ['/about', 'About'],
+  ['/mywork', 'Work'],
+  ['/blogs', 'Writing'],
+  ['/contact', 'Contact'],
+]
 
 const Sidebar = () => {
-    
-  const [showNav, setShowNav] = useState(false);
+  const [showNav, setShowNav] = useState(false)
+  const closeNav = () => setShowNav(false)
 
-  return (<div className='nav-bar'>
-        <Link className='logo' to='/'>
-            <img src={LogoS}  alt="logo" />
-            <img className="sub-logo" src={LogoSubtitle}  alt="Daniyal" />
-        </Link>  
-      {/* <div className='hamburger-icon'> */}
-        <FontAwesomeIcon icon={faBars}
-          onClick={() =>showNav ? setShowNav(false) : setShowNav(true)} 
-          color="#1EB980"
-          size="2x"
-          className='hamburger-icon'
-        />
-      {/* </div> */}
-    <nav className={showNav ? 'mobile-show' : ''}>
-        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" to="/">
-            <FontAwesomeIcon  onClick={() =>setShowNav(false)} icon={faHome} color="#E9F4F8		" />
-        </NavLink>
-         <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="about-link" to="/about">
-            <FontAwesomeIcon onClick={() =>setShowNav(false)}  icon={faUser} color="#E9F4F8		" />
-        </NavLink>
-         <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="contact-link" to="/contact">
-            <FontAwesomeIcon onClick={() =>setShowNav(false)} icon={faEnvelope} color="#E9F4F8		" />
-        </NavLink>
-        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="blog-link" to="/blogs">
-            <FontAwesomeIcon  icon={faBlog} color="#E9F4F8		" />
-        </NavLink>
-        <NavLink onClick={() =>setShowNav(false)} exact="true" activeclassname="active" className="project-link" to="/mywork">
-            <FontAwesomeIcon onClick={() =>setShowNav(false)} icon={faBriefcase} color="#E9F4F8		" />
-        </NavLink>
-        
-    </nav>
+  return (
+    <header className="site-header">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <div className="site-width nav-wrap">
+        <Link className="brand" to="/" onClick={closeNav} aria-label="Daniyal Nisar Rana home">
+          <span className="brand-mark">DN</span>
+          <span className="brand-copy">
+            <strong>Daniyal Nisar Rana</strong>
+            <small>Software Engineer</small>
+          </span>
+        </Link>
 
-    <ul>
-        <li>
-         <a 
-            href="https://www.linkedin.com/in/daniyal-nisar-rana-7b6041209/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FontAwesomeIcon icon={faLinkedin} color="#E9F4F8" />
-          </a>
-        </li>
-        <li>
-         <a 
-            href="https://github.com/DaniyalNisar"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FontAwesomeIcon icon={faGithub} color="#E9F4F8	" />
-          </a>
-        </li>
-          <li>
-         <a 
-            href="https://www.facebook.com/share/18dovEmFev/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FontAwesomeIcon icon={faFacebook} color="#E9F4F8	" />
-          </a>
-        </li>
-          <li>
-         <a 
-            href="https://www.instagram.com/daniyal.nisar99/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FontAwesomeIcon icon={faInstagram} color="#E9F4F8	" />
-          </a>
-        </li>
-        
-    </ul>
-  
-  </div>
+        <button
+          className="nav-toggle"
+          type="button"
+          aria-label={showNav ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={showNav}
+          onClick={() => setShowNav(!showNav)}
+        >
+          <FontAwesomeIcon icon={showNav ? faXmark : faBars} />
+        </button>
 
+        <nav className={showNav ? 'site-nav open' : 'site-nav'} aria-label="Primary navigation">
+          {navItems.map(([to, label]) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              onClick={closeNav}
+              className={({ isActive }) => isActive ? 'active' : undefined}
+            >
+              {label}
+            </NavLink>
+          ))}
+          <div className="nav-socials">
+            <a href="https://www.linkedin.com/in/daniyal-nisar99/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+            <a href="https://github.com/DaniyalNisar" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+              <FontAwesomeIcon icon={faGithub} />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
   )
 }
-export default Sidebar;
+
+export default Sidebar

@@ -1,7 +1,8 @@
 .blog-container {
   scroll-snap-type: x proximity;
   scroll-padding-inline: .2rem;
-  touch-action: pan-x;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-card {
@@ -94,9 +95,18 @@
     gap: 1.2rem;
     padding-bottom: 1rem;
     scrollbar-width: none;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
   }
 
   .blog-container::-webkit-scrollbar { display: none; }
+
+  .blog-card {
+    transform: none;
+    will-change: auto;
+  }
+
+  .blog-card.visible { transform: none; }
 
   .blog-orbit {
     top: 72px;

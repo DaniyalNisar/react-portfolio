@@ -1,80 +1,157 @@
-.app-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.site-main {
-  flex: 1;
+.page {
   width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
-.site-width {
-  width: min(1180px, calc(100% - 4rem));
-  margin: 0 auto;
+.tags {
+  color: #3b82f6;
+  opacity: .65;
+  position: fixed;
+  left: 90px;
+  font-size: 18px;
+  font-family: 'La Belle Aurore';
+  z-index: 2;
+  pointer-events: none;
 }
+
+.top-tags { top: 28px; }
+.bottom-tags { bottom: 18px; }
+.bottom-tag-html { margin-left: -20px; }
 
 .container {
-  width: min(1180px, calc(100% - 4rem));
-  margin: 0 auto;
-  padding: clamp(4rem, 7vw, 8rem) 0;
+  width: calc(100% - 60px);
+  margin-left: 60px;
+  min-height: 100vh;
+  position: relative;
+  opacity: 0;
+  z-index: 1;
+  animation: fadeIn 1s forwards;
+  animation-delay: .55s;
 }
 
-.text-zone {
-  width: 100%;
+.about-page,
+.contact-page {
+  .text-zone {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38%;
+    max-width: 720px;
+
+    h1 {
+      font-size: clamp(4rem, 4.2vw, 5.4rem);
+      font-family: 'Coolvetica';
+      color: #60a5fa;
+      font-weight: 400;
+      margin: 0 0 38px;
+      position: relative;
+
+      &::before,
+      &::after {
+        font-family: 'La Belle Aurore';
+        color: #3b82f6;
+        font-size: 18px;
+        opacity: .65;
+        position: absolute;
+      }
+
+      &::before { content: '<h1>'; top: -22px; left: -10px; }
+      &::after { content: '</h1>'; left: -10px; bottom: -25px; animation: fadeIn 1s 1.7s backwards; }
+    }
+
+    p {
+      font-size: 1.35rem;
+      line-height: 1.65;
+      color: #dbeafe;
+      font-family: sans-serif;
+      font-weight: 300;
+      animation: pulse 1s;
+    }
+  }
+
+  .text-animate-hover:hover { color: #fff; }
 }
 
-.page-heading,
-.about-page h1,
-.contact-page h1,
-.blog-page h1,
-.work-page h1,
-.blog-detail-page h1 {
-  margin: 0 0 1.8rem;
-  font-size: clamp(3.2rem, 6vw, 6.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  color: #f8fafc;
-  font-weight: 800;
+.blog-page,
+.blog-detail-page,
+.work-page {
+  .text-zone {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80%;
+    max-width: 1500px;
+
+    h1 {
+      font-size: clamp(4rem, 4.2vw, 5.4rem);
+      font-family: 'Coolvetica';
+      color: #60a5fa;
+      font-weight: 400;
+      margin: 0 0 38px;
+      position: relative;
+
+      &::before,
+      &::after {
+        font-family: 'La Belle Aurore';
+        color: #3b82f6;
+        font-size: 18px;
+        opacity: .65;
+        position: absolute;
+      }
+
+      &::before { content: '<h1>'; top: -22px; left: -10px; }
+      &::after { content: '</h1>'; left: -10px; bottom: -25px; animation: fadeIn 1s 1.7s backwards; }
+    }
+
+    p { color: #dbeafe; font-family: sans-serif; font-weight: 300; }
+  }
 }
 
-.section-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: .8rem;
-  margin-bottom: 1.4rem;
-  color: #60a5fa;
-  text-transform: uppercase;
-  letter-spacing: .18em;
-  font-size: 1.05rem;
-  font-weight: 800;
+@media (max-width: 1000px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    min-height: calc(100dvh - 64px);
+  }
+
+  .tags { display: none; }
+
+  .about-page,
+  .contact-page,
+  .blog-page,
+  .blog-detail-page,
+  .work-page {
+    overflow: visible;
+    padding: 96px 5vw 64px;
+
+    .text-zone {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+    }
+  }
+
+  .about-page { padding-top: 240px; }
 }
 
-.section-kicker::before {
-  content: '';
-  width: 26px;
-  height: 2px;
-  background: #3b82f6;
-}
+@media (max-width: 600px) {
+  .about-page,
+  .contact-page,
+  .blog-page,
+  .blog-detail-page,
+  .work-page {
+    padding-left: 20px;
+    padding-right: 20px;
 
-.site-footer {
-  border-top: 1px solid rgba(96, 165, 250, .12);
-  background: rgba(2, 6, 23, .7);
-}
+    .text-zone h1 { font-size: 3.8rem; }
+  }
 
-.footer-inner {
-  min-height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  color: #64748b;
-  font-size: 1.1rem;
-}
-
-@media (max-width: 700px) {
-  .site-width,
-  .container { width: min(100% - 2.4rem, 1180px); }
-  .container { padding: 3.5rem 0 5rem; }
-  .footer-inner { flex-direction: column; justify-content: center; text-align: center; padding: 1.8rem 0; }
+  .about-page { padding-top: 205px; }
 }

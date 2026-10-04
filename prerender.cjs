@@ -3,10 +3,39 @@ const fs = require('fs')
 const path = require('path')
 const babel = require('@babel/core')
 const original = require.extensions['.js']
-require.extensions['.scss'] = () => {}
+
+require.extensions['.scss'] = require.extensions['.css'] = () => {}
+
+// Resolve imported assets during Node-side prerendering. CRA normally handles
+// these through webpack, but the prerender step executes source files directly.
+const assetManifest = JSON.parse(fs.readFileSync('build/asset-manifest.json', 'utf8'))
+const assetFiles = assetManifest.files || {}
+const mimeTypes = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+}
+
+for (const [ext, mime] of Object.entries(mimeTypes)) {
+  require.extensions[ext] = (module, filename) => {
+    const manifestKey = Object.keys(assetFiles).find(
+      (key) => key.startsWith('static/media/') && key.includes(path.basename(filename, ext))
+    )
+    const url = manifestKey
+      ? assetFiles[manifestKey]
+      : `data:${mime};base64,${fs.readFileSync(filename).toString('base64')}`
+    module.exports = { __esModule: true, default: url }
+  }
+}
+
 require.extensions['.js'] = (module, filename) => {
-  if (!filename.startsWith(path.resolve('src') + path.sep))
+  if (!filename.startsWith(path.resolve('src') + path.sep)) {
     return original(module, filename)
+  }
+
   const { code } = babel.transformSync(fs.readFileSync(filename, 'utf8'), {
     filename,
     presets: [
@@ -18,32 +47,33 @@ require.extensions['.js'] = (module, filename) => {
   })
   module._compile(code, filename)
 }
+
 const React = require('react')
 const { renderToString } = require('react-dom/server')
 const { StaticRouter } = require('react-router-dom/server')
 const App = require('./src/App').default
 const { articles } = require('./src/articles')
+const { metadata } = require('./src/App')
 const template = fs.readFileSync('build/index.html', 'utf8')
 const origin = 'https://daniyalnisar.netlify.app'
-const { metadata } = require('./src/App')
+
 const pages = [
   ...Object.entries(metadata),
-  ...articles.map((a) => [
-    `/blog/${a.id}`,
+  ...articles.map((article) => [
+    `/blog/${article.id}`,
     [
-      `${a.title} | Daniyal Nisar Rana`,
-      `Engineering notes by Daniyal Nisar Rana: ${a.title}`,
+      `${article.title} | Daniyal Nisar Rana`,
+      `Engineering notes by Daniyal Nisar Rana: ${article.title}`,
     ],
   ]),
 ]
-const escape = (s) =>
-  s.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
+
+const escape = (value) =>
+  value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
+
 for (const [route, [title, description]] of [
   ...pages,
-  [
-    '/404',
-    ['Page not found | Daniyal Nisar Rana', 'This page could not be found.'],
-  ],
+  ['/404', ['Page not found | Daniyal Nisar Rana', 'This page could not be found.']],
 ]) {
   const markup = renderToString(
     React.createElement(
@@ -52,6 +82,7 @@ for (const [route, [title, description]] of [
       React.createElement(App)
     )
   )
+
   let html = template
     .replace('<div id="root"></div>', `<div id="root">${markup}</div>`)
     .replace(/<title>.*?<\/title>/, `<title>${escape(title)}</title>`)
@@ -68,20 +99,22 @@ for (const [route, [title, description]] of [
       `$1${origin}${route === '/' ? '/' : route}`
     )
     .replace(/(<meta property="og:url" content=")[^"]*/, `$1${origin}${route}`)
-  if (route === '/404')
-    html = html.replace(
-      '</head>',
-      '<meta name="robots" content="noindex"/></head>'
-    )
+
+  if (route === '/404') {
+    html = html.replace('</head>', '<meta name="robots" content="noindex"/></head>')
+  }
+
   const file =
-    route === '/404'
-      ? 'build/404.html'
-      : path.join('build', route, 'index.html')
+    route === '/404' ? 'build/404.html' : path.join('build', route, 'index.html')
   fs.mkdirSync(path.dirname(file), { recursive: true })
   fs.writeFileSync(file, html)
 }
+
 fs.writeFileSync(
   'build/sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([route]) => `  <url><loc>${origin}${route}</loc></url>`).join('\n')}\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
+    .map(([route]) => `  <url><loc>${origin}${route}</loc></url>`)
+    .join('\n')}\n</urlset>\n`
 )
+
 console.log(`Prerendered ${pages.length} pages and a 404 page.`)

@@ -13,7 +13,7 @@ export const articles = [
     title: '01 Matrix: BFS-Based Distance Calculation',
     date: 'June 23, 2025',
     datePublished: '2025-06-23',
-    image: '/og-image.png',
+    image: '/images/blogs/react.png',
     excerpt: 'A clear explanation of using multi-source breadth-first search to solve the 01 Matrix shortest-distance problem.',
     description: 'A clear explanation of using multi-source breadth-first search to solve the 01 Matrix shortest-distance problem.',
   },

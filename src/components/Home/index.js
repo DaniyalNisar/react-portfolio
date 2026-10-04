@@ -8,7 +8,7 @@ import Loader from 'react-loaders'
 
 const Home = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
-  const nameArray = ['D','a','n','i','y','a','l,']
+  const nameArray = ['a','n','i','y','a','l,']
   const jobArray = ['S','o','f','t','w','a','r','e',' ','E','n','g','i','n','e','e','r','.']
 
   useEffect(() => {
@@ -31,25 +31,25 @@ const Home = () => {
                 <span className={`${letterClass} _13`}>I</span>
                 <span className={`${letterClass} _14`}>'m</span>
               </span>
-              <img src={LogoTitle} alt="" aria-hidden="true" />
+              <img src={LogoTitle} alt="Daniyal Nisar logo" />
               <span className="hero-name">
                 <AnimatedLetters letterClass={letterClass} strArray={nameArray} idx={15} />
               </span>
             </span>
 
             <span className="hero-line hero-role-line">
-              <AnimatedLetters letterClass={letterClass} strArray={jobArray} idx={24} />
+              <AnimatedLetters letterClass={letterClass} strArray={jobArray} idx={23} />
             </span>
           </h1>
 
           <p className="hero-specialties">Backend Engineering / Java / Payments / Fintech / AI &amp; ML</p>
           <p className="hero-intro">
-            I build reliable software, solve hard engineering problems, and keep learning how better systems can be designed and delivered.
+            I enjoy building dependable software, solving difficult engineering problems, and turning complex ideas into systems that are easier to use and maintain.
           </p>
 
           <div className="hero-actions">
             <Link to="/contact" className="flat-button">CONTACT ME</Link>
-            <a href="/Daniyal_Nisar_Resume.pdf" download className="flat-button1">DOWNLOAD CV</a>
+            <a href={`${process.env.PUBLIC_URL || ''}/Daniyal_Nisar_Resume.pdf`} download className="flat-button1">DOWNLOAD CV</a>
           </div>
         </div>
         <Logo />

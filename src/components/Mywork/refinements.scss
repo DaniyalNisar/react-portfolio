@@ -1,0 +1,70 @@
+@media (hover: none) {
+  .work-card:hover { transform: none; }
+}
+
+.work-container {
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: .2rem;
+  touch-action: pan-x;
+}
+
+.work-card {
+  scroll-snap-stop: normal;
+  transition: opacity .45s ease, transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .25s ease, border-color .25s ease;
+  will-change: transform;
+}
+
+@media (max-width: 900px) {
+  .work-container {
+    gap: 1.2rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+
+  .work-container::-webkit-scrollbar { display: none; }
+
+  .work-signal {
+    display: block;
+    top: 72px;
+    right: 4vw;
+    width: 96px;
+    height: 96px;
+    opacity: .16;
+  }
+
+  .signal-core {
+    left: 43px;
+    top: 43px;
+  }
+
+  .signal-ring-one { width: 48px; height: 48px; }
+  .signal-ring-two { width: 82px; height: 82px; }
+  .signal-dot-one { top: 8px; left: 47px; }
+  .signal-dot-two { right: 8px; bottom: 22px; }
+  .signal-dot-three { left: 8px; bottom: 20px; }
+}
+
+@media (max-width: 520px) {
+  .work-signal {
+    display: block;
+    top: 68px;
+    right: 12px;
+    width: 78px;
+    height: 78px;
+    opacity: .12;
+  }
+
+  .signal-core {
+    width: 9px;
+    height: 9px;
+    left: 35px;
+    top: 35px;
+  }
+
+  .signal-ring-one { width: 38px; height: 38px; }
+  .signal-ring-two { width: 66px; height: 66px; }
+  .signal-dot { width: 5px; height: 5px; }
+  .signal-dot-one { top: 7px; left: 38px; }
+  .signal-dot-two { right: 7px; bottom: 18px; }
+  .signal-dot-three { left: 7px; bottom: 17px; }
+}

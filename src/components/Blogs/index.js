@@ -20,8 +20,14 @@ const BlogPage = () => {
     return () => { clearTimeout(timer1); clearTimeout(timer2) }
   }, [])
 
-  const scrollLeft = () => blogContainerRef.current?.scrollBy({ left: -340, behavior: 'smooth' })
-  const scrollRight = () => blogContainerRef.current?.scrollBy({ left: 340, behavior: 'smooth' })
+  const scrollCarousel = (direction) => {
+    const container = blogContainerRef.current
+    if (!container) return
+    const card = container.querySelector('.blog-card')
+    const gap = parseFloat(getComputedStyle(container).gap) || 16
+    const distance = card ? card.getBoundingClientRect().width + gap : container.clientWidth * 0.8
+    container.scrollBy({ left: direction * distance, behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -38,7 +44,7 @@ const BlogPage = () => {
           <h1><AnimatedLetters letterClass={letterClass} strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']} idx={15} /></h1>
           <p className="blog-intro">Notes on software engineering, backend systems, performance, algorithms and the technical ideas I’m currently exploring.</p>
           <div className="blog-scroll-wrapper">
-            <div className="button-wrapper"><button className="scroll-button left" onClick={scrollLeft} aria-label="Scroll blog left">&lt;</button></div>
+            <div className="button-wrapper"><button className="scroll-button left" onClick={() => scrollCarousel(-1)} aria-label="Scroll blog left">&lt;</button></div>
             <div className="blog-container" ref={blogContainerRef} tabIndex="0" aria-label="Engineering articles">
               {blogPosts.map((post) => (
                 <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id}>
@@ -63,7 +69,7 @@ const BlogPage = () => {
                 </article>
               ))}
             </div>
-            <div className="button-wrapper"><button className="scroll-button right" onClick={scrollRight} aria-label="Scroll blog right">&gt;</button></div>
+            <div className="button-wrapper"><button className="scroll-button right" onClick={() => scrollCarousel(1)} aria-label="Scroll blog right">&gt;</button></div>
           </div>
         </div>
       </div>

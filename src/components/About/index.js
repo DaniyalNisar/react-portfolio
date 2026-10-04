@@ -26,9 +26,20 @@ const About = () => {
           <p>
             I enjoy working on systems where correctness, latency and reliability matter. That often means tracing difficult production issues, understanding data and concurrency problems, improving service behavior and making the code easier to maintain.
           </p>
-          <p>
-            My core toolkit includes Java, Spring Boot, SQL, Linux and Git. Alongside my backend work, I’m building deeper knowledge in Python, machine learning and AI, with an interest in applying those skills to practical engineering problems rather than treating them as separate disciplines.
-          </p>
+
+          <div className="profile-grid" aria-label="Experience and education">
+            <article className="profile-card">
+              <span className="profile-kicker">Experience</span>
+              <h2>Software Engineer · i2c, Inc.</h2>
+              <p>Backend and payments engineering across real-time transaction systems, production reliability, performance and payment lifecycle flows.</p>
+            </article>
+            <article className="profile-card">
+              <span className="profile-kicker">Education</span>
+              <h2>BS Information Technology · PUCIT</h2>
+              <p>CGPA 3.87, ranked first in class. Currently continuing graduate study in Artificial Intelligence at LUMS.</p>
+            </article>
+          </div>
+
           <div className="exploring-block" aria-label="Currently exploring">
             <span className="exploring-label">Currently exploring</span>
             <div className="exploring-items">
@@ -38,9 +49,12 @@ const About = () => {
               <span>Optimization</span>
             </div>
           </div>
-          <p>
-            I value clear communication, thoughtful engineering and steady improvement. Outside work, I spend time on side projects, technical reading and gaming.
-          </p>
+
+          <div className="about-links">
+            <a href="https://www.linkedin.com/in/daniyal-nisar99/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/DaniyalNisar" target="_blank" rel="noreferrer">GitHub</a>
+            <a href={`${process.env.PUBLIC_URL || ''}/Daniyal_Nisar_Resume.pdf`} target="_blank" rel="noreferrer">View Resume</a>
+          </div>
         </div>
 
         <div className="stage-cube-cont" aria-label="Animated technology stack">

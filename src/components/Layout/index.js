@@ -3,17 +3,16 @@ import Sidebar from '../Sidebar'
 import { Outlet } from 'react-router-dom'
 
 const Layout = () => (
-  <div className="app-shell">
+  <div className="App">
     <Sidebar />
-    <main className="site-main" id="main-content">
+    <div className="page">
+      <span className="tags top-tags">&lt;body&gt;</span>
       <Outlet />
-    </main>
-    <footer className="site-footer">
-      <div className="site-width footer-inner">
-        <span>© {new Date().getFullYear()} Daniyal Nisar Rana</span>
-        <span>Backend Engineering · Payments · Fintech · AI/ML</span>
-      </div>
-    </footer>
+      <span className="tags bottom-tags">
+        &lt;/body&gt;<br />
+        <span className="bottom-tag-html">&lt;/html&gt;</span>
+      </span>
+    </div>
   </div>
 )
 

@@ -2,6 +2,67 @@
   .work-card:hover { transform: none; }
 }
 
+.featured-work {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.featured-work-card {
+  padding: .85rem 1rem;
+  border: 1px solid rgba(96,165,250,.18);
+  border-radius: 10px;
+  background: rgba(15,23,42,.48);
+}
+
+.featured-work-card span,
+.work-category {
+  display: block;
+  color: #60a5fa;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.featured-work-card strong {
+  display: block;
+  margin-top: .35rem;
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.work-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-bottom: 1rem;
+}
+
+.work-filters button {
+  padding: .52rem .8rem;
+  border: 1px solid rgba(96,165,250,.2);
+  border-radius: 999px;
+  background: rgba(15,23,42,.45);
+  color: #cbd5e1;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.work-filters button:hover,
+.work-filters button:focus-visible,
+.work-filters button.active {
+  color: #fff;
+  border-color: rgba(96,165,250,.65);
+  background: rgba(37,99,235,.18);
+}
+
+.work-category { margin: .8rem 0 -.2rem; }
+
 .work-container {
   scroll-snap-type: x proximity;
   scroll-padding-inline: .2rem;
@@ -36,57 +97,23 @@
   }
 }
 
-.work-signal {
-  opacity: .48;
-}
+.work-signal { opacity: .48; }
+.signal-ring { border-color: rgba(96, 165, 250, .62); box-shadow: 0 0 18px rgba(59, 130, 246, .12); }
+.signal-core { background: #93c5fd; box-shadow: 0 0 26px rgba(96, 165, 250, .95); }
+.signal-dot { background: #60a5fa; box-shadow: 0 0 16px rgba(96, 165, 250, .9); }
 
-.signal-ring {
-  border-color: rgba(96, 165, 250, .62);
-  box-shadow: 0 0 18px rgba(59, 130, 246, .12);
-}
-
-.signal-core {
-  background: #93c5fd;
-  box-shadow: 0 0 26px rgba(96, 165, 250, .95);
-}
-
-.signal-dot {
-  background: #60a5fa;
-  box-shadow: 0 0 16px rgba(96, 165, 250, .9);
+@media (max-width: 1100px) {
+  .featured-work { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 900px) {
-  .work-container {
-    gap: 1.2rem;
-    padding-bottom: 1rem;
-    scrollbar-width: none;
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
-
+  .featured-work { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-container { gap: 1.2rem; padding-bottom: 1rem; scrollbar-width: none; scroll-snap-type: none; scroll-behavior: auto; }
   .work-container::-webkit-scrollbar { display: none; }
-
-  .work-card {
-    transform: none;
-    will-change: auto;
-  }
-
+  .work-card { transform: none; will-change: auto; }
   .work-card.visible { transform: none; }
-
-  .work-signal {
-    display: block;
-    top: 72px;
-    right: 4vw;
-    width: 96px;
-    height: 96px;
-    opacity: .34;
-  }
-
-  .signal-core {
-    left: 43px;
-    top: 43px;
-  }
-
+  .work-signal { display: block; top: 72px; right: 4vw; width: 96px; height: 96px; opacity: .34; }
+  .signal-core { left: 43px; top: 43px; }
   .signal-ring-one { width: 48px; height: 48px; }
   .signal-ring-two { width: 82px; height: 82px; }
   .signal-dot-one { top: 8px; left: 47px; }
@@ -94,26 +121,18 @@
   .signal-dot-three { left: 8px; bottom: 20px; }
 }
 
+@media (max-width: 600px) {
+  .featured-work { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 520px) {
   .work-tags { gap: .45rem; }
   .work-tags span { font-size: .95rem; min-height: 23px; }
-
-  .work-signal {
-    display: block;
-    top: 68px;
-    right: 12px;
-    width: 78px;
-    height: 78px;
-    opacity: .26;
-  }
-
-  .signal-core {
-    width: 9px;
-    height: 9px;
-    left: 35px;
-    top: 35px;
-  }
-
+  .work-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .35rem; scrollbar-width: none; }
+  .work-filters::-webkit-scrollbar { display: none; }
+  .work-filters button { flex: 0 0 auto; }
+  .work-signal { display: block; top: 68px; right: 12px; width: 78px; height: 78px; opacity: .26; }
+  .signal-core { width: 9px; height: 9px; left: 35px; top: 35px; }
   .signal-ring-one { width: 38px; height: 38px; }
   .signal-ring-two { width: 66px; height: 66px; }
   .signal-dot { width: 5px; height: 5px; }

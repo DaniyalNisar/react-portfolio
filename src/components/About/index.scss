@@ -41,6 +41,39 @@
   .face6 { transform: rotateX(-90deg) translateZ(100px); }
 }
 
+.exploring-block {
+  margin: 1.6rem 0 1.8rem;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid rgba(96, 165, 250, .18);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, .45);
+}
+
+.exploring-label {
+  display: block;
+  margin-bottom: .9rem;
+  color: #93c5fd;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.exploring-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+
+  span {
+    padding: .42rem .75rem;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, .1);
+    border: 1px solid rgba(96, 165, 250, .16);
+    color: #dbeafe;
+    font-size: 1.08rem;
+  }
+}
+
 @keyframes spincube {
   from, to { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
   16% { transform: rotateY(-90deg); }
@@ -119,6 +152,9 @@
     .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(63px); }
     .face6 { transform: rotateX(-90deg) translateZ(63px); }
   }
+
+  .exploring-block { padding: 1rem; }
+  .exploring-items { gap: .45rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

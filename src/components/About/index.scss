@@ -1,87 +1,86 @@
-.about-intro {
-  display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-  gap: clamp(3rem, 7vw, 8rem);
-  align-items: start;
+.stage-cube-cont {
+  width: 50%;
+  height: 100%;
+  top: 0;
+  padding-top: 18%;
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  perspective: 800px;
 }
 
-.about-copy {
-  display: grid;
-  gap: 1.5rem;
+.cubespinner {
+  animation: spincube 12s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transform-origin: 100px 100px 0;
+  margin-left: calc(50% - 100px);
+
+  div {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(96, 165, 250, .5);
+    background: rgba(15, 23, 42, .72);
+    backdrop-filter: blur(8px);
+    text-align: center;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 28px rgba(37, 99, 235, .22);
+    color: #60a5fa;
+  }
+
+  .face1 { transform: translateZ(100px); }
+  .face2 { transform: rotateY(90deg) translateZ(100px); }
+  .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(100px); }
+  .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(100px); }
+  .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px); }
+  .face6 { transform: rotateX(-90deg) translateZ(100px); }
 }
 
-.about-copy p,
-.about-bottom p {
-  margin: 0;
-  color: #9aa9bd;
-  font-size: 1.35rem;
-  line-height: 1.8;
+@keyframes spincube {
+  from, to { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  16% { transform: rotateY(-90deg); }
+  33% { transform: rotateY(-90deg) rotateZ(90deg); }
+  50% { transform: rotateY(-180deg) rotateZ(90deg); }
+  66% { transform: rotateY(-270deg) rotateX(90deg); }
+  83% { transform: rotateX(90deg); }
 }
 
-.strength-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.4rem;
-  margin-top: clamp(4rem, 8vw, 8rem);
+@media (max-width: 1000px) {
+  .stage-cube-cont {
+    top: 88px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    padding-top: 0;
+    overflow: visible;
+  }
+
+  .cubespinner {
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    transform-origin: 75px 75px 0;
+
+    div {
+      width: 150px;
+      height: 150px;
+      font-size: 60px;
+    }
+
+    .face1 { transform: translateZ(75px); }
+    .face2 { transform: rotateY(90deg) translateZ(75px); }
+    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(75px); }
+    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(75px); }
+    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(75px); }
+    .face6 { transform: rotateX(-90deg) translateZ(75px); }
+  }
 }
 
-.strength-card {
-  position: relative;
-  padding: 2.2rem;
-  border: 1px solid rgba(96, 165, 250, .14);
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(15,23,42,.78), rgba(2,6,23,.78));
-  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-
-.strength-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(96, 165, 250, .34);
-  box-shadow: 0 18px 50px rgba(0,0,0,.24);
-}
-
-.card-number {
-  display: inline-block;
-  margin-bottom: 2.4rem;
-  color: #3b82f6;
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: .14em;
-}
-
-.strength-card h2 {
-  margin: 0 0 1rem;
-  color: #eaf2ff;
-  font-size: 1.75rem;
-}
-
-.strength-card p {
-  margin: 0;
-  color: #8495aa;
-  font-size: 1.18rem;
-  line-height: 1.7;
-}
-
-.about-bottom {
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-  gap: clamp(3rem, 7vw, 8rem);
-  align-items: start;
-  margin-top: clamp(5rem, 9vw, 9rem);
-  padding-top: clamp(4rem, 7vw, 7rem);
-  border-top: 1px solid rgba(96,165,250,.12);
-}
-
-.about-bottom h2 {
-  margin: 0;
-  color: #f8fafc;
-  font-size: clamp(2.4rem, 4vw, 4.2rem);
-  line-height: 1.1;
-  letter-spacing: -.03em;
-}
-
-@media (max-width: 800px) {
-  .about-intro,
-  .about-bottom { grid-template-columns: 1fr; gap: 2.4rem; }
-  .strength-grid { grid-template-columns: 1fr; }
+@media (prefers-reduced-motion: reduce) {
+  .cubespinner { animation-duration: 30s; }
 }

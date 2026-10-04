@@ -46,6 +46,16 @@ const Contact = () => {
   return (
     <>
       <div className="container contact-page">
+        <div className="contact-network" aria-hidden="true">
+          <span className="network-line line-one" />
+          <span className="network-line line-two" />
+          <span className="network-line line-three" />
+          <span className="network-node node-one" />
+          <span className="network-node node-two" />
+          <span className="network-node node-three" />
+          <span className="network-node node-four" />
+        </div>
+
         <div className="text-zone">
           <h1><AnimatedLetters letterClass={letterClass} strArray={['C','o','n','t','a','c','t',' ','m','e']} idx={15} /></h1>
           <p className="contact-text">Feel free to get in touch. Whether it’s a project, engineering opportunity, collaboration or a technical conversation, I’d be happy to hear from you.</p>

@@ -21,20 +21,20 @@ const About = () => {
             <AnimatedLetters letterClass={letterClass} strArray={['A','b','o','u','t',' ','m','e']} idx={15} />
           </h1>
           <p>
-            I’m a software engineer with a BS in Information Technology and hands-on experience building and optimizing backend systems, especially in fintech and payments. My work includes Java and Spring-based services, ISO 8583 transaction processing, production debugging, caching, and performance improvements in transaction-heavy environments.
+            I’m a software engineer focused on backend systems, fintech and payment processing. My work includes Java and Spring-based services, ISO 8583 transaction flows, production debugging, caching and performance improvements in transaction-heavy environments.
           </p>
           <p>
-            My day-to-day toolkit includes Java, Spring Boot, SQL, Linux, Git and backend engineering tools. Alongside that, I’m continuing to build depth in Python, machine learning and AI so I can combine strong software engineering with intelligent systems where it makes sense.
+            I enjoy working on systems where correctness, latency and reliability matter. That often means tracing difficult production issues, understanding data and concurrency problems, improving service behavior and making the code easier to maintain.
           </p>
           <p>
-            I enjoy solving performance and reliability problems: tracing production issues, reducing bottlenecks, improving service behavior, and making systems easier to reason about. I also value clear communication and collaboration because complex engineering work rarely succeeds in isolation.
+            My core toolkit includes Java, Spring Boot, SQL, Linux and Git. Alongside my backend work, I’m building deeper knowledge in Python, machine learning and AI, with an interest in applying those skills to practical engineering problems rather than treating them as separate disciplines.
           </p>
           <p>
-            Outside work, I like gaming, experimenting with side projects, and learning new technical ideas. That curiosity is a big part of how I approach engineering.
+            I value clear communication, thoughtful engineering and steady improvement. Outside work, I spend time on side projects, technical reading and gaming.
           </p>
         </div>
 
-        <div className="stage-cube-cont" aria-label="Technology stack animation">
+        <div className="stage-cube-cont" aria-label="Animated technology stack">
           <div className="cubespinner">
             <div className="face1"><FontAwesomeIcon icon={faJava} /></div>
             <div className="face2"><FontAwesomeIcon icon={faDocker} /></div>

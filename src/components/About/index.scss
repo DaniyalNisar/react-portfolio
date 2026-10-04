@@ -30,7 +30,6 @@
     align-items: center;
     box-shadow: 0 0 28px rgba(37, 99, 235, .22);
     color: #60a5fa;
-    transition: box-shadow .3s ease, border-color .3s ease;
   }
 
   .face1 { transform: translateZ(100px); }
@@ -41,23 +40,53 @@
   .face6 { transform: rotateX(-90deg) translateZ(100px); }
 }
 
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.6rem 0;
+}
+
+.profile-card {
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(96,165,250,.18);
+  border-radius: 12px;
+  background: rgba(15,23,42,.5);
+}
+
+.profile-card h2 {
+  margin: .45rem 0 .7rem;
+  color: #f8fafc;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.profile-card p {
+  margin: 0 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.55 !important;
+  color: #b8c5d8 !important;
+}
+
+.profile-kicker,
+.exploring-label {
+  display: block;
+  color: #93c5fd;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
 .exploring-block {
-  margin: 1.6rem 0 1.8rem;
+  margin: 1.6rem 0 1.4rem;
   padding: 1.2rem 1.35rem;
   border: 1px solid rgba(96, 165, 250, .18);
   border-radius: 12px;
   background: rgba(15, 23, 42, .45);
 }
 
-.exploring-label {
-  display: block;
-  margin-bottom: .9rem;
-  color: #93c5fd;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
+.exploring-label { margin-bottom: .9rem; }
 
 .exploring-items {
   display: flex;
@@ -74,6 +103,31 @@
   }
 }
 
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: 1.2rem;
+}
+
+.about-links a {
+  padding: .72rem 1rem;
+  border: 1px solid rgba(96,165,250,.3);
+  border-radius: 8px;
+  color: #bfdbfe;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.about-links a:hover,
+.about-links a:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(96,165,250,.7);
+  background: rgba(37,99,235,.12);
+}
+
 @keyframes spincube {
   from, to { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
   16% { transform: rotateY(-90deg); }
@@ -81,22 +135,6 @@
   50% { transform: rotateY(-180deg) rotateZ(90deg); }
   66% { transform: rotateY(-270deg) rotateX(90deg); }
   83% { transform: rotateX(90deg); }
-}
-
-@media (max-height: 760px) and (min-width: 1001px) {
-  .stage-cube-cont { padding-top: 14%; }
-  .cubespinner {
-    transform-origin: 80px 80px 0;
-    margin-left: calc(50% - 80px);
-
-    div { width: 160px; height: 160px; font-size: 76px; }
-    .face1 { transform: translateZ(80px); }
-    .face2 { transform: rotateY(90deg) translateZ(80px); }
-    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(80px); }
-    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(80px); }
-    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(80px); }
-    .face6 { transform: rotateX(-90deg) translateZ(80px); }
-  }
 }
 
 @media (max-width: 1000px) {
@@ -117,12 +155,7 @@
     margin: 0;
     transform-origin: 75px 75px 0;
 
-    div {
-      width: 150px;
-      height: 150px;
-      font-size: 60px;
-    }
-
+    div { width: 150px; height: 150px; font-size: 60px; }
     .face1 { transform: translateZ(75px); }
     .face2 { transform: rotateY(90deg) translateZ(75px); }
     .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(75px); }
@@ -132,13 +165,12 @@
   }
 }
 
-@media (max-width: 480px) {
-  .stage-cube-cont {
-    top: 96px;
-    width: 126px;
-    height: 126px;
-  }
+@media (max-width: 700px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}
 
+@media (max-width: 480px) {
+  .stage-cube-cont { top: 96px; width: 126px; height: 126px; }
   .cubespinner {
     width: 126px;
     height: 126px;
@@ -153,8 +185,8 @@
     .face6 { transform: rotateX(-90deg) translateZ(63px); }
   }
 
-  .exploring-block { padding: 1rem; }
-  .exploring-items { gap: .45rem; }
+  .exploring-block,
+  .profile-card { padding: 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

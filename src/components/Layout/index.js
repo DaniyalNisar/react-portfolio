@@ -1,29 +1,20 @@
-import './index.scss';
+import './index.scss'
 import Sidebar from '../Sidebar'
-import { Outlet } from 'react-router-dom';
-const Layout =() => {
+import { Outlet } from 'react-router-dom'
 
-    return(
-        <div className="App">
-        <Sidebar />
-        <div className="page">
-            <span className="tags top-tags">
-                &lt;body&gt;
-            </span>
+const Layout = () => (
+  <div className="app-shell">
+    <Sidebar />
+    <main className="site-main" id="main-content">
+      <Outlet />
+    </main>
+    <footer className="site-footer">
+      <div className="site-width footer-inner">
+        <span>© {new Date().getFullYear()} Daniyal Nisar Rana</span>
+        <span>Backend Engineering · Payments · Fintech · AI/ML</span>
+      </div>
+    </footer>
+  </div>
+)
 
-            <Outlet />
-
-            <span className="tags bottom-tags">
-                &lt;/body&gt;
-                <br />
-            <span className="bottom-tag-html">    
-                &lt;/html&gt;
-            </span>
-            </span> 
-        </div>
-        </div>
-
-    )
-}
-
-export default Layout;
+export default Layout

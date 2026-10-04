@@ -7,6 +7,7 @@ import Contact from './components/Contact'
 import BlogPage from './components/Blogs'
 import BlogDetail from './components/BlogDetail'
 import MyWork from './components/Mywork'
+import NotFound from './components/NotFound'
 
 export const metadata = {
   '/': [
@@ -41,6 +42,7 @@ function App() {
         <Route path="blogs" element={<BlogPage />} />
         <Route path="blog/:id" element={<BlogDetail />} />
         <Route path="mywork" element={<MyWork />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

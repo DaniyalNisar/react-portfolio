@@ -1,5 +1,31 @@
 .specialties-mobile { display: none; }
 
+.hero-initial {
+  display: inline-block;
+  flex: 0 0 auto;
+  margin-left: .08em;
+  margin-right: .005em;
+  font-family: 'Coolvetica', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 45%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(59, 130, 246, .26));
+}
+
+.hero-initial.text-animate-hover:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 45%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 @keyframes mobileLogoBreath {
   0%, 100% { opacity: .58; filter: drop-shadow(0 8px 20px rgba(37, 99, 235, .08)); }
   50% { opacity: 1; filter: drop-shadow(0 12px 28px rgba(37, 99, 235, .22)); }
@@ -24,12 +50,10 @@
         align-items: baseline;
       }
 
-      .hero-name-line img {
-        width: 1em;
-        height: 1em;
-        object-fit: contain;
-        margin: 0 -.05em -.045em .09em;
-        transform: translateY(.035em);
+      .hero-initial {
+        margin-left: .1em;
+        margin-right: .005em;
+        transform: translateY(.01em);
       }
 
       .hero-name { margin-left: 0; }
@@ -100,13 +124,10 @@
       .hero-greeting { margin-bottom: .08em; }
       .hero-name-line { margin-bottom: .08em; }
 
-      .hero-name-line img {
-        width: 1.02em;
-        height: 1.02em;
-        margin-left: .09em;
-        margin-right: -.055em;
-        margin-bottom: -.05em;
-        transform: translateY(.04em);
+      .hero-initial {
+        margin-left: .11em;
+        margin-right: 0;
+        transform: translateY(.005em);
       }
 
       .hero-role-line {
@@ -177,11 +198,8 @@
     h1 {
       font-size: clamp(2.72rem, 8.65vw, 3.3rem);
 
-      .hero-name-line img {
-        width: 1.03em;
-        height: 1.03em;
-        margin-left: .1em;
-        margin-right: -.05em;
+      .hero-initial {
+        margin-left: .11em;
       }
     }
 

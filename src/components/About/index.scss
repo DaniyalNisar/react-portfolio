@@ -6,7 +6,8 @@
   position: absolute;
   right: 0;
   overflow: hidden;
-  perspective: 800px;
+  perspective: 900px;
+  pointer-events: none;
 }
 
 .cubespinner {
@@ -29,6 +30,7 @@
     align-items: center;
     box-shadow: 0 0 28px rgba(37, 99, 235, .22);
     color: #60a5fa;
+    transition: box-shadow .3s ease, border-color .3s ease;
   }
 
   .face1 { transform: translateZ(100px); }
@@ -48,9 +50,25 @@
   83% { transform: rotateX(90deg); }
 }
 
+@media (max-height: 760px) and (min-width: 1001px) {
+  .stage-cube-cont { padding-top: 14%; }
+  .cubespinner {
+    transform-origin: 80px 80px 0;
+    margin-left: calc(50% - 80px);
+
+    div { width: 160px; height: 160px; font-size: 76px; }
+    .face1 { transform: translateZ(80px); }
+    .face2 { transform: rotateY(90deg) translateZ(80px); }
+    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(80px); }
+    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(80px); }
+    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(80px); }
+    .face6 { transform: rotateX(-90deg) translateZ(80px); }
+  }
+}
+
 @media (max-width: 1000px) {
   .stage-cube-cont {
-    top: 88px;
+    top: 92px;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
@@ -78,6 +96,28 @@
     .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(75px); }
     .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(75px); }
     .face6 { transform: rotateX(-90deg) translateZ(75px); }
+  }
+}
+
+@media (max-width: 480px) {
+  .stage-cube-cont {
+    top: 96px;
+    width: 126px;
+    height: 126px;
+  }
+
+  .cubespinner {
+    width: 126px;
+    height: 126px;
+    transform-origin: 63px 63px 0;
+
+    div { width: 126px; height: 126px; font-size: 50px; }
+    .face1 { transform: translateZ(63px); }
+    .face2 { transform: rotateY(90deg) translateZ(63px); }
+    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(63px); }
+    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(63px); }
+    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(63px); }
+    .face6 { transform: rotateX(-90deg) translateZ(63px); }
   }
 }
 

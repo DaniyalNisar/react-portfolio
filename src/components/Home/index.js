@@ -43,9 +43,12 @@ const Home = () => {
             </span>
           </h1>
 
-          <p className="hero-specialties">Backend Engineering / Java / Payments / Fintech / AI &amp; ML</p>
+          <p className="hero-specialties">
+            <span className="specialties-desktop">Backend Engineering / Java / Payments / Fintech / AI &amp; ML</span>
+            <span className="specialties-mobile">Backend • Java • Payments • AI/ML</span>
+          </p>
           <p className="hero-intro">
-            I enjoy building dependable software, solving difficult engineering problems, and turning complex ideas into systems that are easier to use and maintain.
+            I build dependable software, solve hard engineering problems, and enjoy turning complex ideas into systems that work well.
           </p>
 
           <div className="hero-actions">

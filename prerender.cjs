@@ -49,8 +49,9 @@ const { articles } = require('./src/articles')
 const { metadata } = require('./src/App')
 const template = fs.readFileSync('build/index.html', 'utf8')
 
-const origin = (process.env.SITE_ORIGIN || 'https://daniyalnisar.netlify.app').replace(/\/$/, '')
+const origin = (process.env.SITE_ORIGIN || 'https://daniyalnisar.github.io/react-portfolio').replace(/\/$/, '')
 const basePath = (process.env.PUBLIC_URL || '').replace(/\/$/, '')
+const personId = `${origin}/#person`
 const articleByRoute = Object.fromEntries(articles.map((article) => [`/blog/${article.id}`, article]))
 
 const pages = [
@@ -91,6 +92,59 @@ for (const [route, [title, description]] of [
     .replace(/(<link rel="canonical" href=")[^"]*/, `$1${canonical}`)
     .replace(/(<meta property="og:url" content=")[^"]*/, `$1${canonical}`)
 
+  if (route === '/about') {
+    const profileSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${canonical}#profile`,
+      url: canonical,
+      name: 'About Daniyal Nisar Rana',
+      mainEntity: {
+        '@type': 'Person',
+        '@id': personId,
+        name: 'Daniyal Nisar Rana',
+        url: `${origin}/`,
+        jobTitle: 'Software Engineer',
+        sameAs: [
+          'https://www.linkedin.com/in/daniyal-nisar99/',
+          'https://github.com/DaniyalNisar',
+        ],
+        knowsAbout: [
+          'Java',
+          'Spring Boot',
+          'Backend Engineering',
+          'Fintech',
+          'Payment Systems',
+          'ISO 8583',
+          'Performance Engineering',
+          'Artificial Intelligence',
+          'Machine Learning',
+        ],
+      },
+    }
+    html = addJsonLd(html, profileSchema)
+  }
+
+  if (route === '/mywork') {
+    const workSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': `${canonical}#work`,
+      url: canonical,
+      name: 'Engineering Work by Daniyal Nisar Rana',
+      description,
+      author: { '@id': personId },
+      about: [
+        'Backend Engineering',
+        'Payment Systems',
+        'Performance Engineering',
+        'Reliability Engineering',
+        'Web Applications',
+      ],
+    }
+    html = addJsonLd(html, workSchema)
+  }
+
   if (route === '/blogs') {
     const blogListSchema = {
       '@context': 'https://schema.org',
@@ -115,8 +169,8 @@ for (const [route, [title, description]] of [
       description: article.description,
       datePublished: article.datePublished,
       dateModified: article.datePublished,
-      author: { '@type': 'Person', name: 'Daniyal Nisar Rana', url: origin },
-      publisher: { '@type': 'Person', name: 'Daniyal Nisar Rana', url: origin },
+      author: { '@type': 'Person', '@id': personId, name: 'Daniyal Nisar Rana', url: `${origin}/` },
+      publisher: { '@type': 'Person', '@id': personId, name: 'Daniyal Nisar Rana', url: `${origin}/` },
       mainEntityOfPage: canonical,
       image: imageUrl,
     }

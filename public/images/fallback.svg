@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Daniyal Nisar portfolio image placeholder</title>
+  <desc id="desc">A dark blue technical grid with a stylized D mark.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1e3a8a" stroke-opacity=".18" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+  <circle cx="320" cy="180" r="92" fill="none" stroke="url(#accent)" stroke-width="4" opacity=".35"/>
+  <path d="M260 112h65c66 0 105 29 105 68s-39 68-105 68h-65zM294 142v76h31c43 0 69-14 69-38s-26-38-69-38z" fill="url(#accent)" opacity=".92"/>
+</svg>

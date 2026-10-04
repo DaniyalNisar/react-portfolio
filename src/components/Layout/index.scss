@@ -34,11 +34,15 @@
 .contact-page {
   .text-zone {
     position: absolute;
-    left: 10%;
+    left: clamp(7rem, 8vw, 14rem);
     top: 50%;
     transform: translateY(-50%);
-    width: 38%;
-    max-width: 720px;
+    width: min(40%, 720px);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, .45) transparent;
 
     h1 {
       font-size: clamp(4rem, 4.2vw, 5.4rem);
@@ -62,12 +66,13 @@
     }
 
     p {
-      font-size: 1.35rem;
-      line-height: 1.65;
+      font-size: clamp(1.25rem, 1.05vw, 1.42rem);
+      line-height: 1.72;
       color: #dbeafe;
       font-family: sans-serif;
       font-weight: 300;
       animation: pulse 1s;
+      margin: 0 0 1.45rem;
     }
   }
 
@@ -79,11 +84,11 @@
 .work-page {
   .text-zone {
     position: absolute;
-    left: 10%;
+    left: clamp(7rem, 8vw, 14rem);
     top: 50%;
     transform: translateY(-50%);
-    width: 80%;
-    max-width: 1500px;
+    width: min(82%, 1500px);
+    max-height: calc(100vh - 96px);
 
     h1 {
       font-size: clamp(4rem, 4.2vw, 5.4rem);
@@ -110,11 +115,41 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .about-page,
+  .contact-page,
+  .blog-page,
+  .blog-detail-page,
+  .work-page {
+    .text-zone { left: clamp(10rem, 10vw, 20rem); }
+  }
+}
+
+@media (max-height: 760px) and (min-width: 1001px) {
+  .about-page,
+  .contact-page,
+  .blog-page,
+  .work-page {
+    .text-zone {
+      top: 52%;
+      max-height: calc(100vh - 72px);
+    }
+  }
+
+  .about-page .text-zone p,
+  .contact-page .text-zone p { font-size: 1.2rem; line-height: 1.55; }
+
+  .about-page .text-zone h1,
+  .contact-page .text-zone h1,
+  .blog-page .text-zone h1,
+  .work-page .text-zone h1 { margin-bottom: 30px; }
+}
+
 @media (max-width: 1000px) {
   .container {
     width: 100%;
     margin-left: 0;
-    min-height: calc(100dvh - 64px);
+    min-height: 100dvh;
   }
 
   .tags { display: none; }
@@ -125,7 +160,7 @@
   .blog-detail-page,
   .work-page {
     overflow: visible;
-    padding: 96px 5vw 64px;
+    padding: 104px clamp(24px, 6vw, 56px) 64px;
 
     .text-zone {
       position: relative;
@@ -135,23 +170,46 @@
       width: 100%;
       max-width: none;
       max-height: none;
+      overflow: visible;
+      padding-right: 0;
     }
   }
 
-  .about-page { padding-top: 240px; }
+  .about-page { padding-top: 255px; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .about-page,
   .contact-page,
   .blog-page,
   .blog-detail-page,
   .work-page {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 48px;
 
-    .text-zone h1 { font-size: 3.8rem; }
+    .text-zone h1 {
+      font-size: clamp(3.4rem, 11vw, 4.2rem);
+      margin-bottom: 34px;
+    }
+
+    .text-zone p { font-size: 1.25rem; }
   }
 
-  .about-page { padding-top: 205px; }
+  .about-page { padding-top: 220px; }
+}
+
+@media (max-width: 420px) {
+  .about-page,
+  .contact-page,
+  .blog-page,
+  .blog-detail-page,
+  .work-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container { animation-duration: .01ms; animation-delay: 0s; }
 }

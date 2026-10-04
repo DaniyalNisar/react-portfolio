@@ -31,9 +31,14 @@ const Home = () => {
             <br />
             <AnimatedLetters letterClass={letterClass} strArray={jobArray} idx={17} />
           </h1>
-          <h2>Java / Backend / Fintech / Payments / Full Stack / AI &amp; ML</h2>
-          <Link to="/contact" className="flat-button">CONTACT ME</Link>
-          <a href="/Daniyal_Nisar_Resume.pdf" download className="flat-button1">DOWNLOAD CV</a>
+          <h2>Backend Engineering / Java / Payments / Fintech / AI &amp; ML</h2>
+          <p className="home-intro">
+            I build reliable, performance-focused software for transaction-heavy systems and continue to develop my work in applied AI and machine learning.
+          </p>
+          <div className="home-actions">
+            <Link to="/contact" className="flat-button">CONTACT ME</Link>
+            <a href="/Daniyal_Nisar_Resume.pdf" download className="flat-button1">DOWNLOAD CV</a>
+          </div>
         </div>
         <Logo />
       </div>

@@ -21,11 +21,11 @@ require.extensions['.js'] = (module, filename) => {
 const React = require('react')
 const { renderToString } = require('react-dom/server')
 const { StaticRouter } = require('react-router-dom/server')
-const App = require('../src/App').default
-const { articles } = require('../src/articles')
+const App = require('./src/App').default
+const { articles } = require('./src/articles')
 const template = fs.readFileSync('build/index.html', 'utf8')
 const origin = 'https://daniyalnisar.netlify.app'
-const { metadata } = require('../src/App')
+const { metadata } = require('./src/App')
 const pages = [
   ...Object.entries(metadata),
   ...articles.map((a) => [

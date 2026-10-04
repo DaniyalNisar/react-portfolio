@@ -4,6 +4,7 @@ import { articles } from '../../articles'
 import './index.scss'
 
 const withBase = (src = '') => `${process.env.PUBLIC_URL || ''}${src}`
+const fallbackImage = withBase('/images/fallback.svg')
 
 const blogPosts = [
   {
@@ -204,6 +205,12 @@ const BlogDetail = () => {
             alt={`${blog.title} article`}
             className="blog-title-image"
             loading="eager"
+            width="960"
+            height="540"
+            onError={(event) => {
+              event.currentTarget.onerror = null
+              event.currentTarget.src = fallbackImage
+            }}
           />
         )}
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
@@ -216,6 +223,19 @@ const BlogDetail = () => {
         <div className="related-list">
           {relatedPosts.map((post) => (
             <Link key={post.id} to={`/blog/${post.id}`} className="related-card">
+              <img
+                src={withBase(post.image || '/images/fallback.svg')}
+                alt=""
+                aria-hidden="true"
+                className="related-thumb"
+                loading="lazy"
+                width="320"
+                height="180"
+                onError={(event) => {
+                  event.currentTarget.onerror = null
+                  event.currentTarget.src = fallbackImage
+                }}
+              />
               <span className="related-date">{post.date}</span>
               <strong>{post.title}</strong>
               <span className="related-excerpt">{post.excerpt}</span>

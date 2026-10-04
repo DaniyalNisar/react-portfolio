@@ -10,7 +10,7 @@
       z-index: 2;
       width: min(90%, 720px);
       margin: 0 auto;
-      padding: 78px 0 40px;
+      padding: calc(64px + env(safe-area-inset-top) + 42px) 0 40px;
     }
 
     h1 {
@@ -20,14 +20,15 @@
       }
 
       .hero-name-line img {
-        width: .78em;
-        height: .78em;
-        margin: 0 -.14em .012em .015em;
-        transform: translateY(.01em);
+        width: .94em;
+        height: .94em;
+        object-fit: contain;
+        margin: 0 -.18em -.035em -.01em;
+        transform: translateY(.035em);
       }
 
       .hero-name { margin-left: 0; }
-      .hero-role-line { margin-top: .05em; }
+      .hero-role-line { margin-top: .08em; }
 
       &::before {
         top: -20px;
@@ -36,37 +37,37 @@
 
       &::after {
         right: .08em;
-        bottom: -.1em;
+        bottom: -.12em;
       }
     }
 
     .hero-specialties {
-      margin-top: 16px;
+      margin-top: 18px;
       letter-spacing: .08em;
       line-height: 1.45;
     }
 
     .hero-intro {
-      margin-top: 11px;
+      margin-top: 12px;
       line-height: 1.52;
       max-width: 590px;
     }
 
     .hero-actions {
-      margin-top: 18px;
+      margin-top: 20px;
       justify-content: flex-start;
     }
   }
 
   .logo-container {
     display: block !important;
-    top: 56% !important;
+    top: 47% !important;
     left: 50% !important;
     right: auto !important;
-    width: min(68vw, 330px) !important;
-    height: min(42vh, 430px) !important;
+    width: min(64vw, 315px) !important;
+    height: min(38vh, 380px) !important;
     transform: translate(-50%, -50%) !important;
-    opacity: .045 !important;
+    opacity: .055 !important;
     z-index: 0 !important;
   }
 }
@@ -79,23 +80,24 @@
     .text-zone {
       width: calc(100% - 34px);
       margin: 0 auto;
-      padding-top: 54px;
-      padding-bottom: 28px;
+      padding-top: calc(64px + env(safe-area-inset-top) + 34px);
+      padding-bottom: 32px;
     }
 
     h1 {
       font-size: clamp(2.9rem, 8.45vw, 3.8rem);
-      line-height: 1.035;
+      line-height: 1.04;
 
-      .hero-greeting { margin-bottom: .07em; }
-      .hero-name-line { margin-bottom: .06em; }
+      .hero-greeting { margin-bottom: .08em; }
+      .hero-name-line { margin-bottom: .08em; }
 
       .hero-name-line img {
-        width: .76em;
-        height: .76em;
-        margin-left: .005em;
-        margin-right: -.16em;
-        margin-bottom: .01em;
+        width: .96em;
+        height: .96em;
+        margin-left: -.015em;
+        margin-right: -.2em;
+        margin-bottom: -.045em;
+        transform: translateY(.045em);
       }
 
       .hero-role-line {
@@ -104,26 +106,26 @@
       }
 
       &::before {
-        top: -16px;
+        top: -17px;
         font-size: 12px;
       }
 
       &::after {
-        right: .1em;
-        bottom: -.08em;
+        right: .08em;
+        bottom: -.1em;
         font-size: 12px;
       }
     }
 
     .hero-specialties {
-      margin-top: 15px;
+      margin-top: 17px;
       font-size: .94rem;
-      letter-spacing: .065em;
+      letter-spacing: .06em;
       line-height: 1.4;
     }
 
     .hero-intro {
-      margin-top: 11px;
+      margin-top: 12px;
       max-width: 35rem;
       font-size: 1.19rem;
       line-height: 1.5;
@@ -133,7 +135,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 20px;
       width: min(100%, 390px);
     }
 
@@ -149,18 +151,18 @@
   }
 
   .logo-container {
-    top: 55% !important;
-    width: min(82vw, 340px) !important;
-    height: min(42vh, 400px) !important;
-    opacity: .05 !important;
+    top: 48% !important;
+    width: min(72vw, 310px) !important;
+    height: min(34vh, 340px) !important;
+    opacity: .06 !important;
   }
 }
 
 @media (max-width: 420px) {
   .home-page {
     .text-zone {
-      width: calc(100% - 26px);
-      padding-top: 48px;
+      width: calc(100% - 28px);
+      padding-top: calc(64px + env(safe-area-inset-top) + 30px);
     }
 
     h1 { font-size: clamp(2.72rem, 8.65vw, 3.3rem); }
@@ -182,9 +184,9 @@
   }
 
   .logo-container {
-    top: 54% !important;
-    width: 88vw !important;
-    opacity: .048 !important;
+    top: 49% !important;
+    width: 76vw !important;
+    opacity: .058 !important;
   }
 }
 

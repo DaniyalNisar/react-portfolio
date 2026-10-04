@@ -1,172 +1,87 @@
-.stage-cube-cont {
-  width: 50%;
-  height: 100%;
-  top: 0;
-  padding-top: 18%;
-  margin-left: 0;
-  position: absolute;
-  right: 0;
-  overflow: hidden;
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: start;
 }
 
-.cubespinner {
-  animation-name: spincube;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-duration: 12s;
-  transform-style: preserve-3d;
-  transform-origin: 100px 100px 0;
-  margin-left: calc(50% - 100px);
-
-  div {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border: 1px solid #ccc;
-    background: rgba(255, 255, 255, 0.4);
-    text-align: center;
-    font-size: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 20px 0px lightyellow;
-  }
-
-  .face1 {
-    transform: translateZ(100px);
-    color: #dd0031;
-  }
-  .face2 {
-    transform: rotateY(90deg) translateZ(100px);
-    color: #f06529;
-  }
-  .face3 {
-    transform: rotateY(90deg) rotateX(90deg) translateZ(100px);
-    color: #28a4d9;
-  }
-  .face4 {
-    transform: rotateY(180deg) rotateZ(90deg) translateZ(100px);
-    color: #5ed4f4;
-  }
-  .face5 {
-    transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px);
-    color: #efd81d;
-  }
-  .face6 {
-    transform: rotateX(-90deg) translateZ(100px);
-    color: #ec4d28;
-  }
-  
+.about-copy {
+  display: grid;
+  gap: 1.5rem;
 }
 
-@keyframes spincube {
-  from,
-  to {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  }
-  16% {
-    transform: rotateY(-90deg);
-  }
-  33% {
-    transform: rotateY(-90deg) rotateZ(90deg);
-  }
-  50% {
-    transform: rotateY(-180deg) rotateZ(90deg);
-  }
-  66% {
-    transform: rotateY(-270deg) rotateX(90deg);
-  }
-  83% {
-    transform: rotateX(90deg);
-  }
+.about-copy p,
+.about-bottom p {
+  margin: 0;
+  color: #9aa9bd;
+  font-size: 1.35rem;
+  line-height: 1.8;
 }
 
-
-
-
-@media (max-width: 900px) {
-  .stage-cube-cont {
-    position: absolute !important;
-    top: 20px !important;                // space from top
-    left: 50% !important;               // center horizontally
-    transform: translateX(-50%) !important;
-    width: 150px !important;            // container = cube size
-    height: 150px !important;
-    padding-top: 0 !important;
-    margin: 0 !important;
-    overflow: visible !important;       // allow faces to show
-    z-index: 1 !important;
-    perspective: 600px !important;      // give depth to the 3D scene
-  }
-
-  .cubespinner {
-    width: 150px !important;
-    height: 150px !important;
-    margin: 0 !important;
-    transform-origin: 75px 75px 0 !important;   // pivot at cube center
-    transform-style: preserve-3d !important;    // keep faces in 3D
-    animation-name: spincube !important;
-    animation-duration: 12s !important;
-    animation-timing-function: ease-in-out !important;
-    animation-iteration-count: infinite !important;
-  }
-
-  .cubespinner div {
-    position: absolute !important;
-    width: 150px !important;            // face size
-    height: 150px !important;
-    border: 1px solid #ccc !important;
-    background: rgba(255, 255, 255, 0.4) !important;
-    text-align: center !important;
-    font-size: 60px !important;         // scale down text/icons
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    box-shadow: 0 0 10px 0px lightyellow !important;
-  }
-
-  // Each face sits exactly half its size out on the Z axis
-  .face1 { transform: translateZ(75px) !important; }
-  .face2 { transform: rotateY(90deg) translateZ(75px) !important; }
-  .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(75px) !important; }
-  .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(75px) !important; }
-  .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(75px) !important; }
-  .face6 { transform: rotateX(-90deg) translateZ(75px) !important; }
-
-
-
-  
-.about-page{
-
- 
-  display: flex;
-  overflow-y:scroll;
-  scroll-behavior: smooth;
-  padding: 1rem 0;
-  gap: 2rem;
-  scrollbar-width: thin;
-  scrollbar-color: #1EB980 transparent;
-
-
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #1EB980;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  .text-zone{
-
-    font-size: 10rem !important;
-    font-weight: bolder !important;
-
-
+.strength-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-top: clamp(4rem, 8vw, 8rem);
 }
 
+.strength-card {
+  position: relative;
+  padding: 2.2rem;
+  border: 1px solid rgba(96, 165, 250, .14);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(15,23,42,.78), rgba(2,6,23,.78));
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
+
+.strength-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, .34);
+  box-shadow: 0 18px 50px rgba(0,0,0,.24);
+}
+
+.card-number {
+  display: inline-block;
+  margin-bottom: 2.4rem;
+  color: #3b82f6;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.strength-card h2 {
+  margin: 0 0 1rem;
+  color: #eaf2ff;
+  font-size: 1.75rem;
+}
+
+.strength-card p {
+  margin: 0;
+  color: #8495aa;
+  font-size: 1.18rem;
+  line-height: 1.7;
+}
+
+.about-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: start;
+  margin-top: clamp(5rem, 9vw, 9rem);
+  padding-top: clamp(4rem, 7vw, 7rem);
+  border-top: 1px solid rgba(96,165,250,.12);
+}
+
+.about-bottom h2 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+}
+
+@media (max-width: 800px) {
+  .about-intro,
+  .about-bottom { grid-template-columns: 1fr; gap: 2.4rem; }
+  .strength-grid { grid-template-columns: 1fr; }
 }

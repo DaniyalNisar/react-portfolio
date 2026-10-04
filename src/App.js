@@ -20,7 +20,7 @@ export const metadata = {
   ],
   '/mywork': [
     'Engineering Work | Daniyal Nisar Rana',
-    'Selected backend, payments, fintech, performance, and full-stack engineering work by Daniyal Nisar Rana.',
+    'Selected backend, payments, fintech, performance, reliability, and web application engineering work by Daniyal Nisar Rana.',
   ],
   '/blogs': [
     'Engineering Notes | Daniyal Nisar Rana',

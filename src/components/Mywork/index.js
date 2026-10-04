@@ -33,6 +33,15 @@ const MyWork = () => {
   return (
     <>
       <div className="container work-page">
+        <div className="work-signal" aria-hidden="true">
+          <span className="signal-core" />
+          <span className="signal-ring signal-ring-one" />
+          <span className="signal-ring signal-ring-two" />
+          <span className="signal-dot signal-dot-one" />
+          <span className="signal-dot signal-dot-two" />
+          <span className="signal-dot signal-dot-three" />
+        </div>
+
         <div className="text-zone">
           <h1><AnimatedLetters letterClass={letterClass} strArray={['D','a','n','i','y','a','l','\'','s',' ','W','o','r','k']} idx={15} /></h1>
           <p className="work-intro">Selected work across backend engineering, payments, performance improvements and full-stack projects.</p>

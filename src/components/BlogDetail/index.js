@@ -1,8 +1,6 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import './index.scss'; // optional styling
-import { useEffect } from 'react';
-// import AnimatedLetters from '../AnimatedLetters';
-
+import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import './index.scss'
 
 const blogPosts = [
   {
@@ -10,334 +8,204 @@ const blogPosts = [
     title: 'Understanding Caching: A Simple Guide for Developers',
     date: 'May 04, 2025',
     image: '/images/blogs/cache.jpg',
-    content: `<p>Imagine you go to your favorite coffee shop every morning. The first day, you give your name and your order, and they make your drink. But what if, on day two, they already remember your order and start making it as you walk in? That’s caching — remembering things to save time next time.</p>
-  <p>In software, caching works the same way: we store data that's expensive to compute or fetch so we can access it faster later. Caching improves performance by saving time and reducing the load on your data sources, such as databases or external APIs.</p>
+    content: `
+      <p>Caching is one of the simplest ways to improve application performance, but it is most useful when the reason for caching is clear. The idea is straightforward: keep data that is expensive to compute or fetch somewhere faster so repeated requests do less work.</p>
 
-  <h3>🗂️ In-Memory Caching</h3>
-  <p>Think of in-memory caching like sticky notes on your monitor — fast, temporary, and close at hand. It’s perfect for data that’s frequently accessed but doesn't change often.</p>
-  <p><strong>Example:</strong> Cache your product list in a <code>HashMap</code> so you don’t query the database every time. This drastically reduces response times.</p>
-  
-  <pre><code> // Simple in-memory cache example in Java
-  Map&lt;String, Product&gt; productCache = new HashMap&lt;&gt;();
+      <h3>In-memory caching</h3>
+      <p>In-memory caching keeps frequently used data inside the application process. It is fast and easy to introduce, which makes it useful for values that are read often and do not change constantly.</p>
+      <pre><code>Map&lt;String, Product&gt; productCache = new HashMap&lt;&gt;();
 
-  public Product getProduct(String productId) {
+public Product getProduct(String productId) {
     if (!productCache.containsKey(productId)) {
-      Product product = database.getProductById(productId);
-      productCache.put(productId, product);  // Store in cache
+        productCache.put(productId, database.getProductById(productId));
     }
-    return productCache.get(productId);  // Retrieve from cache
-  }
-  </code></pre>
+    return productCache.get(productId);
+}</code></pre>
+      <p>The trade-off is that each application instance has its own cache. Once an application runs on several servers, keeping those copies consistent becomes more difficult.</p>
 
-  <p><strong>Tools:</strong> Java Map, Guava, Caffeine, Spring <code>@Cacheable</code></p>
+      <h3>Distributed caching</h3>
+      <p>A distributed cache such as Redis gives several application instances access to the same cached data. This is useful for shared sessions, reference data and other values that need to be available consistently across multiple servers.</p>
 
-  <h3>🌍 Distributed Caching</h3>
-  <p>When you have multiple app servers running, each needs access to the same cached data to ensure consistency across the system. Distributed caching solves this problem by storing cached data in a shared location that all servers can access.</p>
-  <p><strong>Example:</strong> All your app instances access session tokens stored in Redis, ensuring that the session data is consistent across all servers.</p>
-  
-  <pre><code> // Redis example using Jedis (Java)
-  Jedis jedis = new Jedis("localhost");
-  String sessionToken = jedis.get("session:token:userId");
+      <h3>Expiration and invalidation</h3>
+      <p>The hard part of caching is usually not storing data. It is deciding when that data is no longer valid. Time-to-live values, explicit invalidation and eviction policies such as LRU can help, but each choice should match how the underlying data changes.</p>
 
-  // Set session token with an expiration of 30 minutes
-  jedis.setex("session:token:userId", 1800, "token_value");
-  </code></pre>
+      <h3>Choosing a strategy</h3>
+      <p>Lazy loading works well when data should only be cached after it is requested. Eager loading is useful when a known set of values will be needed immediately. Write-through caching favors consistency by updating the cache and persistent store together, while write-behind approaches can improve write performance at the cost of additional complexity and failure handling.</p>
 
-  <p><strong>Tools:</strong> Redis, Memcached</p>
-
-  <h3>🌐 Browser (Client-Side) Caching</h3>
-  <p>Browser caching allows you to store static resources like images, scripts, and stylesheets on the user's device, which speeds up load times on subsequent visits.</p>
-  <p><strong>Example:</strong> When a user visits a website, their browser can store resources like CSS, JavaScript, and images locally, reducing the need to re-download them each time they revisit.</p>
-  
-  <pre><code> // Example of setting HTTP cache headers for static resources
-  const cacheControl = 'public, max-age=3600'; // Cache for 1 hour
-  fetch('/path/to/resource', {
-    method: 'GET',
-    headers: {
-      'Cache-Control': cacheControl
-    }
-  });
-  </code></pre>
-
-  <p><strong>Tools:</strong> HTTP cache headers, Service Workers</p>
-
-  <h3>💾 Database Caching</h3>
-  <p>This strategy caches the results of expensive database queries, so subsequent requests can be served faster without re-running the same query. It’s commonly used for aggregating data or results that don’t change often.</p>
-  <p><strong>Example:</strong> Save the result of a "top 10 products this month" query so you don't have to run the same query multiple times.</p>
-  
-  <pre><code> // Example of caching expensive database query results in Redis
-  String cacheKey = "top-products-this-month";
-  String topProducts = redis.get(cacheKey);
-
-  if (topProducts == null) {
-    topProducts = database.getTopProducts();  // Expensive query
-    redis.setex(cacheKey, 3600, topProducts);  // Cache for 1 hour
-  }
-  </code></pre>
-
-  <p><strong>Tools:</strong> Hibernate second-level cache, Redis, manual implementations</p>
-
-  <h3>🧠 Caching Strategies</h3>
-
-  <h4>⏱️ Lazy Loading (Load on First Use)</h4>
-  <p>Lazy loading delays fetching and caching data until it's actually needed, which can help save memory and improve initial load times.</p>
-  <p><strong>Example:</strong> User permissions are only loaded when the user tries to access a feature that requires them.</p>
-  
-  <pre><code> // Example of lazy loading user permissions
-  public class UserPermissions {
-    private Map&lt;String, Permission&gt; permissionsCache = new HashMap&lt;&gt;();
-
-    public Permission getPermission(String userId, String feature) {
-      if (!permissionsCache.containsKey(userId + ":" + feature)) {
-        Permission permission = database.fetchPermission(userId, feature);  // Expensive call
-        permissionsCache.put(userId + ":" + feature, permission);
-      }
-      return permissionsCache.get(userId + ":" + feature);
-    }
-  }
-  </code></pre>
-
-  <p><strong>Pros:</strong> Saves memory by only loading data when needed.</p>
-  <p><strong>Cons:</strong> Might cause a delay on first use, as the data needs to be fetched.</p>
-
-  <h4>⚡ Eager Loading (Load in Advance)</h4>
-  <p>Eager loading fetches data upfront, even if it's not immediately needed. This can make subsequent accesses faster because the data is already in memory.</p>
-  <p><strong>Example:</strong> Load all user settings at login so they’re instantly available everywhere.</p>
-  
-  <pre><code> // Example of eager loading user data at login
-  public class UserData {
-    private Map&lt;String, Object&gt; userSettings = new HashMap&lt;&gt;();
-
-    public void loadUserSettings(String userId) {
-      userSettings = database.fetchUserSettings(userId);  // Fetch all settings upfront
-    }
-  }
-  </code></pre>
-
-  <p><strong>Pros:</strong> Fast access when needed, as data is already loaded.</p>
-  <p><strong>Cons:</strong> Can use unnecessary memory if the data is not required immediately.</p>
-
-  <h4>🖊️ Write-Through Caching</h4>
-  <p>With write-through caching, any data written to the cache is also immediately written to the database. This ensures that the cache and database are always in sync.</p>
-  <p><strong>Example:</strong> A user updates their profile, and both the cache and database are updated simultaneously.</p>
-  
-  <pre><code> // Write-through caching example
-  public void updateUserProfile(String userId, UserProfile profile) {
-    cache.put("userProfile:" + userId, profile);  // Update cache
-    database.updateUserProfile(userId, profile);  // Update database
-  }
-  </code></pre>
-
-  <p><strong>Pros:</strong> Always ensures data consistency.</p>
-  <p><strong>Cons:</strong> Slower write operations, as both cache and database need to be updated at the same time.</p>
-
-  <h4>🕓 Write-Behind (Write-Back) Caching</h4>
-  <p>In write-behind caching, data is first written to the cache and then asynchronously written to the database in the background. This improves write performance but introduces some risks.</p>
-  <p><strong>Example:</strong> A user updates their profile, and the change is written to the cache immediately, with the database being updated later.</p>
-  
-  <pre><code> // Write-behind caching example
-  public void updateUserProfileAsync(String userId, UserProfile profile) {
-    cache.put("userProfile:" + userId, profile);  // Immediate write to cache
-    executor.submit(() -> {
-      database.updateUserProfile(userId, profile);  // Background write to DB
-    });
-  }
-  </code></pre>
-
-  <p><strong>Pros:</strong> Faster write operations.</p>
-  <p><strong>Cons:</strong> Potential for data loss if the cache crashes before the database is updated.</p>
-
-  <h4>🧹 TTL & Eviction Policies</h4>
-  <p>Caching data can’t last forever. Setting expiration times (TTL) and eviction policies ensures that stale data doesn’t stay in the cache for too long.</p>
-  
-  <pre><code> // Example of cache expiration (TTL) and eviction
-  redis.setex("userProfile:user123", 600, userProfile);  // TTL of 10 minutes
-  redis.evictionPolicy(LRU);  // Least Recently Used (LRU) eviction policy
-  </code></pre>
-
-  <p><strong>TTL (Time To Live):</strong> Cache expires after a specified time (in seconds or minutes).</p>
-  <p><strong>Eviction:</strong> Automatically removes cache items based on rules like Least Recently Used (LRU), Least Frequently Used (LFU), or First-In-First-Out (FIFO).</p>
-
-  <h3>🚀 Final Thoughts</h3>
-  <p>Caching is like the brain of your application — it remembers the right things at the right time to save effort and speed things up.</p>
-  <p>Knowing <strong>when and how to cache</strong> can drastically improve your app’s performance, especially when used with smart strategies like lazy loading, distributed caching, and proper eviction policies. You can also use a combination of these strategies based on the specific needs of your application to optimize both performance and memory usage.</p>
-  <p>Start small, measure impact, and optimize as you grow. Happy caching! 🧠⚡</p>
-
-`
+      <h3>Final thoughts</h3>
+      <p>Good caching starts with measurement. Find the expensive path, understand how fresh the data needs to be, choose a cache that fits the problem and verify the improvement. A cache should simplify the performance problem, not create a harder consistency problem.</p>
+    `,
   },
   {
     id: 2,
-    title: '01 Matrix – BFS-Based Distance Calculation',
+    title: '01 Matrix: BFS-Based Distance Calculation',
     date: 'June 23, 2025',
     content: `
-      <p>The 01 Matrix problem is a common interview question where you need to update each cell in a matrix based on the shortest distance to a nearby zero. While brute force works, there's a clean and optimal BFS approach that gets the job done efficiently. Let's explore it.</p>
-  
-      <h3>🧩 Problem Statement</h3>
-      <p>You're given an <code>m x n</code> binary matrix <code>mat</code> filled with 0s and 1s. Your task is to return a matrix where each cell containing a 1 is replaced by the shortest distance to the nearest 0. Distance is measured in number of adjacent moves (up/down/left/right).</p>
-      
+      <p>The 01 Matrix problem asks for the distance from every cell containing 1 to its nearest 0. A direct approach can repeat the same work many times. Multi-source breadth-first search gives a cleaner and more efficient solution.</p>
+
+      <h3>Problem</h3>
+      <p>Given an <code>m x n</code> binary matrix, return a matrix where each cell contains the shortest number of horizontal or vertical moves required to reach a 0.</p>
       <pre><code>Input:
-  mat = [[0,0,0],
-         [0,1,0],
-         [1,1,1]]
-  
-  Output:
-  [[0,0,0],
-   [0,1,0],
-   [1,2,1]]
-      </code></pre>
-  
-      <h3>🧠 Intuition</h3>
-      <p>Instead of calculating distance for each 1, we reverse the approach. We start from all 0s and do a multi-source BFS, updating distance level by level. This guarantees the shortest path since BFS spreads outward uniformly.</p>
-  
-      <h3>⚙️ Approach</h3>
-      <ul>
-        <li>Initialize a queue with all 0s and mark them visited.</li>
-        <li>Use BFS to explore neighbors of each 0.</li>
-        <li>For every unvisited neighbor (i.e., a 1), set its distance to current + 1 and add to queue.</li>
-        <li>Repeat until all cells are processed.</li>
-      </ul>
-  
-      <h3>💻 Java Code</h3>
+[[0,0,0],
+ [0,1,0],
+ [1,1,1]]
+
+Output:
+[[0,0,0],
+ [0,1,0],
+ [1,2,1]]</code></pre>
+
+      <h3>Why multi-source BFS works</h3>
+      <p>Instead of starting a search from every 1, start from every 0 at the same time. Add all zero cells to the queue with distance 0, then expand outward level by level. The first time a cell is reached is guaranteed to be through a shortest path.</p>
+
+      <h3>Java implementation</h3>
       <pre><code>class Node {
-      int first, second, third;
-      Node(int first, int second, int third) {
-          this.first = first;
-          this.second = second;
-          this.third = third;
-      }
-  }
-  
-  class Solution {
-      public int[][] updateMatrix(int[][] mat) {
-          int n = mat.length;
-          int m = mat[0].length;
-          int[][] vis = new int[n][m];
-          int[][] dist = new int[n][m];
-          Queue&lt;Node&gt; q = new LinkedList&lt;&gt;();
-  
-          for (int i = 0; i &lt; n; i++) {
-              for (int j = 0; j &lt; m; j++) {
-                  if (mat[i][j] == 0) {
-                      q.add(new Node(i, j, 0));
-                      vis[i][j] = 1;
-                  }
-              }
-          }
-  
-          int[] drow = {-1, 0, 1, 0};
-          int[] dcol = {0, 1, 0, -1};
-  
-          while (!q.isEmpty()) {
-              Node node = q.poll();
-              int row = node.first, col = node.second, dis = node.third;
-              dist[row][col] = dis;
-  
-              for (int i = 0; i &lt; 4; i++) {
-                  int nrow = row + drow[i];
-                  int ncol = col + dcol[i];
-  
-                  if (nrow &gt;= 0 &amp;&amp; ncol &gt;= 0 &amp;&amp; nrow &lt; n &amp;&amp; ncol &lt; m &amp;&amp; vis[nrow][ncol] == 0) {
-                      q.add(new Node(nrow, ncol, dis + 1));
-                      vis[nrow][ncol] = 1;
-                  }
-              }
-          }
-  
-          return dist;
-      }
-  }
-      </code></pre>
-  
-      <h3>⏱️ Time & Space Complexity</h3>
-      <ul>
-        <li><strong>Time:</strong> O(n * m), since each cell is visited at most once.</li>
-        <li><strong>Space:</strong> O(n * m) for the queue, visited, and distance matrices.</li>
-      </ul>
-  
-      <h3>🚀 Final Thoughts</h3>
-      <p>This problem is a textbook case for BFS on a grid. Starting from all 0s and spreading out is both intuitive and efficient. Mastering patterns like this makes you faster and more confident during interviews and real-world development.</p>
-    `
+    int row, col, distance;
+
+    Node(int row, int col, int distance) {
+        this.row = row;
+        this.col = col;
+        this.distance = distance;
+    }
+}
+
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        int rows = mat.length;
+        int cols = mat[0].length;
+        int[][] distance = new int[rows][cols];
+        boolean[][] visited = new boolean[rows][cols];
+        Queue&lt;Node&gt; queue = new LinkedList&lt;&gt;();
+
+        for (int row = 0; row &lt; rows; row++) {
+            for (int col = 0; col &lt; cols; col++) {
+                if (mat[row][col] == 0) {
+                    queue.add(new Node(row, col, 0));
+                    visited[row][col] = true;
+                }
+            }
+        }
+
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = {0, 1, 0, -1};
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            distance[node.row][node.col] = node.distance;
+
+            for (int i = 0; i &lt; 4; i++) {
+                int nextRow = node.row + dr[i];
+                int nextCol = node.col + dc[i];
+
+                if (nextRow &gt;= 0 &amp;&amp; nextCol &gt;= 0 &amp;&amp;
+                    nextRow &lt; rows &amp;&amp; nextCol &lt; cols &amp;&amp;
+                    !visited[nextRow][nextCol]) {
+                    visited[nextRow][nextCol] = true;
+                    queue.add(new Node(nextRow, nextCol, node.distance + 1));
+                }
+            }
+        }
+
+        return distance;
+    }
+}</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Each cell is processed at most once, so the time complexity is <code>O(m × n)</code>. The queue, visited matrix and result matrix also require <code>O(m × n)</code> space.</p>
+
+      <h3>Takeaway</h3>
+      <p>Multi-source BFS is useful whenever several starting points should spread through a graph or grid at the same time. Recognizing that pattern often turns a repeated-search solution into a single traversal.</p>
+    `,
   },
-  
-  
-  {
-      id: 2,
-      title: 'Working with React and SCSS',
-      date: 'April 25, 2025',
-      image: '/images/blogs/react.png',
-      content: ``
-    } 
-  ,
   {
     id: 3,
     title: 'Tips for Clean JavaScript Code',
     date: 'April 20, 2025',
     image: '/images/blogs/react.png',
-    content: ``
-    } ,
+    content: `
+      <p>Clean JavaScript is less about clever syntax and more about making intent obvious. Code is easier to maintain when another developer can understand what it does without reconstructing the reasoning behind every line.</p>
+
+      <h3>Name things for their purpose</h3>
+      <p>Prefer names such as <code>activeUsers</code>, <code>calculateTotal</code> or <code>isPaymentValid</code> over short names that only make sense while the code is fresh in your mind.</p>
+
+      <h3>Keep functions focused</h3>
+      <p>A function that validates input, calls an API, transforms data and updates the UI is doing too much. Smaller functions are easier to test, reuse and review.</p>
+
+      <h3>Reduce unnecessary nesting</h3>
+      <p>Guard clauses can make control flow easier to follow by handling invalid or exceptional cases early instead of wrapping the main path in several levels of conditions.</p>
+
+      <h3>Be consistent</h3>
+      <p>Consistent formatting, error handling and naming conventions matter more than personal style preferences. A codebase should feel predictable from one file to the next.</p>
+
+      <h3>Write for the next change</h3>
+      <p>Readable code is easier to modify safely. The goal is not to anticipate every possible future requirement, but to leave enough clarity that the next developer can change the behavior without guessing.</p>
+    `,
+  },
   {
     id: 4,
     title: 'Designing for Developers',
     date: 'April 18, 2025',
     image: '/images/blogs/react.png',
-      content: ``} 
-];
+    content: `
+      <p>Developers make design decisions every day, even when a dedicated designer is involved. Naming a button, ordering information, choosing an error state and deciding what happens on a small screen are all design decisions.</p>
+
+      <h3>Start with hierarchy</h3>
+      <p>Users should be able to tell what matters first. Clear headings, spacing and contrast usually improve an interface more than adding extra visual elements.</p>
+
+      <h3>Design the states, not just the ideal screen</h3>
+      <p>A feature is not complete if only its successful state looks good. Loading, empty, disabled, validation and error states should be considered from the beginning.</p>
+
+      <h3>Responsive means more than smaller</h3>
+      <p>A mobile layout should not simply shrink the desktop version. Content should reflow, controls should remain easy to tap and interactions should still make sense when hover is unavailable.</p>
+
+      <h3>Use motion with a purpose</h3>
+      <p>Animation can give an interface character and help communicate state, but it should not block content or make navigation harder. Good motion supports the experience instead of competing with it.</p>
+
+      <h3>Keep the implementation maintainable</h3>
+      <p>The best visual solution is not useful if it requires fragile layout hacks. Reusable spacing, predictable breakpoints and semantic markup make the interface easier to improve over time.</p>
+    `,
+  },
+]
 
 const BlogDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const blog = blogPosts.find((b) => b.id === parseInt(id));
-  // const [letterClass, setLetterClass] = useState('text-animate');
-
-  
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const blog = blogPosts.find((post) => post.id === Number(id))
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  // useEffect(() => {
-  //   const timer1 = setTimeout(() => {
-  //     setLetterClass('text-animate-hover');
-  //   }, 3000);
-
-  
-  //   return () => {
-  //     clearTimeout(timer1);
-  //   };
-  // }, []);
-
-  
+    window.scrollTo(0, 0)
+  }, [id])
 
   if (!blog) {
-    return <div style={{ padding: '2rem', color: 'red' }}>Blog not found</div>;
+    return (
+      <div className="container blog-detail-page">
+        <div className="text-zone">
+          <h1>Article not found</h1>
+          <p>The article you requested is not available.</p>
+          <button onClick={() => navigate('/blogs')} className="go-back">Back to blog</button>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="container blog-detail-page">
-      <div className='text-zone'>
-      <h1 className='blog-detail-heading'>
-        {blog.title}
-            {/* <AnimatedLetters
-              letterClass={letterClass}
-              strArray={blog.title.split('')}
-              idx={50}
-            /> */}
-          </h1>
-      <p className="blog-date">{blog.date}</p>
-      {blog.image?.trim() && (
-      <img
-        src={blog.image}
-        alt={blog.title}
-        className="blog-title-image"
-      />
-    )}
-      <div
-         className="blog-content"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-></div>      <button onClick={() => navigate(-1)} className="go-back">← Go Back</button>
-      </div>
+      <article className="text-zone">
+        <h1 className="blog-detail-heading">{blog.title}</h1>
+        <p className="blog-date">{blog.date}</p>
+        {blog.image && (
+          <img
+            src={blog.image}
+            alt={`${blog.title} article`}
+            className="blog-title-image"
+            loading="lazy"
+          />
+        )}
+        <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <button onClick={() => navigate('/blogs')} className="go-back">Back to blog</button>
+      </article>
     </div>
-  );
-};
+  )
+}
 
-export default BlogDetail;
+export default BlogDetail

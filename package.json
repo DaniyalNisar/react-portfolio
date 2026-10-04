@@ -1,28 +1,25 @@
 {
   "name": "react-portfolio",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "22.23.3"
+  },
   "dependencies": {
-    "@emailjs/browser": "^3.6.2",
-    "@fortawesome/free-brands-svg-icons": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.1.18",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "animate.css": "^4.1.1",
-    "gh-pages": "^4.0.0",
-    "gsap-trial": "^3.10.4",
-    "loaders.css": "^0.1.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-leaflet": "^4.0.0",
-    "react-loaders": "^3.0.1",
-    "react-router-dom": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "7.3.1",
+    "@fortawesome/free-solid-svg-icons": "7.3.1",
+    "@fortawesome/react-fontawesome": "3.5.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.30.6",
     "react-scripts": "5.0.1",
-    "react-toastify": "^11.0.5",
-    "sass": "^1.52.3",
-    "web-vitals": "^2.1.4"
+    "react-toastify": "11.1.0",
+    "sass": "1.105.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7"
   },
   "scripts": {
     "start": "react-scripts start",

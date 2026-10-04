@@ -14,7 +14,7 @@ const BlogPage = () => {
 
   useEffect(() => {
     const timer1 = setTimeout(() => setLetterClass('text-animate-hover'), 3000)
-    const timer2 = setTimeout(() => setShowCards(true), 800)
+    const timer2 = setTimeout(() => setShowCards(true), 300)
     return () => { clearTimeout(timer1); clearTimeout(timer2) }
   }, [])
 
@@ -24,14 +24,22 @@ const BlogPage = () => {
   return (
     <>
       <div className="container blog-page">
+        <div className="blog-orbit" aria-hidden="true">
+          <span className="orbit-ring orbit-ring-one" />
+          <span className="orbit-ring orbit-ring-two" />
+          <span className="orbit-code">&lt;/&gt;</span>
+          <span className="orbit-node orbit-node-one" />
+          <span className="orbit-node orbit-node-two" />
+        </div>
+
         <div className="text-zone">
           <h1><AnimatedLetters letterClass={letterClass} strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']} idx={15} /></h1>
           <p className="blog-intro">Notes on software engineering, backend systems, performance, algorithms and the technical ideas I’m currently exploring.</p>
           <div className="blog-scroll-wrapper">
             <div className="button-wrapper"><button className="scroll-button left" onClick={scrollLeft} aria-label="Scroll blog left">&lt;</button></div>
             <div className="blog-container" ref={blogContainerRef} tabIndex="0" aria-label="Engineering articles">
-              {blogPosts.map((post, index) => (
-                <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id} style={{ transitionDelay: `${index * 0.08}s` }}>
+              {blogPosts.map((post) => (
+                <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id}>
                   {post.image && (
                     <img
                       src={withBase(post.image)}

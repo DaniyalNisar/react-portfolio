@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { articles as blogPosts } from '../../articles'
 
 const withBase = (src = '') => `${process.env.PUBLIC_URL || ''}${src}`
+const fallbackImage = withBase('/images/fallback.svg')
 
 const BlogPage = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
@@ -41,14 +42,18 @@ const BlogPage = () => {
             <div className="blog-container" ref={blogContainerRef} tabIndex="0" aria-label="Engineering articles">
               {blogPosts.map((post) => (
                 <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id}>
-                  {post.image && (
-                    <img
-                      src={withBase(post.image)}
-                      alt={`${post.title} thumbnail`}
-                      className="blog-card-image"
-                      loading="lazy"
-                    />
-                  )}
+                  <img
+                    src={withBase(post.image || '/images/fallback.svg')}
+                    alt={`${post.title} thumbnail`}
+                    className="blog-card-image"
+                    loading="lazy"
+                    width="640"
+                    height="360"
+                    onError={(event) => {
+                      event.currentTarget.onerror = null
+                      event.currentTarget.src = fallbackImage
+                    }}
+                  />
                   <div className="blog-card-body">
                     <h2>{post.title}</h2>
                     <p className="blog-date">{post.date}</p>

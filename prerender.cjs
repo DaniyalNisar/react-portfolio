@@ -3,7 +3,28 @@ const fs = require('fs')
 const path = require('path')
 const babel = require('@babel/core')
 const original = require.extensions['.js']
-require.extensions['.scss'] = () => {}
+require.extensions['.scss'] = require.extensions['.css'] = () => {}
+// Resolve imported assets to the URLs emitted by the CRA build; Node would
+// otherwise fall back to the .js loader and try to parse them as JavaScript.
+const { files: assetFiles } = JSON.parse(
+  fs.readFileSync('build/asset-manifest.json', 'utf8')
+)
+const mimeTypes = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+}
+for (const [ext, mime] of Object.entries(mimeTypes)) {
+  require.extensions[ext] = (module, filename) => {
+    const url =
+      assetFiles[`static/media/${path.basename(filename)}`] ||
+      `data:${mime};base64,${fs.readFileSync(filename).toString('base64')}`
+    module.exports = { __esModule: true, default: url }
+  }
+}
 require.extensions['.js'] = (module, filename) => {
   if (!filename.startsWith(path.resolve('src') + path.sep))
     return original(module, filename)

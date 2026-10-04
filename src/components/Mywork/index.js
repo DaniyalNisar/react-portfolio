@@ -3,6 +3,8 @@ import './index.scss'
 import AnimatedLetters from '../AnimatedLetters'
 import { useState, useEffect, useRef } from 'react'
 
+const withBase = (path) => `${process.env.PUBLIC_URL || ''}${path}`
+
 const MyWork = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   const [showCards, setShowCards] = useState(false)
@@ -23,7 +25,7 @@ const MyWork = () => {
 
   useEffect(() => {
     const timer1 = setTimeout(() => setLetterClass('text-animate-hover'), 3000)
-    const timer2 = setTimeout(() => setShowCards(true), 800)
+    const timer2 = setTimeout(() => setShowCards(true), 300)
     return () => { clearTimeout(timer1); clearTimeout(timer2) }
   }, [])
 
@@ -48,9 +50,9 @@ const MyWork = () => {
           <div className="work-scroll-wrapper">
             <div className="button-wrapper"><button className="scroll-button left" onClick={scrollLeft} aria-label="Scroll work left">&lt;</button></div>
             <div className="work-container" ref={workContainerRef} tabIndex="0" aria-label="Selected engineering work">
-              {myWorks.map((post, index) => (
-                <article className={`work-card ${showCards ? 'visible' : ''}`} key={post.id} style={{ transitionDelay: `${index * 0.08}s` }}>
-                  <img src={post.image} alt={`${post.title} project`} className="work-image" loading="lazy" />
+              {myWorks.map((post) => (
+                <article className={`work-card ${showCards ? 'visible' : ''}`} key={post.id}>
+                  <img src={withBase(post.image)} alt={`${post.title} project`} className="work-image" loading="lazy" />
                   <h2>{post.title}</h2>
                   <p className="work-excerpt">{post.excerpt}</p>
                 </article>

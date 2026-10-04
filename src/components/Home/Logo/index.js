@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import gsap from 'gsap-trial'
+import gsap from 'gsap'
 import LogoS from '../../../assets/images/logo-s.png'
 import './index.scss'
 
@@ -8,41 +8,27 @@ const Logo = () => {
   const solidLogoRef = useRef()
 
   useEffect(() => {
+    const timeline = gsap.timeline()
+      .to(bgRef.current, { duration: 1, opacity: 1 })
+      .fromTo(
+        solidLogoRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 4 },
+        1
+      )
 
-    gsap
-      .timeline()
-      .to(bgRef.current, {
-        duration: 1,
-        opacity: 1,
-      })
-   
-
-    gsap.fromTo(
-      solidLogoRef.current,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        delay: 1,
-        duration: 4,
-      }
-    )
+    return () => timeline.kill()
   }, [])
 
   return (
-    <>
-    
     <div className="logo-container" ref={bgRef}>
-     <img
+      <img
         className="solid-logo"
         ref={solidLogoRef}
         src={LogoS}
-        alt="JavaScript,  Developer"
+        alt="Daniyal Nisar"
       />
-
     </div>
-    </>
   )
 }
 

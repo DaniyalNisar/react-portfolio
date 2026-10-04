@@ -16,7 +16,7 @@
   right: 7%;
   width: 132px;
   height: 132px;
-  opacity: .28;
+  opacity: .5;
   pointer-events: none;
   z-index: 0;
 }
@@ -29,8 +29,9 @@
 
 .orbit-ring {
   inset: 50%;
-  border: 1px solid rgba(96, 165, 250, .34);
+  border: 1px solid rgba(96, 165, 250, .58);
   transform: translate(-50%, -50%);
+  box-shadow: 0 0 18px rgba(59, 130, 246, .14);
 }
 
 .orbit-ring-one {
@@ -50,17 +51,17 @@
   position: absolute;
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
-  color: #60a5fa;
-  font: 700 1.4rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  text-shadow: 0 0 14px rgba(96, 165, 250, .45);
+  color: #93c5fd;
+  font: 700 1.45rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-shadow: 0 0 18px rgba(96, 165, 250, .75);
   animation: codePulse 2.8s ease-in-out infinite;
 }
 
 .orbit-node {
-  width: 7px;
-  height: 7px;
-  background: #3b82f6;
-  box-shadow: 0 0 12px rgba(59, 130, 246, .65);
+  width: 8px;
+  height: 8px;
+  background: #60a5fa;
+  box-shadow: 0 0 16px rgba(96, 165, 250, .9);
 }
 
 .orbit-node-one { top: 5px; left: 62px; animation: floatBlogNode 4s ease-in-out infinite; }
@@ -75,13 +76,13 @@
 }
 
 @keyframes codePulse {
-  0%, 100% { opacity: .65; transform: translate(-50%, -50%) scale(.96); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  0%, 100% { opacity: .75; transform: translate(-50%, -50%) scale(.96); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
 }
 
 @keyframes floatBlogNode {
   0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(4px, -7px); }
+  50% { transform: translate(5px, -8px); }
 }
 
 @media (hover: none) {
@@ -102,7 +103,7 @@
     right: 4vw;
     width: 92px;
     height: 92px;
-    opacity: .16;
+    opacity: .36;
   }
 
   .orbit-ring-one { width: 52px; height: 52px; }
@@ -117,7 +118,7 @@
     right: 10px;
     width: 72px;
     height: 72px;
-    opacity: .12;
+    opacity: .28;
   }
 
   .orbit-ring-one { width: 40px; height: 40px; }

@@ -1,21 +1,11 @@
-// src/components/Contact/Contact.jsx
-
-import React, { useState, useEffect, useRef } from 'react'
-import Loader from 'react-loaders'
-import AnimatedLetters from '../AnimatedLetters'
+import React, { useState, useRef } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './index.scss'
 
 const Contact = () => {
-  const [letterClass, setLetterClass] = useState('text-animate')
   const [sending, setSending] = useState(false)
   const refForm = useRef()
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLetterClass('text-animate-hover'), 3000)
-    return () => clearTimeout(timer)
-  }, [])
 
   const sendEmail = async (e) => {
     e.preventDefault()
@@ -23,12 +13,9 @@ const Contact = () => {
 
     const form = refForm.current
     const data = new FormData(form)
-    // Replace with your actual Web3Forms access key:
     data.append('access_key', 'c590dcdc-12ca-4079-b94e-914595f27a41')
-    // Force-send to your email:
     data.append('to_email', 'daniyal.nisar999@gmail.com')
-    // Fallback subject if none entered:
-    data.append('subject', data.get('subject') || 'New contact form submission')
+    data.append('subject', data.get('subject') || 'New portfolio contact')
 
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -37,98 +24,59 @@ const Contact = () => {
         body: data,
       })
       const json = await res.json()
-
-      if (json.success) {
-        toast.success('✅ Message sent successfully!', {
-          position: 'top-center',
-          autoClose: 3000,
-          hideProgressBar: false,
-          pauseOnHover: true,
-          draggable: true,
-        })
-        form.reset()
-      } else {
-        throw new Error(json.message || 'Unknown error')
-      }
+      if (!json.success) throw new Error(json.message || 'Unknown error')
+      toast.success('Message sent successfully.', { position: 'top-center', autoClose: 3000 })
+      form.reset()
     } catch (err) {
       console.error('Error sending form:', err)
-      toast.error('❌ Failed to send message. Please try again.', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        pauseOnHover: true,
-        draggable: true,
-      })
+      toast.error('Could not send the message. Please try again.', { position: 'top-center', autoClose: 5000 })
     } finally {
       setSending(false)
     }
   }
 
   return (
-    <>
-      <div className="container contact-page">
-        <div className="text-zone">
-          <h1>
-            <AnimatedLetters
-              letterClass={letterClass}
-              strArray={['C','o','n','t','a','c','t',' ','m','e']}
-              idx={15}
-            />
-          </h1>
-          <p className='contact-text'>
-            Feel free to get in touch! Whether it’s a project proposal,
-            collaboration idea, or just to say hi—I’d love to hear from you.
+    <div className="container contact-page">
+      <div className="contact-layout">
+        <section className="contact-copy">
+          <span className="section-kicker">Contact</span>
+          <h1>Let’s talk about engineering, payments or AI.</h1>
+          <p>
+            I’m open to conversations around backend engineering, fintech and payment systems,
+            technical collaboration, research and applied AI opportunities.
           </p>
-
-          <div className="contact-form">
-            <form ref={refForm} onSubmit={sendEmail}>
-              <ul>
-                <li className="half">
-                  <input type="text" name="name" placeholder="Name" required />
-                </li>
-                <li className="half">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                  />
-                </li>
-                <li>
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Subject"
-                    required
-                  />
-                </li>
-                <li>
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    required
-                  />
-                </li>
-                <li>
-                  <button
-                    type="submit"
-                    className="flat-button"
-                    disabled={sending}
-                  >
-                    {sending ? 'SENDING…' : 'SEND'}
-                  </button>
-                </li>
-              </ul>
-            </form>
+          <div className="contact-links">
+            <a href="https://www.linkedin.com/in/daniyal-nisar99/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a href="https://github.com/DaniyalNisar" target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
-        </div>
+        </section>
+
+        <section className="contact-card" aria-label="Contact form">
+          <form ref={refForm} onSubmit={sendEmail}>
+            <div className="form-row">
+              <label>
+                <span>Name</span>
+                <input type="text" name="name" autoComplete="name" required />
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" name="email" autoComplete="email" required />
+              </label>
+            </div>
+            <label>
+              <span>Subject</span>
+              <input type="text" name="subject" required />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea name="message" rows="7" required />
+            </label>
+            <button type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send message'}</button>
+          </form>
+        </section>
       </div>
-
-      {/* Toast container (you can also move this to App.jsx) */}
       <ToastContainer />
-
-      <Loader type="pacman" />
-    </>
+    </div>
   )
 }
 

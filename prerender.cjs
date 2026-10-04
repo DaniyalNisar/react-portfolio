@@ -65,8 +65,9 @@ const pages = [
 const escape = (value) =>
   value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
 
-const addJsonLd = (html, schema) =>
-  html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(schema)}</script></head>`)
+const addJsonLd = (html, schema) => {
+  return html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(schema)}</script></head>`)
+}
 
 for (const [route, [title, description]] of [
   ...pages,

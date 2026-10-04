@@ -6,8 +6,6 @@ const original = require.extensions['.js']
 
 require.extensions['.scss'] = require.extensions['.css'] = () => {}
 
-// Resolve imported assets during Node-side prerendering. CRA normally handles
-// these through webpack, but the prerender step executes source files directly.
 const assetManifest = JSON.parse(fs.readFileSync('build/asset-manifest.json', 'utf8'))
 const assetFiles = assetManifest.files || {}
 const mimeTypes = {
@@ -32,16 +30,11 @@ for (const [ext, mime] of Object.entries(mimeTypes)) {
 }
 
 require.extensions['.js'] = (module, filename) => {
-  if (!filename.startsWith(path.resolve('src') + path.sep)) {
-    return original(module, filename)
-  }
+  if (!filename.startsWith(path.resolve('src') + path.sep)) return original(module, filename)
 
   const { code } = babel.transformSync(fs.readFileSync(filename, 'utf8'), {
     filename,
-    presets: [
-      '@babel/preset-env',
-      ['@babel/preset-react', { runtime: 'automatic' }],
-    ],
+    presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }]],
     babelrc: false,
     configFile: false,
   })
@@ -55,16 +48,16 @@ const App = require('./src/App').default
 const { articles } = require('./src/articles')
 const { metadata } = require('./src/App')
 const template = fs.readFileSync('build/index.html', 'utf8')
-const origin = 'https://daniyalnisar.netlify.app'
+
+const origin = (process.env.SITE_ORIGIN || 'https://daniyalnisar.netlify.app').replace(/\/$/, '')
+const basePath = (process.env.PUBLIC_URL || '').replace(/\/$/, '')
+const articleByRoute = Object.fromEntries(articles.map((article) => [`/blog/${article.id}`, article]))
 
 const pages = [
   ...Object.entries(metadata),
   ...articles.map((article) => [
     `/blog/${article.id}`,
-    [
-      `${article.title} | Daniyal Nisar Rana`,
-      `Engineering notes by Daniyal Nisar Rana: ${article.title}`,
-    ],
+    [`${article.title} | Daniyal Nisar Rana`, article.description],
   ]),
 ]
 
@@ -75,37 +68,51 @@ for (const [route, [title, description]] of [
   ...pages,
   ['/404', ['Page not found | Daniyal Nisar Rana', 'This page could not be found.']],
 ]) {
+  const location = `${basePath}${route === '/' ? '/' : route}` || '/'
   const markup = renderToString(
     React.createElement(
       StaticRouter,
-      { location: route },
+      { location, basename: basePath || undefined },
       React.createElement(App)
     )
   )
 
+  const canonical = `${origin}${route === '/' ? '/' : route}`
+  const article = articleByRoute[route]
+
   let html = template
     .replace('<div id="root"></div>', `<div id="root">${markup}</div>`)
     .replace(/<title>.*?<\/title>/, `<title>${escape(title)}</title>`)
-    .replace(
-      /(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g,
-      `$1${escape(description)}`
-    )
-    .replace(
-      /(<meta (?:name|property)="(?:og:title|twitter:title)" content=")[^"]*/g,
-      `$1${escape(title)}`
-    )
-    .replace(
-      /(<link rel="canonical" href=")[^"]*/,
-      `$1${origin}${route === '/' ? '/' : route}`
-    )
-    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${origin}${route}`)
+    .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g, `$1${escape(description)}`)
+    .replace(/(<meta (?:name|property)="(?:og:title|twitter:title)" content=")[^"]*/g, `$1${escape(title)}`)
+    .replace(/(<link rel="canonical" href=")[^"]*/, `$1${canonical}`)
+    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${canonical}`)
+
+  if (article) {
+    const imageUrl = `${origin}${article.image}`
+    const articleSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      description: article.description,
+      datePublished: article.datePublished,
+      author: { '@type': 'Person', name: 'Daniyal Nisar Rana', url: origin },
+      mainEntityOfPage: canonical,
+      image: imageUrl,
+    }
+
+    html = html
+      .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
+      .replace(/(<meta property="og:image" content=")[^"]*/, `$1${imageUrl}`)
+      .replace(/(<meta name="twitter:image" content=")[^"]*/, `$1${imageUrl}`)
+      .replace('</head>', `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script></head>`)
+  }
 
   if (route === '/404') {
     html = html.replace('</head>', '<meta name="robots" content="noindex"/></head>')
   }
 
-  const file =
-    route === '/404' ? 'build/404.html' : path.join('build', route, 'index.html')
+  const file = route === '/404' ? 'build/404.html' : path.join('build', route, 'index.html')
   fs.mkdirSync(path.dirname(file), { recursive: true })
   fs.writeFileSync(file, html)
 }
@@ -113,8 +120,10 @@ for (const [route, [title, description]] of [
 fs.writeFileSync(
   'build/sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
-    .map(([route]) => `  <url><loc>${origin}${route}</loc></url>`)
+    .map(([route]) => `  <url><loc>${origin}${route === '/' ? '/' : route}</loc></url>`)
     .join('\n')}\n</urlset>\n`
 )
 
-console.log(`Prerendered ${pages.length} pages and a 404 page.`)
+fs.writeFileSync('build/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`)
+
+console.log(`Prerendered ${pages.length} pages and a 404 page for ${origin}.`)

@@ -1,5 +1,10 @@
 .specialties-mobile { display: none; }
 
+@keyframes mobileLogoBreath {
+  0%, 100% { opacity: .58; filter: drop-shadow(0 8px 20px rgba(37, 99, 235, .08)); }
+  50% { opacity: 1; filter: drop-shadow(0 12px 28px rgba(37, 99, 235, .22)); }
+}
+
 @media (max-width: 900px) {
   .home-page {
     min-height: calc(100dvh - 64px);
@@ -20,10 +25,10 @@
       }
 
       .hero-name-line img {
-        width: .94em;
-        height: .94em;
+        width: 1em;
+        height: 1em;
         object-fit: contain;
-        margin: 0 -.18em -.035em -.01em;
+        margin: 0 -.05em -.045em .09em;
         transform: translateY(.035em);
       }
 
@@ -61,14 +66,18 @@
 
   .logo-container {
     display: block !important;
-    top: 47% !important;
+    top: clamp(340px, 43dvh, 470px) !important;
     left: 50% !important;
     right: auto !important;
     width: min(64vw, 315px) !important;
     height: min(38vh, 380px) !important;
     transform: translate(-50%, -50%) !important;
-    opacity: .055 !important;
+    opacity: .06 !important;
     z-index: 0 !important;
+
+    .solid-logo {
+      animation: mobileLogoBreath 5.2s ease-in-out infinite 4.4s;
+    }
   }
 }
 
@@ -92,12 +101,12 @@
       .hero-name-line { margin-bottom: .08em; }
 
       .hero-name-line img {
-        width: .96em;
-        height: .96em;
-        margin-left: -.015em;
-        margin-right: -.2em;
-        margin-bottom: -.045em;
-        transform: translateY(.045em);
+        width: 1.02em;
+        height: 1.02em;
+        margin-left: .09em;
+        margin-right: -.055em;
+        margin-bottom: -.05em;
+        transform: translateY(.04em);
       }
 
       .hero-role-line {
@@ -151,10 +160,10 @@
   }
 
   .logo-container {
-    top: 48% !important;
+    top: clamp(350px, 42dvh, 440px) !important;
     width: min(72vw, 310px) !important;
     height: min(34vh, 340px) !important;
-    opacity: .06 !important;
+    opacity: .07 !important;
   }
 }
 
@@ -165,7 +174,16 @@
       padding-top: calc(64px + env(safe-area-inset-top) + 30px);
     }
 
-    h1 { font-size: clamp(2.72rem, 8.65vw, 3.3rem); }
+    h1 {
+      font-size: clamp(2.72rem, 8.65vw, 3.3rem);
+
+      .hero-name-line img {
+        width: 1.03em;
+        height: 1.03em;
+        margin-left: .1em;
+        margin-right: -.05em;
+      }
+    }
 
     .hero-specialties { font-size: .89rem; }
     .hero-intro { font-size: 1.13rem; }
@@ -184,9 +202,9 @@
   }
 
   .logo-container {
-    top: 49% !important;
-    width: 76vw !important;
-    opacity: .058 !important;
+    top: clamp(350px, 41dvh, 425px) !important;
+    width: 74vw !important;
+    opacity: .07 !important;
   }
 }
 
@@ -199,4 +217,8 @@
 
 @media (max-width: 380px) {
   .home-page h1 { font-size: 2.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-container .solid-logo { animation: none !important; }
 }

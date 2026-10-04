@@ -1,61 +1,58 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import AnimatedLetters from '../AnimatedLetters'
-import LogoTitle from '../../assets/images/logo-s.png'
-import Logo from './Logo'
 import './index.scss'
-import Loader from 'react-loaders'
 
-const Home = () => {
-    const [letterClass, setLetterClass] = useState('text-animate');
-    const nameArray= ['a','n','i','y','a','l,']
-    const jobArray = ['S','o','f','t','w','a','r','e',' ','E','n','g','i','n','e','e','r.']
+const highlights = [
+  ['Payments engineering', 'ISO 8583, card networks, authorization and clearing flows'],
+  ['Backend systems', 'Java, Spring Boot, OLTP services, APIs and production debugging'],
+  ['Performance', 'Caching, high-throughput transaction processing and latency reduction'],
+  ['AI / ML', 'Applied machine learning, AI systems and graduate-level AI study'],
+]
 
-  useEffect(() => {
-  const timer= setTimeout(() =>{
-    setLetterClass('text-animate-hover')
-  }, 4000)
-  return () => clearTimeout(timer)
-},[])
- 
-    return (
-        <>
-        <div className="container home-page">
-            <div className="text-zone">
-                <h1>
-                <span className={letterClass}>H</span> 
-                <span className={`${letterClass} _12`}>i,</span> 
-                <br /> 
-                <span className={`${letterClass} _13`}>I</span> 
-                <span className={`${letterClass} _14`}>'m</span> 
-                <img src={LogoTitle} alt="developer" />
-                <AnimatedLetters letterClass={letterClass}
-                strArray={nameArray}
-                idx={15}
-                />
-                <br />
-                <AnimatedLetters letterClass={letterClass}
-                strArray={jobArray}
-                idx={17}
-                />
-                </h1>
-                <h2>Full Stack Developer / Java / Fintech / MERN / ML </h2>
-                <Link to="/contact" className="flat-button">
-                    CONTACT ME
-                </Link>
-                <a href="/Daniyal_Nisar_Resume.pdf"
-                   download
-                   className="flat-button1"
-                >
-                    DOWNLOAD CV
-                </a>       
-            </div>
-            <Logo />
-            
+const stack = ['Java', 'Spring Boot', 'ISO 8583', 'SQL', 'Informix', 'Linux', 'Git', 'Docker', 'Python', 'AI / ML']
+
+const Home = () => (
+  <div className="container home-page">
+    <section className="hero" aria-labelledby="hero-title">
+      <div className="hero-copy">
+        <span className="section-kicker">Backend · Payments · Fintech · AI</span>
+        <h1 id="hero-title">
+          Building reliable payment systems and high-performance backend software.
+        </h1>
+        <p className="hero-lead">
+          I’m Daniyal Nisar Rana, a software engineer focused on Java backend engineering,
+          fintech and payment processing. I work on transaction-heavy systems where correctness,
+          latency and production reliability matter, while continuing to build depth in AI and machine learning.
+        </p>
+        <div className="hero-actions">
+          <Link to="/mywork" className="button button-primary">Explore my work</Link>
+          <Link to="/contact" className="button button-secondary">Contact me</Link>
+          <a href="/Daniyal_Nisar_Resume.pdf" className="text-link" download>Download résumé</a>
         </div>
-        <Loader type="pacman" />
-        </>
-    )    
-}
+        <div className="stack-list" aria-label="Core technologies">
+          {stack.map((item) => <span key={item}>{item}</span>)}
+        </div>
+      </div>
 
-export default Home;
+      <aside className="hero-panel" aria-label="Engineering focus">
+        <div className="status-line"><span className="status-dot" /> Software Engineer · Lahore, Pakistan</div>
+        <h2>Engineering focus</h2>
+        <div className="highlight-list">
+          {highlights.map(([title, text]) => (
+            <div className="highlight-item" key={title}>
+              <strong>{title}</strong>
+              <p>{text}</p>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </section>
+
+    <section className="home-strip" aria-label="Professional summary">
+      <div><strong>Backend first</strong><span>Production Java systems and service design</span></div>
+      <div><strong>Payments domain</strong><span>Visa, Mastercard, Amex and transaction processing</span></div>
+      <div><strong>Performance minded</strong><span>Concurrency, caching, debugging and data integrity</span></div>
+    </section>
+  </div>
+)
+
+export default Home

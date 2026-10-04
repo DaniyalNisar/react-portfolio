@@ -6,10 +6,10 @@
 
 .tags {
   color: #3b82f6;
-  opacity: .65;
+  opacity: .58;
   position: fixed;
-  left: 90px;
-  font-size: 18px;
+  left: 96px;
+  font-size: 17px;
   font-family: 'La Belle Aurore';
   z-index: 2;
   pointer-events: none;
@@ -20,8 +20,8 @@
 .bottom-tag-html { margin-left: -20px; }
 
 .container {
-  width: calc(100% - 60px);
-  margin-left: 60px;
+  width: calc(100% - 64px);
+  margin-left: 64px;
   min-height: 100vh;
   position: relative;
   opacity: 0;
@@ -34,30 +34,31 @@
 .contact-page {
   .text-zone {
     position: absolute;
-    left: clamp(7rem, 8vw, 14rem);
+    left: clamp(7.5rem, 8vw, 14rem);
     top: 50%;
     transform: translateY(-50%);
     width: min(40%, 720px);
     max-height: calc(100vh - 100px);
     overflow-y: auto;
-    padding-right: 8px;
+    padding-right: 10px;
     scrollbar-width: thin;
-    scrollbar-color: rgba(59, 130, 246, .45) transparent;
+    scrollbar-color: rgba(59, 130, 246, .4) transparent;
 
     h1 {
       font-size: clamp(4rem, 4.2vw, 5.4rem);
-      font-family: 'Coolvetica';
+      font-family: 'Coolvetica', 'Helvetica Neue', Arial, sans-serif;
       color: #60a5fa;
       font-weight: 400;
       margin: 0 0 38px;
       position: relative;
+      line-height: 1.05;
 
       &::before,
       &::after {
         font-family: 'La Belle Aurore';
         color: #3b82f6;
-        font-size: 18px;
-        opacity: .65;
+        font-size: 17px;
+        opacity: .58;
         position: absolute;
       }
 
@@ -66,13 +67,13 @@
     }
 
     p {
-      font-size: clamp(1.25rem, 1.05vw, 1.42rem);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(1.38rem, 1.05vw, 1.55rem);
       line-height: 1.72;
       color: #dbeafe;
-      font-family: sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       animation: pulse 1s;
-      margin: 0 0 1.45rem;
+      margin: 0 0 1.5rem;
     }
   }
 
@@ -84,7 +85,7 @@
 .work-page {
   .text-zone {
     position: absolute;
-    left: clamp(7rem, 8vw, 14rem);
+    left: clamp(7.5rem, 8vw, 14rem);
     top: 50%;
     transform: translateY(-50%);
     width: min(82%, 1500px);
@@ -92,18 +93,19 @@
 
     h1 {
       font-size: clamp(4rem, 4.2vw, 5.4rem);
-      font-family: 'Coolvetica';
+      font-family: 'Coolvetica', 'Helvetica Neue', Arial, sans-serif;
       color: #60a5fa;
       font-weight: 400;
       margin: 0 0 38px;
       position: relative;
+      line-height: 1.05;
 
       &::before,
       &::after {
         font-family: 'La Belle Aurore';
         color: #3b82f6;
-        font-size: 18px;
-        opacity: .65;
+        font-size: 17px;
+        opacity: .58;
         position: absolute;
       }
 
@@ -111,7 +113,11 @@
       &::after { content: '</h1>'; left: -10px; bottom: -25px; animation: fadeIn 1s 1.7s backwards; }
     }
 
-    p { color: #dbeafe; font-family: sans-serif; font-weight: 300; }
+    p {
+      color: #dbeafe;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 400;
+    }
   }
 }
 
@@ -137,7 +143,10 @@
   }
 
   .about-page .text-zone p,
-  .contact-page .text-zone p { font-size: 1.2rem; line-height: 1.55; }
+  .contact-page .text-zone p {
+    font-size: 1.3rem;
+    line-height: 1.58;
+  }
 
   .about-page .text-zone h1,
   .contact-page .text-zone h1,
@@ -193,7 +202,10 @@
       margin-bottom: 34px;
     }
 
-    .text-zone p { font-size: 1.25rem; }
+    .text-zone p {
+      font-size: 1.35rem;
+      line-height: 1.68;
+    }
   }
 
   .about-page { padding-top: 220px; }

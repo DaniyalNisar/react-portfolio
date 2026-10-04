@@ -1,110 +1,64 @@
-import Loader from 'react-loaders';
-import './index.scss';
-import AnimatedLetters from '../AnimatedLetters';
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import './index.scss'
+import { Link } from 'react-router-dom'
 
+export const blogPosts = [
+  {
+    id: 1,
+    title: 'Understanding Caching: A Simple Guide for Developers',
+    date: 'May 04, 2025',
+    excerpt: 'A practical introduction to in-memory, distributed, browser and database caching, plus the trade-offs behind common cache strategies.',
+    topic: 'Backend',
+  },
+  {
+    id: 2,
+    title: '01 Matrix: BFS-Based Distance Calculation',
+    date: 'June 23, 2025',
+    excerpt: 'Why multi-source BFS is the clean solution for finding the nearest zero from every cell in a binary matrix.',
+    topic: 'Algorithms',
+  },
+  {
+    id: 3,
+    title: 'Tips for Clean JavaScript Code',
+    date: 'April 20, 2025',
+    excerpt: 'Simple habits that make JavaScript easier to read, review and maintain across a growing codebase.',
+    topic: 'JavaScript',
+  },
+  {
+    id: 4,
+    title: 'Designing for Developers',
+    date: 'April 18, 2025',
+    excerpt: 'A developer-focused look at the design decisions that make software interfaces clearer, more usable and easier to build.',
+    topic: 'Engineering',
+  },
+]
 
-const BlogPage = () => {
-  const [letterClass, setLetterClass] = useState('text-animate');
-  const [showCards, setShowCards] = useState(false);
-  const blogContainerRef = useRef(null); // ref for blog container
+const BlogPage = () => (
+  <div className="container blog-page">
+    <header className="blog-header">
+      <span className="section-kicker">Writing</span>
+      <h1>Engineering notes, explanations and problem-solving.</h1>
+      <p>
+        Notes on backend engineering, algorithms and software development. I use writing to make technical ideas
+        easier to reason about and easier to revisit later.
+      </p>
+    </header>
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Understanding Caching: A Simple Guide for Developers',
-      date: 'May 04, 2025',
-      excerpt: 'Speed up your app with smart caching techniques!'
-    },
-    {
-      id: 2,
-      title: '01 Matrix',
-      date: 'June 23, 2025',
-      excerpt: 'Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell'
-    },
-    {
-      id: 3,
-      title: 'Tips for Clean JavaScript Code',
-      date: 'April 20, 2025',
-      excerpt: 'These practices help you write cleaner, more maintainable JavaScript in any project...'
-    },
-    {
-      id: 4,
-      title: 'Designing for Developers',
-      date: 'April 18, 2025',
-      excerpt: 'Bridging the gap between design and code can unlock new levels of creativity and productivity...'
-    }
-  ];
-
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setLetterClass('text-animate-hover');
-    }, 3000);
-
-    const timer2 = setTimeout(() => {
-      setShowCards(true);
-    }, 1000); // show cards after 1 sec
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-
-  const scrollLeft = () => {
-    blogContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-  };
-
-  const scrollRight = () => {
-    blogContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-  };
-
-  return (
-    <>
-      <div className="container blog-page">
-        <div className="text-zone">
-          <h1>
-            <AnimatedLetters
-              letterClass={letterClass}
-              strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']}
-              idx={15}
-            />
-          </h1>
-          <p className="blog-intro">
-            Welcome to my blog where I share insights, tutorials, and thoughts on development, design, and tech!
-          </p>
-
-          <div className="blog-scroll-wrapper">
-            <div className='button-wrapper'>
-              <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
-            </div>
-
-            <div className="blog-container" ref={blogContainerRef}>
-              {blogPosts.map((post, index) => (
-                <div
-                  className={`blog-card ${showCards ? 'visible' : ''}`}
-                  key={post.id}
-                  style={{ transitionDelay: `${index * 0.2}s` }}
-                >
-                  <h2>{post.title}</h2>
-                  <p className="blog-date">{post.date}</p>
-                  <p className="blog-excerpt">{post.excerpt}</p>
-                  <Link to={`/blog/${post.id}`} className="read-more">Read More</Link>
-                </div>
-              ))}
-            </div>
-
-            <div className='button-wrapper'>
-              <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
-            </div>
+    <section className="blog-grid" aria-label="Technical articles">
+      {blogPosts.map((post) => (
+        <article className="blog-card" key={post.id}>
+          <div className="blog-meta">
+            <span>{post.topic}</span>
+            <time>{post.date}</time>
           </div>
-        </div>
-      </div>
+          <h2><Link to={`/blog/${post.id}`}>{post.title}</Link></h2>
+          <p>{post.excerpt}</p>
+          <Link to={`/blog/${post.id}`} className="read-more" aria-label={`Read ${post.title}`}>
+            Read article →
+          </Link>
+        </article>
+      ))}
+    </section>
+  </div>
+)
 
-      <Loader type="pacman" />
-    </>
-  );
-};
-
-export default BlogPage;
+export default BlogPage

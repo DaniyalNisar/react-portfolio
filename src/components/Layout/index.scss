@@ -4,6 +4,16 @@
   position: relative;
 }
 
+.route-transition {
+  min-height: inherit;
+  animation: routeEnter .48s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes routeEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .tags {
   color: #3b82f6;
   opacity: .58;
@@ -223,5 +233,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .container { animation-duration: .01ms; animation-delay: 0s; }
+  .container,
+  .route-transition { animation-duration: .01ms; animation-delay: 0s; }
 }

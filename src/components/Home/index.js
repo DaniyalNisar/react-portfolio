@@ -4,6 +4,7 @@ import AnimatedLetters from '../AnimatedLetters'
 import LogoTitle from '../../assets/images/logo-s.png'
 import Logo from './Logo'
 import './index.scss'
+import './refinements.scss'
 import Loader from 'react-loaders'
 
 const Home = () => {

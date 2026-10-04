@@ -64,6 +64,9 @@ const pages = [
 const escape = (value) =>
   value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
 
+const addJsonLd = (html, schema) =>
+  html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(schema)}</script></head>`)
+
 for (const [route, [title, description]] of [
   ...pages,
   ['/404', ['Page not found | Daniyal Nisar Rana', 'This page could not be found.']],
@@ -88,6 +91,21 @@ for (const [route, [title, description]] of [
     .replace(/(<link rel="canonical" href=")[^"]*/, `$1${canonical}`)
     .replace(/(<meta property="og:url" content=")[^"]*/, `$1${canonical}`)
 
+  if (route === '/blogs') {
+    const blogListSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Engineering Notes by Daniyal Nisar Rana',
+      itemListElement: articles.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${origin}/blog/${item.id}`,
+        name: item.title,
+      })),
+    }
+    html = addJsonLd(html, blogListSchema)
+  }
+
   if (article) {
     const imageUrl = `${origin}${article.image}`
     const articleSchema = {
@@ -96,16 +114,29 @@ for (const [route, [title, description]] of [
       headline: article.title,
       description: article.description,
       datePublished: article.datePublished,
+      dateModified: article.datePublished,
       author: { '@type': 'Person', name: 'Daniyal Nisar Rana', url: origin },
+      publisher: { '@type': 'Person', name: 'Daniyal Nisar Rana', url: origin },
       mainEntityOfPage: canonical,
       image: imageUrl,
+    }
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${origin}/blogs` },
+        { '@type': 'ListItem', position: 3, name: article.title, item: canonical },
+      ],
     }
 
     html = html
       .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
       .replace(/(<meta property="og:image" content=")[^"]*/, `$1${imageUrl}`)
       .replace(/(<meta name="twitter:image" content=")[^"]*/, `$1${imageUrl}`)
-      .replace('</head>', `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script></head>`)
+
+    html = addJsonLd(html, articleSchema)
+    html = addJsonLd(html, breadcrumbSchema)
   }
 
   if (route === '/404') {
@@ -117,11 +148,16 @@ for (const [route, [title, description]] of [
   fs.writeFileSync(file, html)
 }
 
+const sitemapEntries = pages.map(([route]) => {
+  const article = articleByRoute[route]
+  const loc = `${origin}${route === '/' ? '/' : route}`
+  const lastmod = article?.datePublished ? `<lastmod>${article.datePublished}</lastmod>` : ''
+  return `  <url><loc>${loc}</loc>${lastmod}</url>`
+})
+
 fs.writeFileSync(
   'build/sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
-    .map(([route]) => `  <url><loc>${origin}${route === '/' ? '/' : route}</loc></url>`)
-    .join('\n')}\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.join('\n')}\n</urlset>\n`
 )
 
 fs.writeFileSync('build/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`)

@@ -12,28 +12,28 @@ const BlogPage = () => {
 
   useEffect(() => {
     const timer1 = setTimeout(() => setLetterClass('text-animate-hover'), 3000)
-    const timer2 = setTimeout(() => setShowCards(true), 1000)
+    const timer2 = setTimeout(() => setShowCards(true), 800)
     return () => { clearTimeout(timer1); clearTimeout(timer2) }
   }, [])
 
-  const scrollLeft = () => blogContainerRef.current?.scrollBy({ left: -320, behavior: 'smooth' })
-  const scrollRight = () => blogContainerRef.current?.scrollBy({ left: 320, behavior: 'smooth' })
+  const scrollLeft = () => blogContainerRef.current?.scrollBy({ left: -340, behavior: 'smooth' })
+  const scrollRight = () => blogContainerRef.current?.scrollBy({ left: 340, behavior: 'smooth' })
 
   return (
     <>
       <div className="container blog-page">
         <div className="text-zone">
           <h1><AnimatedLetters letterClass={letterClass} strArray={['D','a','n','i','y','a','l','\'','s',' ','B','l','o','g']} idx={15} /></h1>
-          <p className="blog-intro">Engineering notes, tutorials and ideas around backend systems, algorithms, performance and software development.</p>
+          <p className="blog-intro">Notes on software engineering, backend systems, performance, algorithms and the technical ideas I’m currently exploring.</p>
           <div className="blog-scroll-wrapper">
             <div className="button-wrapper"><button className="scroll-button left" onClick={scrollLeft} aria-label="Scroll blog left">&lt;</button></div>
-            <div className="blog-container" ref={blogContainerRef}>
+            <div className="blog-container" ref={blogContainerRef} tabIndex="0" aria-label="Engineering articles">
               {blogPosts.map((post, index) => (
-                <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id} style={{ transitionDelay: `${index * 0.12}s` }}>
+                <article className={`blog-card ${showCards ? 'visible' : ''}`} key={post.id} style={{ transitionDelay: `${index * 0.08}s` }}>
                   <h2>{post.title}</h2>
                   <p className="blog-date">{post.date}</p>
                   <p className="blog-excerpt">{post.excerpt}</p>
-                  <Link to={`/blog/${post.id}`} className="read-more">Read More</Link>
+                  <Link to={`/blog/${post.id}`} className="read-more" aria-label={`Read ${post.title}`}>Read article</Link>
                 </article>
               ))}
             </div>

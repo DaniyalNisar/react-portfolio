@@ -5,14 +5,12 @@
   animation-duration: 1s;
   animation-delay: 1s;
   animation-fill-mode: forwards;
-  min-width: 10px;
   font-family: 'Coolvetica', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
   letter-spacing: 0;
 }
 
 .text-animate-hover {
-  min-width: 10px;
   display: inline-block;
   animation-fill-mode: both;
   font-family: 'Coolvetica', 'Helvetica Neue', Arial, sans-serif;
@@ -23,6 +21,10 @@
     animation: rubberBand 1s;
     color: #60a5fa;
   }
+}
+
+.letter-space {
+  width: .28em;
 }
 
 @for $i from 1 through 40 {

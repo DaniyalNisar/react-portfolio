@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { articles } from '../../articles'
 import './index.scss'
 
+const withBase = (src = '') => `${process.env.PUBLIC_URL || ''}${src}`
+
 const blogPosts = [
   {
     id: 1,
@@ -41,6 +43,7 @@ public Product getProduct(String productId) {
     id: 2,
     title: '01 Matrix: BFS-Based Distance Calculation',
     date: 'June 23, 2025',
+    image: '/images/blogs/react.png',
     content: `
       <p>The 01 Matrix problem asks for the distance from every cell containing 1 to its nearest 0. A direct approach can repeat the same work many times. Multi-source breadth-first search gives a cleaner and more efficient solution.</p>
 
@@ -197,7 +200,7 @@ const BlogDetail = () => {
         <p className="blog-date">{blog.date}</p>
         {blog.image && (
           <img
-            src={blog.image}
+            src={withBase(blog.image)}
             alt={`${blog.title} article`}
             className="blog-title-image"
             loading="eager"

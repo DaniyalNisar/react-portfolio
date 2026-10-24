@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071123">
+<meta name="description" content="ReversalIQ is a privacy-first payment operations triage tool. Find duplicate transactions, unmatched reversals, spikes in declines and late responses from sanitized CSV exports.">
+<title>ReversalIQ — Payment incident analysis in minutes</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eaf1ff;background:#071123;font-synthesis:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;line-height:1.5}button,input,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #81cbff;outline-offset:3px}
+.wrapper{max-width:1140px;margin:auto;padding:0 24px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid #20304d}.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:800;letter-spacing:-.03em}.logo{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#5c97fb,#43dccb);color:#071123;font-weight:900}.nav{display:flex;align-items:center;gap:24px;font-size:14px;color:#9baec9}.nav a:hover{color:white}.pill{border:1px solid #2f6f81;background:#092d3b;padding:7px 12px;border-radius:40px;color:#80e7d9;font-weight:650;font-size:12px}
+.hero{padding:66px 0 46px;max-width:860px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#78dcd5;font-weight:800}.hero h1{font-size:clamp(38px,5.3vw,67px);line-height:1.09;margin:14px 0 22px;letter-spacing:-.057em}.hero h1 span{color:#7cb7ff}.hero p{color:#abc0da;font-size:18px;max-width:735px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0 20px}.btn{border-radius:12px;padding:13px 18px;font-weight:730;border:1px solid transparent;min-height:46px}.primary{background:#6fb5ff;color:#06172d}.primary:hover{background:#96cbff}.secondary{background:#122441;border-color:#344d72;color:#eaf1ff}.secondary:hover{background:#1b3555}.ghost{background:transparent;border-color:#294465;color:#afc1dc}.tiny{color:#7991b1;font-size:13px}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
+.panel{background:#0d1b32;border:1px solid #253957;border-radius:19px;padding:24px}.panel h2{margin:0 0 8px;font-size:21px;letter-spacing:-.025em}.panel p{color:#9eb3cf;font-size:14px;margin:5px 0 14px}.upload{margin-top:22px;padding:23px;border-radius:14px;border:1.5px dashed #4a688b;text-align:center;background:#10223b}.upload label{display:block;font-weight:700;margin-bottom:5px}.upload input{width:100%;max-width:300px;color:#a6bbd4;margin:12px auto 0}.rowbuttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.status{font-size:13px;color:#99b0ca;min-height:20px;margin-top:12px}.status.bad{color:#ffb6b6}
+.statgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.stat{background:#0a1730;border:1px solid #243a58;border-radius:12px;padding:15px}.stat strong{display:block;font-size:27px;letter-spacing:-.035em}.stat small{color:#8fa9c8;font-size:12px}
+.section{margin:24px 0 46px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 14px}.sectionhead h2{margin:0;font-size:24px;letter-spacing:-.03em}.findings{display:grid;gap:10px}.finding{background:#0c1c32;border:1px solid #263f60;border-radius:14px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:13px}.sev{font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:7px;min-width:72px;text-align:center;height:27px;display:grid;place-items:center}.sev.high{background:#49232a;color:#ffb9be}.sev.medium{background:#40351d;color:#f9d99a}.sev.low{background:#123b3d;color:#9be8db}.finding h3{margin:0 0 5px;font-size:16px}.finding p{margin:3px 0;color:#9fb3ce;font-size:13px}.finding .fix{color:#d2e4fd;margin-top:9px}
+pre{background:#071326;border:1px solid #213b5c;border-radius:11px;overflow-x:auto;color:#b5c7da;padding:13px;font-size:12px;line-height:1.6}.info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info article{padding:18px;border:1px solid #253b58;border-radius:14px;background:#0b1930}.info h3{font-size:15px;margin:0 0 7px}.info p{color:#96abc7;font-size:13px;margin:0}
+.pricing{margin:42px 0;border-top:1px solid #243958;padding-top:35px}.price{font-size:32px;font-weight:800;letter-spacing:-.045em}.price small{font-size:13px;color:#93acc9;font-weight:500}.pricinggrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.warning{border:1px solid #726344;background:#292518;border-radius:10px;padding:12px 14px;font-size:13px;color:#e6d09e;margin-top:15px}
+footer{border-top:1px solid #233955;color:#8ba2c1;padding:25px 0 45px;font-size:12px}footer p{margin:3px 0}code{color:#95d9fa}
+@media(max-width:760px){.grid,.pricinggrid{grid-template-columns:1fr}.info{grid-template-columns:1fr}.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.nav{gap:10px}.nav a:nth-child(2){display:none}.panel{padding:18px}.hero{padding-top:45px}.hero p{font-size:16px}.wrapper{padding:0 16px}}
+@media print{body{background:white;color:#111}.nav,.actions,.upload,.rowbuttons,.pricing,footer,.info,.tiny{display:none!important}.panel,.finding,.stat{color:#111;background:white;border-color:#bbb}.finding p,.panel p,.stat small{color:#444}.grid{display:block}.statgrid{grid-template-columns:repeat(4,1fr)}.wrapper{max-width:none}.hero{padding:10px 0}.hero h1{font-size:30px}.hero p{font-size:13px;color:#444}}
+</style></head><body>
+<div class="wrapper">
+<header class="top"><a class="brand" href="#home"><span class="logo">R</span> ReversalIQ</a><nav class="nav"><a href="#analyzer">Live analyzer</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></nav><span class="pill">Public beta</span></header>
+<main id="home">
+<section class="hero"><div class="eyebrow">Payment operations · Explainable diagnostics</div><h1>Find the failure.<br><span>Not just the alert.</span></h1><p>Turn sanitized transaction exports into an actionable incident report. Spot unmatched reversals, duplicate references, authorization decline spikes and slow responses. Evidence and triage steps included.</p>
+<div class="actions"><a class="btn primary" href="#analyzer">Analyze transactions →</a><button class="btn secondary" type="button" id="heroSample">Try with sample data</button></div><div class="tiny">Runs entirely in your browser. No transaction data is uploaded. No account required for beta diagnostics.</div></section>
+<section class="grid" id="analyzer">
+<div class="panel"><h2>Payment incident analyzer</h2><p>Upload an anonymized CSV or try a fabricated dataset. Basic rules, not AI predictions. Your data stays on your device.</p><div class="upload"><label for="file">Drop-in CSV diagnostics</label><span class="tiny">Up to 3 MB · 20,000 rows · Use no PAN, names, secrets or personal information</span><br><input id="file" type="file" accept=".csv,text/csv" aria-label="Choose sanitized CSV file"></div><div class="rowbuttons"><button id="sample" class="btn primary" type="button">Load sample data</button><button id="export" class="btn secondary" type="button" disabled>Export findings CSV</button><button id="print" class="btn ghost" type="button" disabled>Print report</button></div><div class="status" id="status" role="status" aria-live="polite">Ready. Try the sample to see how it works.</div>
+</div><aside class="panel"><h2>Input specification</h2><p>Column names (case-insensitive). Extra columns are ignored.</p><pre>trace_id, type, response_code, latency_ms,
+amount, timestamp
+
+T101, AUTH, 00, 160, 120.00, 2026-10-24T14:00:00
+T101, REVERSAL, 00, 120, 120.00, 2026-10-24T14:02:00</pre><p><strong>Types:</strong> AUTH or REVERSAL. <strong>Success:</strong> response code 00. Date and amount are optional for basic checks. Reference IDs must be non-sensitive synthetic or tokenized values.</p><p class="tiny">This tool is a triage assistant, not a bank ledger, network certification engine or automatic reconciliation service.</p></aside>
+</section>
+<section class="section" id="results"><div class="sectionhead"><h2>Live incident report</h2><span class="pill" id="reportTag">No file analyzed</span></div><div class="statgrid">
+<div class="stat"><strong id="kRows">—</strong><small>Parsed transactions</small></div>
+<div class="stat"><strong id="kDecline">—</strong><small>Authorization decline rate</small></div>
+<div class="stat"><strong id="kReversal">—</strong><small>Unmatched reversals</small></div>
+<div class="stat"><strong id="kSlow">—</strong><small>Slow response share</small></div>
+</div><div class="findings" id="findings"><article class="finding"><div class="sev low">START</div><div><h3>Your first actionable report appears here</h3><p>Select “Load sample data” or upload an anonymized CSV. Every finding includes why it was flagged and a suggested investigation step.</p></div></article></div></section>
+<section class="section" id="how"><div class="sectionhead"><h2>From messy export to next action</h2></div><div class="info"><article><h3>01 · Normalize</h3><p>Identify common header aliases, validate rows, distinguish authorization and reversal messages.</p></article><article><h3>02 · Detect</h3><p>Flag duplicate successful authorization references, reversals without a matching authorization and response anomalies.</p></article><article><h3>03 · Explain</h3><p>Prioritize anomalies, show affected records and export a concise incident triage checklist.</p></article></div></section>
+<section class="pricing" id="pricing"><div class="sectionhead"><h2>Designed for teams that live in payment logs</h2></div><div class="pricinggrid"><article class="panel"><div class="eyebrow">Open beta</div><div class="price">Free <small>· browser-only</small></div><p>CSV analyzer, sample data, incident summaries, and downloadable triage report.</p><a class="btn primary" style="display:inline-block" href="#analyzer">Analyze now</a></article><article class="panel"><div class="eyebrow">Planned commercial tier</div><div class="price">$49 <small>· per month, proposed</small></div><p>Scheduled incident ingestion, webhook-based alerting, saved reports and advanced rule configuration — features not launched yet.</p><button class="btn secondary" disabled type="button" title="Payment link is not configured">Checkout pending merchant activation</button></article></div><div class="warning"><strong>Payment activation status:</strong> Lemon Squeezy is the intended merchant-of-record checkout and supports bank payouts in Pakistan, subject to account onboarding and approval. No payment is collected on this beta site. Paid subscriptions and automatic order fulfilment require a verified store, checkout link and secure server-side webhook processing.</div></section>
+</main><footer><p>ReversalIQ beta · Independently developed payment operations analysis concept.</p><p>Do not upload cardholder data, PAN, CVV, passwords or customer records. Browser-local processing does not replace your organization's security review.</p></footer>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const ui={status:$('status'),file:$('file'),findings:$('findings'),tag:$('reportTag')};
+let report=null;
+const demo=[
+['trace_id','type','response_code','latency_ms','amount','timestamp'],
+['T1001','AUTH','00','115','120.00','2026-10-24T14:00:00'],
+['T1001','AUTH','00','130','120.00','2026-10-24T14:00:01'],
+['T1002','AUTH','05','340','300.00','2026-10-24T14:01:00'],
+['T1003','AUTH','91','8200','25.00','2026-10-24T14:02:00'],
+['T1004','REVERSAL','00','230','15.00','2026-10-24T14:03:00'],
+['T1005','AUTH','00','450','15.00','2026-10-24T14:04:00'],
+['T1005','REVERSAL','00','160','15.00','2026-10-24T14:05:00'],
+['T1006','AUTH','05','900','60.00','2026-10-24T14:06:00'],
+['T1007','AUTH','05','720','30.00','2026-10-24T14:07:00'],
+['T1008','AUTH','00','170','12.00','2026-10-24T14:08:00'],
+['T1009','AUTH','05','410','38.00','2026-10-24T14:09:00'],
+['T1010','AUTH','00','6400','50.00','2026-10-24T14:10:00'],
+['T1011','REVERSAL','00','180','48.00','2026-10-24T14:11:00']
+];
+function setStatus(message,bad=false){ui.status.textContent=message;ui.status.className='status'+(bad?' bad':'')}
+function parseCSV(s){
+ const result=[];let cells=[],val='',quote=false;
+ for(let i=0;i<s.length;i++){const c=s[i];
+  if(c==='"'){if(quote&&s[i+1]==='"'){val+='"';i++}else quote=!quote}
+  else if(c===','&&!quote){cells.push(val);val=''}
+  else if((c==='\n'||c==='\r')&&!quote){if(c==='\r'&&s[i+1]==='\n')i++;cells.push(val);val='';if(cells.some(v=>v.trim()!==''))result.push(cells);cells=[]}
+  else val+=c;
+ }if(quote)throw Error('Unclosed quote in CSV.');if(cells.length||val){cells.push(val);if(cells.some(v=>v.trim()!==''))result.push(cells)}return result;
+}
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const choices={id:['traceid','traceno','stanaudit','stan','referenceno','reference','traceauditno'],type:['type','messagetype','transactiontype','msgtype','transaction'],response:['responsecode','respcode','rc','response'],latency:['latencyms','responsetimems','durationms','latency'],amount:['amount','transactionamount'],time:['timestamp','time','transdatetime','datetime']};
+function normalize(table){
+ if(table.length<2)throw Error('CSV needs a header and at least one transaction.');
+ const header=table[0].map(norm), cols={};
+ for(const [key,aliases] of Object.entries(choices)){cols[key]=aliases.map(a=>header.indexOf(a)).find(x=>x>=0);if(cols[key]===undefined)cols[key]=-1}
+ if(cols.id<0||cols.type<0||cols.response<0)throw Error('Missing required headers: trace_id, type, response_code.');
+ if(table.length>20001)throw Error('Use 20,000 transactions or fewer.');
+ const invalid=[];const arr=[];
+ for(let i=1;i<table.length;i++){const r=table[i],get=k=>cols[k]<0?'':String(r[cols[k]]||'').trim();
+   const id=get('id');let type=get('type').toUpperCase();const rc=get('response').toUpperCase();
+   if(['0100','0200','AUTHORIZATION','AUTHORISED','PURCHASE','SALE'].includes(type))type='AUTH';
+   if(['0400','0420','REV','REVERSALREQUEST'].includes(type))type='REVERSAL';
+   if(!id||!['AUTH','REVERSAL'].includes(type)||!rc){invalid.push(i+1);continue}
+   const rawlat=get('latency');const latency=rawlat===''?null:Number(rawlat);
+   if(rawlat!==''&&(!Number.isFinite(latency)||latency<0)){invalid.push(i+1);continue}
+   arr.push({id,type,rc,latency,amount:get('amount'),timestamp:get('time'),row:i+1});
+ }
+ if(!arr.length)throw Error('No valid AUTH/REVERSAL rows found.');
+ return {rows:arr,skipped:invalid.length};
+}
+function analyze(table,label){
+ const {rows,skipped}=normalize(table), auth=rows.filter(x=>x.type==='AUTH'),rev=rows.filter(x=>x.type==='REVERSAL');
+ const good=auth.filter(x=>x.rc==='00'),declined=auth.filter(x=>x.rc!=='00');
+ const refCounts=new Map();for(const x of good)refCounts.set(x.id,(refCounts.get(x.id)||0)+1);
+ const duplicates=[...refCounts].filter(([id,n])=>n>1);
+ const authRefs=new Set(auth.map(x=>x.id));
+ const unmatched=rev.filter(x=>!authRefs.has(x.id));
+ const latRows=rows.filter(x=>x.latency!==null),slow=latRows.filter(x=>x.latency>3000);
+ const rate=auth.length?declined.length/auth.length:0;
+ const findings=[];
+ function add(severity,title,evidence,fix){findings.push({severity,title,evidence,fix})}
+ if(duplicates.length)add('high','Repeated successful authorization references',duplicates.slice(0,12).map(([id,n])=>id+' ('+n+' approvals)').join(', ')+(duplicates.length>12?' …':''),'Check idempotency keys, replay prevention, acquirer retries and whether these references genuinely represent the same business transaction. A reused STAN alone is not proof of duplicate charges.');
+ if(unmatched.length)add('high','Reversals without a matching authorization in this export',unmatched.slice(0,12).map(x=>x.id+' (row '+x.row+')').join(', ')+(unmatched.length>12?' …':''),'Search upstream and downstream logs across a wider timeframe. Check cross-file reference mapping and late authorizations before treating a reversal as orphaned.');
+ if(rate>=0.3&&auth.length>=5)add('medium','High authorization decline share',declined.length+' of '+auth.length+' authorizations declined ('+(rate*100).toFixed(1)+'%).','Group decline response codes by issuer/BIN, merchant and minute. Confirm whether the mix changed versus a historical baseline; this threshold is illustrative.');
+ if(slow.length)add(slow.length>=3?'high':'medium','Responses above the 3-second triage threshold',slow.slice(0,12).map(x=>x.id+' ('+x.latency+' ms)').join(', ')+(slow.length>12?' …':''),'Compare network hop timings, issuer latency, connection pools and timeouts. Tune the threshold to your SLA; this prototype uses a fixed 3000 ms.');
+ if(skipped)add('low','Input rows skipped during validation',skipped+' malformed or unsupported rows skipped.','Check message types, missing references, response codes and non-numeric latency values.');
+ if(!findings.length)add('low','No configured red flags detected','The current rule set did not flag the valid rows.','Review sample coverage, issuer-specific controls and production baselines; absence of these flags is not proof of clean settlement.');
+ report={label,count:rows.length,rate,rev:unmatched.length,slow:latRows.length?slow.length/latRows.length:null,findings,authCount:auth.length,skipped};
+ render();
+}
+function elt(name,className,text){const node=document.createElement(name);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node}
+function render(){const r=report;$('kRows').textContent=r.count.toLocaleString();$('kDecline').textContent=r.authCount?(r.rate*100).toFixed(1)+'%':'N/A';$('kReversal').textContent=r.rev;$('kSlow').textContent=r.slow===null?'N/A':(r.slow*100).toFixed(1)+'%';ui.tag.textContent=r.label+' · '+r.findings.length+' finding'+(r.findings.length===1?'':'s');ui.findings.replaceChildren();
+ for(const f of r.findings){const card=elt('article','finding'),badge=elt('div','sev '+f.severity,f.severity.toUpperCase()),body=elt('div'),h=elt('h3','',f.title),ev=elt('p','',f.evidence),fix=elt('p','fix','Next step: '+f.fix);body.append(h,ev,fix);card.append(badge,body);ui.findings.append(card)}
+ $('export').disabled=false;$('print').disabled=false;setStatus('Analyzed '+r.count+' transactions locally. '+r.findings.length+' finding(s).');
+}
+function csvCell(v){let s=String(v??'');if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
+function exportFile(){if(!report)return;const lines=[['severity','finding','evidence','recommended_action'],...report.findings.map(f=>[f.severity,f.title,f.evidence,f.fix])].map(r=>r.map(csvCell).join(','));const blob=new Blob([lines.join('\r\n')],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='reversaliq-incident-report.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000)}
+$('sample').addEventListener('click',()=>{try{analyze(demo,'Synthetic example')}catch(e){setStatus(e.message,true)}});
+$('heroSample').addEventListener('click',()=>{$('sample').click();$('analyzer').scrollIntoView({behavior:'smooth',block:'start'})});
+$('export').addEventListener('click',exportFile);$('print').addEventListener('click',()=>{if(report)window.print()});
+ui.file.addEventListener('change',async event=>{const f=event.target.files&&event.target.files[0];if(!f)return;if(f.size>3*1024*1024){setStatus('CSV exceeds the 3 MB limit.',true);return}
+ try{const raw=await f.text();analyze(parseCSV(raw),f.name)}catch(e){setStatus('Could not analyze this file: '+e.message,true)}finally{ui.file.value=''}
+});
+})();
+</script></body></html>

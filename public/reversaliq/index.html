@@ -128,4 +128,4 @@ ui.file.addEventListener('change',async event=>{const f=event.target.files&&even
  try{const raw=await f.text();analyze(parseCSV(raw),f.name)}catch(e){setStatus('Could not analyze this file: '+e.message,true)}finally{ui.file.value=''}
 });
 })();
-</script></body></html>
+</script><script src="./lemon-checkout.js"></script></body></html>
